@@ -28,9 +28,22 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/profile.jpeg',
-        width: 1200,
-        height: 630,
+        url: '/opengraph.jpg',
+        width: 1366,
+        height: 768,
+        alt: 'Profile picture',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'danyakmallun',
+    description: 'danyakmallun personal website',
+    images: [
+      {
+        url: '/opengraph.jpg',
+        width: 1366,
+        height: 768,
         alt: 'Profile picture',
       },
     ],
