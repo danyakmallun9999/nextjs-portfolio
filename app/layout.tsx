@@ -12,15 +12,29 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nim-fawn.vercel.app/'),
+  metadataBase: new URL('https://danyakmallun.com/'),
   alternates: {
     canonical: '/'
   },
   title: {
-    default: 'Nim - Personal website template',
-    template: '%s | Nim'
+    default: 'danyakmallun',
+    template: '%s'
   },
-  description:  'Nim is a free and open-source personal website template built with Next.js 15, React 19 and Motion-Primitives.',
+  description: 'danyakmallun personal website',
+  openGraph: {
+    title: 'danyakmallun',
+    description: 'danyakmallun personal website',
+    url: 'https://danyakmallun.com/',
+    type: 'website',
+    images: [
+      {
+        url: '/profile.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'Profile picture',
+      },
+    ],
+  },
 };
 
 const geist = Geist({
