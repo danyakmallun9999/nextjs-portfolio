@@ -94,7 +94,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     label: 'LinkedIn',
-    link: 'https://www.linkedin.com/in/danyakmallunniam',
+    link: 'https://www.linkedin.com/in/dany-akmallun-ni-am-786580230/',
   },
   {
     label: 'Instagram',
