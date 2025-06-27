@@ -265,3 +265,22 @@ export default function Personal() {
     </motion.main>
   )
 }
+
+export const metadata = {
+  title: 'Nama Website Anda | Web3 Builder',
+  description: 'A passionate Crypto Enthusiast and Web3 builder dedicated to architecting the decentralized future.',
+  openGraph: {
+    title: 'Nama Website Anda | Web3 Builder',
+    description: 'A passionate Crypto Enthusiast and Web3 builder dedicated to architecting the decentralized future.',
+    url: 'https://danyakmallun.com/',
+    type: 'website',
+    images: [
+      {
+        url: '/profile.jpeg', // Ganti jika ingin gambar lain
+        width: 1200,
+        height: 630,
+        alt: 'Profile picture',
+      },
+    ],
+  },
+};
