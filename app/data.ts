@@ -81,6 +81,12 @@ export const BLOG_POSTS: BlogPost[] = [
     link: '/blog/apa-itu-web3',
     uid: 'blog-1',
   },
+  {
+    title: 'Peran vital Testnet dalam ekosistem kripto',
+    description: 'Testnet adalah replika jaringan blockchain yang berfungsi sebagai laboratorium aman bagi developer untuk menguji aplikasi dan smart contract tanpa risiko finansial. Pelajari perbedaannya dengan mainnet dan mengapa ini krusial.',
+    link: '/blog/peran-vital-testnet-dalam-ekosistem-kripto',
+    uid: 'blog-2',
+  },
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
