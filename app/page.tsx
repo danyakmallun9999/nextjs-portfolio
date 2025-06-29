@@ -77,7 +77,7 @@ function ProjectImage({ src, project }: ProjectImageProps) {
       }}
     >
       <MorphingDialogTrigger>
-        <div 
+        <div
           className="relative group cursor-zoom-in overflow-hidden rounded-xl"
           onMouseEnter={() => setShowOverlay(true)}
           onMouseLeave={() => setShowOverlay(false)}
@@ -100,10 +100,10 @@ function ProjectImage({ src, project }: ProjectImageProps) {
               </div>
             </div>
           )}
-          
+
           {/* Loading overlay */}
           {isLoading && !imageError && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm"
@@ -116,7 +116,7 @@ function ProjectImage({ src, project }: ProjectImageProps) {
           )}
 
           {/* Hover overlay */}
-          <motion.div 
+          <motion.div
             className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
             initial={{ opacity: 0 }}
             animate={{ opacity: showOverlay ? 1 : 0 }}
@@ -134,13 +134,13 @@ function ProjectImage({ src, project }: ProjectImageProps) {
                   <p className="text-xs text-gray-200 opacity-90">{project.description}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <motion.div 
+                  <motion.div
                     className="rounded-full bg-white/20 p-2 backdrop-blur-sm"
                     whileTap={{ scale: 0.95 }}
                   >
                     <ZoomIn className="h-4 w-4 text-white" />
                   </motion.div>
-                  <motion.div 
+                  <motion.div
                     className="rounded-full bg-white/20 p-2 backdrop-blur-sm"
                     whileTap={{ scale: 0.95 }}
                   >
@@ -153,7 +153,7 @@ function ProjectImage({ src, project }: ProjectImageProps) {
 
           {/* Zoom hint */}
           {!showOverlay && !isLoading && !imageError && (
-            <motion.div 
+            <motion.div
               className="absolute top-4 right-4 text-xs text-white/70 bg-black/30 px-2 py-1 rounded"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -165,16 +165,16 @@ function ProjectImage({ src, project }: ProjectImageProps) {
         </div>
       </MorphingDialogTrigger>
       <MorphingDialogContainer>
-        <MorphingDialogContent className="relative aspect-video rounded-2xl bg-zinc-50 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950 dark:ring-zinc-800/50">
+        <MorphingDialogContent className="relative max-w-4xl mx-auto rounded-2xl bg-zinc-50 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950 dark:ring-zinc-800/50">
           <motion.div
             variants={{
-              initial: { 
+              initial: {
                 opacity: 0,
                 y: 100,
                 scale: 0.9,
                 filter: 'blur(10px)'
               },
-              animate: { 
+              animate: {
                 opacity: 1,
                 y: 0,
                 scale: 1,
@@ -186,7 +186,7 @@ function ProjectImage({ src, project }: ProjectImageProps) {
                   delay: 0.1
                 }
               },
-              exit: { 
+              exit: {
                 opacity: 0,
                 y: 100,
                 scale: 0.9,
@@ -209,27 +209,27 @@ function ProjectImage({ src, project }: ProjectImageProps) {
                 alt={project.name}
                 width={800}
                 height={600}
-                className="w-full h-auto max-h-[80vh] object-contain md:object-cover rounded-xl"
+                className="w-full h-auto max-h-[85vh] object-contain rounded-xl"
                 onError={handleImageError}
               />
             ) : (
-              <div className="w-full h-auto max-h-[80vh] bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center rounded-xl">
+              <div className="w-full h-auto max-h-[85vh] bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center rounded-xl min-h-[400px]">
                 <div className="text-zinc-500 dark:text-zinc-400 text-center">
                   <Eye className="h-16 w-16 mx-auto mb-4 opacity-50" />
                   <p className="text-lg">Gambar tidak tersedia</p>
                 </div>
               </div>
             )}
-            
+
             {/* Project info overlay in modal */}
-            <motion.div 
+            <motion.div
               className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-xl md:block hidden"
               variants={{
-                initial: { 
+                initial: {
                   opacity: 0,
                   y: 50
                 },
-                animate: { 
+                animate: {
                   opacity: 1,
                   y: 0,
                   transition: {
@@ -237,7 +237,7 @@ function ProjectImage({ src, project }: ProjectImageProps) {
                     duration: 0.4
                   }
                 },
-                exit: { 
+                exit: {
                   opacity: 0,
                   y: 50,
                   transition: {
@@ -272,7 +272,7 @@ function ProjectImage({ src, project }: ProjectImageProps) {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Tech Stack */}
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-white/80">
@@ -308,7 +308,7 @@ function ProjectImage({ src, project }: ProjectImageProps) {
         <MorphingDialogClose
           className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1 shadow-lg"
           variants={{
-            initial: { 
+            initial: {
               opacity: 0,
               scale: 0.8,
               y: -20
@@ -317,20 +317,20 @@ function ProjectImage({ src, project }: ProjectImageProps) {
               opacity: 1,
               scale: 1,
               y: 0,
-              transition: { 
-                delay: 0.4, 
+              transition: {
+                delay: 0.4,
                 duration: 0.3,
                 type: 'spring',
                 bounce: 0.2
               },
             },
-            exit: { 
+            exit: {
               opacity: 0,
               scale: 0.8,
               y: -20,
-              transition: { 
-                duration: 0.2 
-              } 
+              transition: {
+                duration: 0.2
+              }
             },
           }}
         >
@@ -394,7 +394,7 @@ export default function Personal() {
               Tentang Saya
             </h2>
             <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-m">
-            Crypto enthusiast & web developer specializing in Laravel, Tailwind, PHP, and modern web stacks. Aktif di testnet project dan gemar eksplorasi ekosistem web3. Also passionate about AI—especially prompt engineering for learning and problem solving. Always curious, always building, always learning.
+              Crypto enthusiast & web developer specializing in Laravel, Tailwind, PHP, and modern web stacks. Aktif di testnet project dan gemar eksplorasi ekosistem web3. Also passionate about AI—especially prompt engineering for learning and problem solving. Always curious, always building, always learning.
             </p>
           </div>
         </motion.section>
@@ -405,12 +405,12 @@ export default function Personal() {
         >
           <h3 className="mb-5 text-lg font-medium flex items-center gap-2">
             <Code2 className="w-5 h-5 text-orange-600 dark:text-orange-400" />
-            Project Pilihan
+            Project
           </h3>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {PROJECTS.map((project) => (
-              <motion.div 
-                key={project.name} 
+              <motion.div
+                key={project.name}
                 className="group relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30 transition-all duration-300 hover:bg-zinc-400/40 dark:hover:bg-zinc-500/40"
                 transition={{ duration: 0.2 }}
               >
@@ -423,7 +423,7 @@ export default function Personal() {
                     <div className="relative p-2">
                       <ProjectImage src={project.image} project={project} />
                     </div>
-                    
+
                     <div className="p-6 space-y-3">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
@@ -450,7 +450,7 @@ export default function Personal() {
                           </div>
                         </div>
                       </div>
-                      
+
                       {/* Tech Stack */}
                       <div className="space-y-1">
                         <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400">
@@ -468,7 +468,7 @@ export default function Personal() {
                           ))}
                         </div>
                       </div>
-                      
+
                       {/* Action Button */}
                       <div className="flex items-center gap-2 pt-1">
                         <motion.a
