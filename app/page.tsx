@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'motion/react'
-import { XIcon } from 'lucide-react'
+import { XIcon, Briefcase, BookOpen, Mail, ExternalLink } from 'lucide-react'
 import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
 import {
@@ -14,11 +14,12 @@ import Link from 'next/link'
 import { AnimatedBackground } from '@/components/ui/animated-background'
 import {
   // PROJECTS,
-  // WORK_EXPERIENCE,
+  WORK_EXPERIENCE,
   BLOG_POSTS,
   EMAIL,
   SOCIAL_LINKS,
 } from './data'
+import { ScrollProgress } from '@/components/ui/scroll-progress'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -125,144 +126,169 @@ function MagneticSocialLink({
 
 export default function Personal() {
   return (
-    <motion.main
-      className="space-y-24"
-      variants={VARIANTS_CONTAINER}
-      initial="hidden"
-      animate="visible"
-    >
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
+    <>
+      <ScrollProgress />
+      <motion.main
+        className="space-y-24"
+        variants={VARIANTS_CONTAINER}
+        initial="hidden"
+        animate="visible"
       >
-        <div className="flex-1">
-          <p className="text-zinc-600 dark:text-zinc-400">
-            A passionate Crypto Enthusiast and Web3 builder dedicated to architecting the decentralized future. My journey into blockchain technology is powered by a strong foundation in Web Development, enabling me to build secure and user-friendly decentralized applications (dApps). I further innovate by leveraging Prompt Engineering to integrate intelligent AI features, creating truly next-generation experiences. My core mission is to contribute to a more transparent, equitable, and user-owned internet.
-          </p>
-        </div>
-      </motion.section>
+        <motion.section
+          variants={VARIANTS_SECTION}
+          transition={TRANSITION_SECTION}
+        >
+          <div className="flex-1">
+            <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-6">
+              Tentang Saya
+            </h2>
+            <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-m">
+              Seorang penggemar Crypto dan pembangun Web3 yang berdedikasi untuk merancang masa depan terdesentralisasi. Perjalanan saya dalam teknologi blockchain didukung oleh fondasi yang kuat dalam Pengembangan Web, memungkinkan saya membangun aplikasi terdesentralisasi (dApps) yang aman dan ramah pengguna. Saya terus berinovasi dengan memanfaatkan Prompt Engineering untuk mengintegrasikan fitur AI yang cerdas, menciptakan pengalaman generasi berikutnya yang benar-benar luar biasa. Misi utama saya adalah berkontribusi pada internet yang lebih transparan, adil, dan dimiliki oleh pengguna.
+            </p>
+          </div>
+        </motion.section>
 
-      {/* <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="mb-5 text-lg font-medium">Selected Projects</h3>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {PROJECTS.map((project) => (
-            <div key={project.name} className="space-y-2">
-              <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
-                <ProjectVideo src={project.video} />
+        {/* <motion.section
+          variants={VARIANTS_SECTION}
+          transition={TRANSITION_SECTION}
+        >
+          <h3 className="mb-5 text-lg font-medium">Selected Projects</h3>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {PROJECTS.map((project) => (
+              <div key={project.name} className="space-y-2">
+                <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
+                  <ProjectVideo src={project.video} />
+                </div>
+                <div className="px-1">
+                  <a
+                    className="font-base group relative inline-block font-[450] text-zinc-900 dark:text-zinc-50"
+                    href={project.link}
+                    target="_blank"
+                  >
+                    {project.name}
+                    <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 dark:bg-zinc-50 transition-all duration-200 group-hover:max-w-full"></span>
+                  </a>
+                  <p className="text-base text-zinc-600 dark:text-zinc-400">
+                    {project.description}
+                  </p>
+                </div>
               </div>
-              <div className="px-1">
-                <a
-                  className="font-base group relative inline-block font-[450] text-zinc-900 dark:text-zinc-50"
-                  href={project.link}
-                  target="_blank"
-                >
-                  {project.name}
-                  <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 dark:bg-zinc-50 transition-all duration-200 group-hover:max-w-full"></span>
-                </a>
-                <p className="text-base text-zinc-600 dark:text-zinc-400">
-                  {project.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </motion.section> */}
+            ))}
+          </div>
+        </motion.section> */}
 
-      {/* <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="mb-5 text-lg font-medium">Work Experience</h3>
-        <div className="flex flex-col space-y-2">
-          {WORK_EXPERIENCE.map((job) => (
-            <div
-              className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
-              rel="noopener noreferrer"
-              key={job.id}
+        <motion.section
+          variants={VARIANTS_SECTION}
+          transition={TRANSITION_SECTION}
+        >
+          <h3 className="mb-5 text-lg font-medium flex items-center gap-2">
+            <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            Pengalaman Kerja
+          </h3>
+          <div className="flex flex-col space-y-4">
+            {WORK_EXPERIENCE.map((job) => (
+              <div
+                className="group relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30 transition-all duration-300 hover:bg-zinc-400/40 dark:hover:bg-zinc-500/40"
+                rel="noopener noreferrer"
+                key={job.id}
+              >
+                <Spotlight
+                  className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
+                  size={64}
+                />
+                <div className="relative h-full w-full rounded-[15px] bg-white p-6 dark:bg-zinc-950">
+                  <div className="relative flex w-full flex-col space-y-3">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h4 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+                          {job.title}
+                        </h4>
+                        <p className="text-base font-medium text-blue-600 dark:text-blue-400">
+                          {job.company}
+                        </p>
+                      </div>
+                      <div className="ml-4 flex flex-col items-end">
+                        <span className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                          {job.start} - {job.end}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="border-t border-zinc-200 pt-3 dark:border-zinc-800">
+                      <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+                        {job.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.section>
+
+        <motion.section
+          variants={VARIANTS_SECTION}
+          transition={TRANSITION_SECTION}
+        >
+          <h3 className="mb-3 text-lg font-medium flex items-center gap-2">
+            <BookOpen className="w-5 h-5 text-green-600 dark:text-green-400" />
+            Artikel Blog
+          </h3>
+          <div className="flex flex-col space-y-0">
+            <AnimatedBackground
+              enableHover
+              className="h-full w-full rounded-lg bg-zinc-100 dark:bg-zinc-900/80"
+              transition={{
+                type: 'spring',
+                bounce: 0,
+                duration: 0.2,
+              }}
             >
-              <Spotlight
-                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
-                size={64}
-              />
-              <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
-                <div className="relative flex w-full flex-row justify-between">
-                  <div>
-                    <h4 className="font-normal dark:text-zinc-100">
-                      {job.title}
+              {BLOG_POSTS.map((post) => (
+                <Link
+                  key={post.uid}
+                  className="-mx-3 rounded-xl px-3 py-3"
+                  href={post.link}
+                  data-id={post.uid}
+                >
+                  <div className="flex flex-col space-y-1">
+                    <h4 className="font-normal dark:text-zinc-100 flex items-center gap-2 group">
+                      {post.title}
+                      <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                     </h4>
                     <p className="text-zinc-500 dark:text-zinc-400">
-                      {job.company}
+                      {post.description}
                     </p>
                   </div>
-                  <p className="text-zinc-600 dark:text-zinc-400">
-                    {job.start} - {job.end}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </motion.section> */}
+                </Link>
+              ))}
+            </AnimatedBackground>
+          </div>
+        </motion.section>
 
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="mb-3 text-lg font-medium">Blog</h3>
-        <div className="flex flex-col space-y-0">
-          <AnimatedBackground
-            enableHover
-            className="h-full w-full rounded-lg bg-zinc-100 dark:bg-zinc-900/80"
-            transition={{
-              type: 'spring',
-              bounce: 0,
-              duration: 0.2,
-            }}
-          >
-            {BLOG_POSTS.map((post) => (
-              <Link
-                key={post.uid}
-                className="-mx-3 rounded-xl px-3 py-3"
-                href={post.link}
-                data-id={post.uid}
-              >
-                <div className="flex flex-col space-y-1">
-                  <h4 className="font-normal dark:text-zinc-100">
-                    {post.title}
-                  </h4>
-                  <p className="text-zinc-500 dark:text-zinc-400">
-                    {post.description}
-                  </p>
-                </div>
-              </Link>
+        <motion.section
+          variants={VARIANTS_SECTION}
+          transition={TRANSITION_SECTION}
+        >
+          <h3 className="mb-5 text-lg font-medium flex items-center gap-2">
+            <Mail className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+            Hubungi Saya
+          </h3>
+          <p className="mb-5 text-zinc-600 dark:text-zinc-400">
+            Jangan ragu untuk menghubungi saya di{' '}
+            <a className="underline dark:text-zinc-300" href={`mailto:${EMAIL}`}>
+              {EMAIL}
+            </a>
+          </p>
+          <div className="flex items-center justify-start space-x-3">
+            {SOCIAL_LINKS.map((link) => (
+              <MagneticSocialLink key={link.label} link={link.link}>
+                {link.label}
+              </MagneticSocialLink>
             ))}
-          </AnimatedBackground>
-        </div>
-      </motion.section>
-
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="mb-5 text-lg font-medium">Connect</h3>
-        <p className="mb-5 text-zinc-600 dark:text-zinc-400">
-          Feel free to contact me at{' '}
-          <a className="underline dark:text-zinc-300" href={`mailto:${EMAIL}`}>
-            {EMAIL}
-          </a>
-        </p>
-        <div className="flex items-center justify-start space-x-3">
-          {SOCIAL_LINKS.map((link) => (
-            <MagneticSocialLink key={link.label} link={link.link}>
-              {link.label}
-            </MagneticSocialLink>
-          ))}
-        </div>
-      </motion.section>
-    </motion.main>
+          </div>
+        </motion.section>
+      </motion.main>
+    </>
   )
 }
 

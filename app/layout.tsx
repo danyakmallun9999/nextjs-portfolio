@@ -8,7 +8,10 @@ import { ThemeProvider } from 'next-themes'
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#ffffff',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#09090b' }
+  ],
 }
 
 export const metadata: Metadata = {
@@ -17,34 +20,38 @@ export const metadata: Metadata = {
     canonical: '/'
   },
   title: {
-    default: 'danyakmallun',
-    template: '%s'
+    default: 'Dany Akmallun Ni\'am - Crypto Enthusiast & Web3 Developer',
+    template: '%s | Dany Akmallun'
   },
-  description: 'danyakmallun personal website',
+  description: 'Portfolio pribadi Dany Akmallun Ni\'am - Penggemar Crypto, Web Developer, dan Prompt Engineer yang berdedikasi untuk membangun masa depan terdesentralisasi.',
+  keywords: ['crypto', 'web3', 'blockchain', 'web developer', 'prompt engineer', 'indonesia', 'dany akmallun'],
+  authors: [{ name: 'Dany Akmallun Ni\'am' }],
+  creator: 'Dany Akmallun Ni\'am',
   openGraph: {
-    title: 'danyakmallun',
-    description: 'danyakmallun personal website',
+    title: 'Dany Akmallun Ni\'am - Crypto Enthusiast & Web3 Developer',
+    description: 'Portfolio pribadi Dany Akmallun Ni\'am - Penggemar Crypto, Web Developer, dan Prompt Engineer yang berdedikasi untuk membangun masa depan terdesentralisasi.',
     url: 'https://danyakmallun.com/',
     type: 'website',
+    locale: 'id_ID',
     images: [
       {
         url: '/opengraph.jpg',
         width: 1366,
         height: 768,
-        alt: 'Profile picture',
+        alt: 'Dany Akmallun Ni\'am - Profile Picture',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'danyakmallun',
-    description: 'danyakmallun personal website',
+    title: 'Dany Akmallun Ni\'am - Crypto Enthusiast & Web3 Developer',
+    description: 'Portfolio pribadi Dany Akmallun Ni\'am - Penggemar Crypto, Web Developer, dan Prompt Engineer.',
     images: [
       {
         url: '/opengraph.jpg',
         width: 1366,
         height: 768,
-        alt: 'Profile picture',
+        alt: 'Dany Akmallun Ni\'am - Profile Picture',
       },
     ],
   },
@@ -66,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="id" suppressHydrationWarning>
       <body
         className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
       >

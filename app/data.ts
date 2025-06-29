@@ -6,14 +6,15 @@
 //   id: string
 // }
 
-// type WorkExperience = {
-//   company: string
-//   title: string
-//   start: string
-//   end: string
-//   link: string
-//   id: string
-// }
+type WorkExperience = {
+  company: string
+  title: string
+  start: string
+  end: string
+  link: string
+  id: string
+  description: string
+}
 
 type BlogPost = {
   title: string
@@ -47,32 +48,17 @@ type SocialLink = {
 //   },
 // ]
 
-// export const WORK_EXPERIENCE: WorkExperience[] = [
-//   {
-//     company: 'Reglazed Studio',
-//     title: 'CEO',
-//     start: '2024',
-//     end: 'Present',
-//     link: 'https://ibelick.com',
-//     id: 'work1',
-//   },
-//   {
-//     company: 'Freelance',
-//     title: 'Design Engineer',
-//     start: '2022',
-//     end: '2024',
-//     link: 'https://ibelick.com',
-//     id: 'work2',
-//   },
-//   {
-//     company: 'Freelance',
-//     title: 'Front-end Developer',
-//     start: '2017',
-//     end: 'Present',
-//     link: 'https://ibelick.com',
-//     id: 'work3',
-//   },
-// ]
+export const WORK_EXPERIENCE: WorkExperience[] = [
+  {
+    company: 'Klinik Pratama Amalia',
+    title: 'IT Support',
+    start: '2022',
+    end: '2023',
+    link: 'https://ibelick.com',
+    id: 'work1',
+    description: 'Mengelola dan memelihara infrastruktur teknologi informasi klinik, termasuk sistem komputer, jaringan, dan perangkat lunak. Memberikan dukungan teknis kepada seluruh staf, melakukan troubleshooting hardware dan software, serta memastikan kelancaran operasional sistem IT untuk mendukung pelayanan kesehatan yang optimal.',
+  },
+]
 
 export const BLOG_POSTS: BlogPost[] = [
   {
@@ -86,6 +72,12 @@ export const BLOG_POSTS: BlogPost[] = [
     description: 'Testnet adalah replika jaringan blockchain yang berfungsi sebagai laboratorium aman bagi developer untuk menguji aplikasi dan smart contract tanpa risiko finansial. Pelajari perbedaannya dengan mainnet dan mengapa ini krusial.',
     link: '/blog/peran-vital-testnet-dalam-ekosistem-kripto',
     uid: 'blog-2',
+  },
+  {
+    title: 'Madilog: Materialisme, Dialektika, & Logika Tan Malaka',
+    description: 'Madilog, gagasan Tan Malaka, adalah kerangka berpikir ilmiah yang menggabungkan Materialisme, Dialektika, dan Logika untuk membebaskan bangsa dari pemikiran irasional. Pelajari tiga konsep dasarnya.',
+    link: '/blog/materialisme-dialektika-dan-logika',
+    uid: 'blog-3',
   },
 ]
 

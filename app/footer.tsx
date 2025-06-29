@@ -68,14 +68,20 @@ function ThemeSwitch() {
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-zinc-100 px-0 py-4 dark:border-zinc-800">
+    <footer className="mt-24 border-t border-zinc-100 px-0 py-6 dark:border-zinc-800">
       <div className="flex items-center justify-between">
-        <a href="https://github.com/ibelick/nim" target="_blank">
-          <TextLoop className="text-xs text-zinc-500">
-            <span>© 2025 danyakmallun.</span>
-            <span>Built with vercel.</span>
-          </TextLoop>
-        </a>
+        <div className="flex flex-col space-y-1">
+          <a href="https://github.com/danyakmallun9999" target="_blank" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
+            <TextLoop className="text-xs text-zinc-500">
+              <span>© 2025 Dany Akmallun Ni'am. Hak cipta dilindungi.</span>
+              <span>Dibuat dengan Next.js & Vercel.</span>
+              <span>Dari Indonesia untuk dunia.</span>
+            </TextLoop>
+          </a>
+          <p className="text-xs text-zinc-400">
+            Terakhir diperbarui: {new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </p>
+        </div>
         <div className="text-xs text-zinc-400">
           <ThemeSwitch />
         </div>
