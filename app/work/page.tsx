@@ -38,7 +38,7 @@ export default function WorkPage() {
         transition={TRANSITION_SECTION}
         className="relative"
       >
-        <div className="flex items-center gap-4 mb-6">
+        <div className="flex items-center gap-4 mb-12">
           <Link
             href="/"
             className="group flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
@@ -48,10 +48,10 @@ export default function WorkPage() {
           </Link>
         </div>
         
-        <div className="flex items-center gap-3 mb-8">
+        <div className="flex items-center gap-3 mb-10">
           <Briefcase className="w-8 h-8 text-blue-600 dark:text-blue-400" />
           <div>
-            <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">
+            <h1 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
               Work Experience
             </h1>
             <p className="text-zinc-600 dark:text-zinc-400 mt-1">
