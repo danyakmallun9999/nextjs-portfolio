@@ -15,12 +15,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       caption: string
     }) => {
       return (
-        <figure className="group relative mb-8 overflow-hidden rounded-2xl">
-          <div className="relative">
+        <figure className="group relative mb-8 mt-0 overflow-hidden rounded-2xl">
+          <div className="relative aspect-video">
             <img 
               src={src} 
               alt={alt} 
-              className="w-full object-cover transition-transform duration-500 group-hover:scale-105" 
+              className="w-full h-full object-cover" 
             />
           </div>
           <figcaption className="mt-4 text-center text-sm font-medium text-zinc-600 dark:text-zinc-400">

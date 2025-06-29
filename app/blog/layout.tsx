@@ -75,15 +75,15 @@ function CopyButton() {
   return (
     <motion.button
       onClick={handleCopy}
-      className="group relative flex items-center gap-2 rounded-lg border border-zinc-200 bg-white/50 px-4 py-2 text-sm text-zinc-600 transition-all duration-200 hover:border-zinc-300 hover:bg-white/80 hover:shadow-sm dark:border-zinc-700 dark:bg-zinc-900/50 dark:text-zinc-300 dark:hover:border-zinc-600 dark:hover:bg-zinc-900/80"
+      className="group relative flex items-center gap-1 rounded-sm border border-zinc-200 bg-white/50 px-4 py-0 text-xs text-zinc-600 transition-all duration-200 hover:border-zinc-300 hover:bg-white/80 hover:shadow-sm dark:border-zinc-700 dark:bg-zinc-900/50 dark:text-zinc-300 dark:hover:border-zinc-600 dark:hover:bg-zinc-900/80"
       type="button"
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       title={`Copy URL: ${currentUrl}`}
     >
-      <Spotlight className="from-blue-500/20 via-purple-500/20 to-pink-500/20" size={150} />
+      <Spotlight className="from-blue-500/20 via-purple-500/20 to-pink-500/20" size={80} />
       <svg
-        className={`h-4 w-4 transition-colors ${isCopied ? 'text-green-500' : 'text-zinc-400 group-hover:text-zinc-600 dark:text-zinc-500 dark:group-hover:text-zinc-300'}`}
+        className={`h-3 w-3 transition-colors ${isCopied ? 'text-green-500' : 'text-zinc-400 group-hover:text-zinc-600 dark:text-zinc-500 dark:group-hover:text-zinc-300'}`}
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -95,7 +95,7 @@ function CopyButton() {
         )}
       </svg>
       <TextMorph>{text}</TextMorph>
-      <span className="hidden sm:inline">URL</span>
+      <span className="inline text-xs">URL</span>
     </motion.button>
   )
 }
@@ -250,13 +250,12 @@ export default function LayoutBlogPost({
         }}
       />
 
-      <div className="absolute right-4 top-24 z-30">
-        <CopyButton />
-      </div>
-
       <TableOfContents />
 
-      <main className="prose prose-gray mt-24 pb-20 prose-h4:prose-base dark:prose-invert prose-h1:text-3xl prose-h1:font-bold prose-h1:tracking-tight prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-2xl prose-h2:font-semibold prose-h2:tracking-tight prose-h3:text-xl prose-h3:font-semibold prose-h3:tracking-tight prose-h4:font-semibold prose-h5:text-lg prose-h5:font-semibold prose-h6:text-base prose-h6:font-semibold prose-strong:font-semibold prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-gradient-to-r prose-blockquote:from-blue-50/80 prose-blockquote:via-purple-50/60 prose-blockquote:to-blue-50/80 prose-blockquote:py-6 prose-blockquote:px-8 prose-blockquote:rounded-lg prose-blockquote:shadow-sm dark:prose-blockquote:from-blue-950/30 dark:prose-blockquote:via-purple-950/20 dark:prose-blockquote:to-blue-950/30 dark:prose-blockquote:shadow-zinc-900/20 prose-code:bg-zinc-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm dark:prose-code:bg-zinc-800 prose-pre:bg-zinc-900 prose-pre:text-zinc-100 dark:prose-pre:bg-zinc-950">
+      <main className="prose prose-gray mt-8 pb-20 prose-h4:prose-base dark:prose-invert prose-h1:text-3xl prose-h1:font-bold prose-h1:tracking-tight prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-2xl prose-h2:font-semibold prose-h2:tracking-tight prose-h3:text-xl prose-h3:font-semibold prose-h3:tracking-tight prose-h4:font-semibold prose-h5:text-lg prose-h5:font-semibold prose-h6:text-base prose-h6:font-semibold prose-strong:font-semibold prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-gradient-to-r prose-blockquote:from-blue-50/80 prose-blockquote:via-purple-50/60 prose-blockquote:to-blue-50/80 prose-blockquote:py-6 prose-blockquote:px-8 prose-blockquote:rounded-lg prose-blockquote:shadow-sm dark:prose-blockquote:from-blue-950/30 dark:prose-blockquote:via-purple-950/20 dark:prose-blockquote:to-blue-950/30 dark:prose-blockquote:shadow-zinc-900/20 prose-code:bg-zinc-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm dark:prose-code:bg-zinc-800 prose-pre:bg-zinc-900 prose-pre:text-zinc-100 dark:prose-pre:bg-zinc-950">
+        <div className="flex justify-end mb-1">
+          <CopyButton />
+        </div>
         {children}
       </main>
 
