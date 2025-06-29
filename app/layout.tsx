@@ -23,13 +23,13 @@ export const metadata: Metadata = {
     default: 'Dany Akmallun Ni\'am - Crypto enthusiast • Web Developer • Lifelong learner',
     template: '%s | Dany Akmallun'
   },
-  description: 'Portfolio pribadi Dany Akmallun Ni\'am - Penggemar Crypto, Web Developer, dan Prompt Engineer yang berdedikasi untuk membangun masa depan terdesentralisasi.',
+  description: 'Portfolio pribadi Dany Akmallun Ni\'am, seorang Crypto enthusiast • Web Developer • Lifelong learner yang berdedikasi untuk membangun masa depan terdesentralisasi.',
   keywords: ['crypto', 'web3', 'blockchain', 'web developer', 'prompt engineer', 'indonesia', 'dany akmallun'],
   authors: [{ name: 'Dany Akmallun Ni\'am' }],
   creator: 'Dany Akmallun Ni\'am',
   openGraph: {
     title: 'Dany Akmallun Ni\'am - Crypto enthusiast • Web Developer • Lifelong learner',
-    description: 'Portfolio pribadi Dany Akmallun Ni\'am seorang Crypto enthusiast • Web Developer • Lifelong learner yang berdedikasi untuk membangun masa depan terdesentralisasi.',
+    description: 'Portfolio pribadi Dany Akmallun Ni\'am, seorang Crypto enthusiast • Web Developer • Lifelong learner yang berdedikasi untuk membangun masa depan terdesentralisasi.',
     url: 'https://danyakmallun.com/',
     type: 'website',
     locale: 'id_ID',
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dany Akmallun Ni\'am - Crypto Enthusiast & Web3 Developer',
-    description: 'Portfolio pribadi Dany Akmallun Ni\'am seorang Crypto enthusiast • Web Developer • Lifelong learner yang berdedikasi untuk membangun masa depan terdesentralisasi.',
+    title: 'Dany Akmallun Ni\'am - Crypto enthusiast • Web Developer • Lifelong learner',
+    description: 'Portfolio pribadi Dany Akmallun Ni\'am, seorang Crypto enthusiast • Web Developer • Lifelong learner yang berdedikasi untuk membangun masa depan terdesentralisasi.',
     images: [
       {
         url: '/opengraph.jpg',
