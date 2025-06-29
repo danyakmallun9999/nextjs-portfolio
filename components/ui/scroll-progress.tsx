@@ -33,7 +33,7 @@ export function ScrollProgress({
 
   return (
     <motion.div
-      className={cn('inset-x-0 top-0 h-1 origin-left', className)}
+      className={cn('fixed inset-x-0 top-0 h-1 origin-left z-50', className)}
       style={{
         scaleX,
       }}

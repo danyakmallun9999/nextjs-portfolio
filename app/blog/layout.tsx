@@ -5,6 +5,7 @@ import { Spotlight } from '@/components/ui/spotlight'
 import { TextEffect } from '@/components/ui/text-effect'
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
+import { usePathname } from 'next/navigation'
 
 function CopyButton() {
   const [text, setText] = useState('Copy')
@@ -239,6 +240,28 @@ export default function LayoutBlogPost({
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname()
+  const isBlogList = pathname === '/blog'
+
+  // If it's the blog list page, use simple layout without table of contents and copy button
+  if (isBlogList) {
+    return (
+      <>
+        <div className="pointer-events-none fixed left-0 top-0 z-10 h-12 w-full bg-gradient-to-b from-gray-100/80 to-transparent backdrop-blur-xl [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)] dark:from-zinc-950/80" />
+        <ScrollProgress
+          className="fixed top-0 z-20 h-0.5 bg-gradient-to-r from-green-500 via-green-400 to-green-600"
+          springOptions={{
+            bounce: 0,
+          }}
+        />
+        <main className="mt-8 pb-20">
+          {children}
+        </main>
+      </>
+    )
+  }
+
+  // For detail posts, use full layout with table of contents and copy button
   return (
     <>
       <ReadingProgress />

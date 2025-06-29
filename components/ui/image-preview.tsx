@@ -1,10 +1,12 @@
 'use client'
 
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import Image from 'next/image'
 import { Eye, ZoomIn, X, ExternalLink, Loader2, Download } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import useClickOutside from '@/hooks/useClickOutside'
+import { createPortal } from 'react-dom'
 
 interface ImagePreviewProps {
   src: string
@@ -39,6 +41,9 @@ export function ImagePreview({
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
   const [isDownloading, setIsDownloading] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  
+  const modalRef = useRef<HTMLDivElement>(null)
 
   const handleImageLoad = useCallback(() => {
     setIsLoading(false)
@@ -58,6 +63,12 @@ export function ImagePreview({
     setShowOverlay(false)
   }, [src])
 
+  // Mount check for portal
+  useEffect(() => {
+    setMounted(true)
+    return () => setMounted(false)
+  }, [])
+
   // Prevent body scroll when modal is open
   useEffect(() => {
     if (isModalOpen) {
@@ -69,6 +80,13 @@ export function ImagePreview({
       document.body.style.overflow = 'unset'
     }
   }, [isModalOpen])
+
+  // Use click outside hook to close modal
+  useClickOutside(modalRef, () => {
+    if (isModalOpen) {
+      setIsModalOpen(false)
+    }
+  })
 
   const handleDownload = async () => {
     if (!src) return
@@ -243,151 +261,145 @@ export function ImagePreview({
         )}
       </div>
 
-      {/* Modal */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            onClick={() => setIsModalOpen(false)}
-          >
-            {/* Backdrop */}
+      {/* Modal - Using Portal */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {isModalOpen && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            />
-
-            {/* Modal Content */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 50 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 50 }}
-              transition={{ type: 'spring', bounce: 0.15, duration: 0.6 }}
-              className="relative max-w-6xl w-full max-h-[90vh] bg-zinc-50 dark:bg-zinc-950 rounded-2xl shadow-2xl overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
+              className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
             >
-              {/* Image Container */}
-              <div className="relative">
-                {!imageError ? (
-                  <Image
-                    src={src}
-                    alt={alt}
-                    width={1200}
-                    height={800}
-                    className="w-full h-auto max-h-[80vh] object-contain"
-                    priority={true}
-                  />
-                ) : (
-                  <div className="w-full h-auto max-h-[80vh] bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center min-h-[400px]">
-                    <div className="text-zinc-500 dark:text-zinc-400 text-center">
-                      <Eye className="h-20 w-20 mx-auto mb-4 opacity-50" />
-                      <p className="text-xl font-medium">Gambar tidak tersedia</p>
-                      <p className="text-sm mt-2 opacity-70">Coba refresh halaman atau periksa koneksi internet</p>
+              {/* Modal Content */}
+              <motion.div
+                ref={modalRef}
+                initial={{ opacity: 0, scale: 0.95, y: 50 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 50 }}
+                transition={{ type: 'spring', bounce: 0.15, duration: 0.6 }}
+                className="relative w-full max-w-4xl max-h-[85vh] bg-white dark:bg-zinc-950 rounded-2xl shadow-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800"
+              >
+                {/* Image Container */}
+                <div className="relative">
+                  {!imageError ? (
+                    <Image
+                      src={src}
+                      alt={alt}
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto max-h-[60vh] object-contain"
+                      priority={true}
+                    />
+                  ) : (
+                    <div className="w-full h-auto max-h-[60vh] bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center min-h-[300px]">
+                      <div className="text-zinc-500 dark:text-zinc-400 text-center">
+                        <Eye className="h-16 w-16 mx-auto mb-3 opacity-50" />
+                        <p className="text-lg font-medium">Gambar tidak tersedia</p>
+                        <p className="text-sm mt-2 opacity-70">Coba refresh halaman atau periksa koneksi internet</p>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {/* Action Buttons */}
-                <div className="absolute top-4 right-4 flex items-center gap-2">
-                  <motion.button
-                    onClick={handleDownload}
-                    disabled={isDownloading}
-                    className="rounded-full bg-white/90 dark:bg-zinc-800/90 p-2 shadow-lg backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-700/50 hover:bg-white dark:hover:bg-zinc-800 transition-colors disabled:opacity-50"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {isDownloading ? (
-                      <Loader2 className="h-5 w-5 text-zinc-600 dark:text-zinc-400 animate-spin" />
-                    ) : (
-                      <Download className="h-5 w-5 text-zinc-600 dark:text-zinc-400" />
-                    )}
-                  </motion.button>
-                  
-                  <motion.button
-                    onClick={() => setIsModalOpen(false)}
-                    className="rounded-full bg-white/90 dark:bg-zinc-800/90 p-2 shadow-lg backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-700/50 hover:bg-white dark:hover:bg-zinc-800 transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <X className="h-5 w-5 text-zinc-600 dark:text-zinc-400" />
-                  </motion.button>
+                  {/* Action Buttons */}
+                  <div className="absolute top-4 right-4 flex items-center gap-2">
+                    <motion.button
+                      onClick={handleDownload}
+                      disabled={isDownloading}
+                      className="rounded-full bg-white/90 dark:bg-zinc-800/90 p-2 shadow-lg backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-700/50 hover:bg-white dark:hover:bg-zinc-800 transition-colors disabled:opacity-50"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {isDownloading ? (
+                        <Loader2 className="h-5 w-5 text-zinc-600 dark:text-zinc-400 animate-spin" />
+                      ) : (
+                        <Download className="h-5 w-5 text-zinc-600 dark:text-zinc-400" />
+                      )}
+                    </motion.button>
+                    
+                    <motion.button
+                      onClick={() => setIsModalOpen(false)}
+                      className="rounded-full bg-white/90 dark:bg-zinc-800/90 p-2 shadow-lg backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-700/50 hover:bg-white dark:hover:bg-zinc-800 transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <X className="h-5 w-5 text-zinc-600 dark:text-zinc-400" />
+                    </motion.button>
+                  </div>
                 </div>
-              </div>
 
-              {/* Info Panel */}
-              {(title || description || category || techStack.length > 0 || link) && (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.4 }}
-                  className="p-6 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800"
-                >
-                  <div className="space-y-4">
-                    {category && (
-                      <div className="flex items-center gap-2">
-                        <span className="inline-flex items-center rounded-full bg-orange-500/20 px-3 py-1.5 text-sm font-medium text-orange-700 dark:text-orange-300">
-                          {category}
-                        </span>
-                      </div>
-                    )}
-                    
-                    {title && (
-                      <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
-                        {title}
-                      </h3>
-                    )}
-                    
-                    {description && (
-                      <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                        {description}
-                      </p>
-                    )}
-
-                    {techStack.length > 0 && (
-                      <div className="space-y-2">
-                        <h4 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-                          Tech Stack:
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {techStack.map((tech, index) => (
-                            <motion.span
-                              key={index}
-                              initial={{ opacity: 0, scale: 0.8 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: 0.3 + index * 0.1, duration: 0.3 }}
-                              className="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800 px-3 py-1.5 text-sm font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700"
-                            >
-                              {tech}
-                            </motion.span>
-                          ))}
+                {/* Info Panel */}
+                {(title || description || category || techStack.length > 0 || link) && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2, duration: 0.4 }}
+                    className="p-4 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800"
+                  >
+                    <div className="space-y-3">
+                      {category && (
+                        <div className="flex items-center gap-2">
+                          <span className="inline-flex items-center rounded-full bg-orange-500/20 px-2.5 py-1 text-sm font-medium text-orange-700 dark:text-orange-300">
+                            {category}
+                          </span>
                         </div>
-                      </div>
-                    )}
+                      )}
+                      
+                      {title && (
+                        <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
+                          {title}
+                        </h3>
+                      )}
+                      
+                      {description && (
+                        <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                          {description}
+                        </p>
+                      )}
 
-                    {link && (
-                      <motion.a
-                        href={link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full bg-zinc-900 dark:bg-zinc-100 px-5 py-2.5 text-sm font-semibold text-white dark:text-zinc-900 transition-all hover:scale-105"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                        <span>Lihat Project</span>
-                      </motion.a>
-                    )}
-                  </div>
-                </motion.div>
-              )}
+                      {techStack.length > 0 && (
+                        <div className="space-y-2">
+                          <h4 className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                            Tech Stack:
+                          </h4>
+                          <div className="flex flex-wrap gap-1.5">
+                            {techStack.map((tech, index) => (
+                              <motion.span
+                                key={index}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.3 + index * 0.1, duration: 0.3 }}
+                                className="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800 px-2 py-1 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700"
+                              >
+                                {tech}
+                              </motion.span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {link && (
+                        <motion.a
+                          href={link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full bg-zinc-900 dark:bg-zinc-100 px-4 py-2 text-sm font-semibold text-white dark:text-zinc-900 transition-all hover:scale-105"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          <span>Lihat Project</span>
+                        </motion.a>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   )
 } 
