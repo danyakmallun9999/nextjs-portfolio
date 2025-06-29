@@ -131,7 +131,7 @@ function BackToTop() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           onClick={scrollToTop}
-          className="group fixed right-0 bottom-0 z-50 m-6 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-all duration-300 hover:bg-blue-700 hover:shadow-xl hover:scale-110 sm:h-12 sm:w-12"
+          className="group fixed left-1/2 bottom-0 mb-6 -translate-x-1/2 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-all duration-300 hover:bg-blue-700 hover:shadow-xl hover:scale-110 sm:h-12 sm:w-12"
           whileHover={{ y: -2 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -256,7 +256,7 @@ export default function LayoutBlogPost({
 
       <TableOfContents />
 
-      <main className="prose prose-gray mx-auto mt-24 max-w-screen-sm pb-20 px-4 prose-h4:prose-base dark:prose-invert prose-h1:text-3xl prose-h1:font-bold prose-h1:tracking-tight prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-2xl prose-h2:font-semibold prose-h2:tracking-tight prose-h3:text-xl prose-h3:font-semibold prose-h3:tracking-tight prose-h4:font-semibold prose-h5:text-lg prose-h5:font-semibold prose-h6:text-base prose-h6:font-semibold prose-strong:font-semibold prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-gradient-to-r prose-blockquote:from-blue-50/80 prose-blockquote:via-purple-50/60 prose-blockquote:to-blue-50/80 prose-blockquote:py-6 prose-blockquote:px-8 prose-blockquote:rounded-lg prose-blockquote:shadow-sm dark:prose-blockquote:from-blue-950/30 dark:prose-blockquote:via-purple-950/20 dark:prose-blockquote:to-blue-950/30 dark:prose-blockquote:shadow-zinc-900/20 prose-code:bg-zinc-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm dark:prose-code:bg-zinc-800 prose-pre:bg-zinc-900 prose-pre:text-zinc-100 dark:prose-pre:bg-zinc-950">
+      <main className="prose prose-gray mt-24 pb-20 prose-h4:prose-base dark:prose-invert prose-h1:text-3xl prose-h1:font-bold prose-h1:tracking-tight prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-2xl prose-h2:font-semibold prose-h2:tracking-tight prose-h3:text-xl prose-h3:font-semibold prose-h3:tracking-tight prose-h4:font-semibold prose-h5:text-lg prose-h5:font-semibold prose-h6:text-base prose-h6:font-semibold prose-strong:font-semibold prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-gradient-to-r prose-blockquote:from-blue-50/80 prose-blockquote:via-purple-50/60 prose-blockquote:to-blue-50/80 prose-blockquote:py-6 prose-blockquote:px-8 prose-blockquote:rounded-lg prose-blockquote:shadow-sm dark:prose-blockquote:from-blue-950/30 dark:prose-blockquote:via-purple-950/20 dark:prose-blockquote:to-blue-950/30 dark:prose-blockquote:shadow-zinc-900/20 prose-code:bg-zinc-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm dark:prose-code:bg-zinc-800 prose-pre:bg-zinc-900 prose-pre:text-zinc-100 dark:prose-pre:bg-zinc-950">
         {children}
       </main>
 
