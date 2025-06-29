@@ -391,7 +391,7 @@ export default function Personal() {
         >
           <div className="flex-1">
             <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-6">
-              Tentang Saya
+              About Me
             </h2>
             <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-m">
               Crypto enthusiast & web developer specializing in Laravel, Tailwind, PHP, and modern web stacks. Aktif di testnet project dan gemar eksplorasi ekosistem web3. Also passionate about AI—especially prompt engineering for learning and problem solving. Always curious, always building, always learning.
@@ -496,7 +496,7 @@ export default function Personal() {
         >
           <h3 className="mb-5 text-lg font-medium flex items-center gap-2">
             <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            Pengalaman Kerja
+            Work Experience
           </h3>
           <div className="flex flex-col space-y-4">
             {WORK_EXPERIENCE.map((job) => (
@@ -544,7 +544,7 @@ export default function Personal() {
         >
           <h3 className="mb-3 text-lg font-medium flex items-center gap-2">
             <BookOpen className="w-5 h-5 text-green-600 dark:text-green-400" />
-            Artikel Blog
+            Blog Posts
           </h3>
           <div className="flex flex-col space-y-0">
             <AnimatedBackground
@@ -584,10 +584,10 @@ export default function Personal() {
         >
           <h3 className="mb-5 text-lg font-medium flex items-center gap-2">
             <Mail className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-            Hubungi Saya
+            Contact Me
           </h3>
           <p className="mb-5 text-zinc-600 dark:text-zinc-400">
-            Jangan ragu untuk menghubungi saya di{' '}
+            Feel free to contact me at{' '}
             <a className="underline dark:text-zinc-300" href={`mailto:${EMAIL}`}>
               {EMAIL}
             </a>
