@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'motion/react'
-import { XIcon, Briefcase, BookOpen, Mail, ExternalLink } from 'lucide-react'
+import { XIcon, Briefcase, BookOpen, Mail, ExternalLink, ExternalLink as ExternalLinkIcon, Code2, ZoomIn, Eye, Github, Globe, Calendar, Tag } from 'lucide-react'
 import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
 import {
@@ -13,13 +13,16 @@ import {
 import Link from 'next/link'
 import { AnimatedBackground } from '@/components/ui/animated-background'
 import {
-  // PROJECTS,
+  PROJECTS,
   WORK_EXPERIENCE,
   BLOG_POSTS,
   EMAIL,
   SOCIAL_LINKS,
 } from './data'
 import { ScrollProgress } from '@/components/ui/scroll-progress'
+import { useState } from 'react'
+import React from 'react'
+import Image from 'next/image'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -40,47 +43,295 @@ const TRANSITION_SECTION = {
   duration: 0.3,
 }
 
-type ProjectVideoProps = {
+type ProjectImageProps = {
   src: string
+  project: {
+    name: string
+    description: string
+    link: string
+    techStack: string[]
+    category: string
+  }
 }
 
-function ProjectVideo({ src }: ProjectVideoProps) {
+function ProjectImage({ src, project }: ProjectImageProps) {
+  const [isLoading, setIsLoading] = useState(true)
+  const [showOverlay, setShowOverlay] = useState(false)
+  const [imageError, setImageError] = useState(false)
+
+  const handleImageLoad = () => {
+    setIsLoading(false)
+  }
+
+  const handleImageError = () => {
+    setIsLoading(false)
+    setImageError(true)
+  }
+
   return (
     <MorphingDialog
       transition={{
         type: 'spring',
-        bounce: 0,
-        duration: 0.3,
+        bounce: 0.1,
+        duration: 0.5,
       }}
     >
       <MorphingDialogTrigger>
-        <video
-          src={src}
-          autoPlay
-          loop
-          muted
-          className="aspect-video w-full cursor-zoom-in rounded-xl"
-        />
+        <div 
+          className="relative group cursor-zoom-in overflow-hidden rounded-xl"
+          onMouseEnter={() => setShowOverlay(true)}
+          onMouseLeave={() => setShowOverlay(false)}
+        >
+          {!imageError ? (
+            <Image
+              src={src}
+              alt={project.name}
+              width={600}
+              height={400}
+              className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              onLoad={handleImageLoad}
+              onError={handleImageError}
+            />
+          ) : (
+            <div className="aspect-video w-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center">
+              <div className="text-zinc-500 dark:text-zinc-400 text-center">
+                <Eye className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                <p className="text-sm">Gambar tidak tersedia</p>
+              </div>
+            </div>
+          )}
+          
+          {/* Loading overlay */}
+          {isLoading && !imageError && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm"
+            >
+              <div className="flex items-center gap-2 text-white">
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                <span className="text-sm">Memuat...</span>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Hover overlay */}
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: showOverlay ? 1 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="absolute bottom-4 left-4 right-4">
+              <div className="flex items-center justify-between">
+                <div className="text-white">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="inline-flex items-center rounded-full bg-orange-500/20 px-2 py-0.5 text-xs font-medium text-orange-200 backdrop-blur-sm">
+                      {project.category}
+                    </span>
+                  </div>
+                  <h4 className="font-semibold text-sm mb-1">{project.name}</h4>
+                  <p className="text-xs text-gray-200 opacity-90">{project.description}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <motion.div 
+                    className="rounded-full bg-white/20 p-2 backdrop-blur-sm"
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <ZoomIn className="h-4 w-4 text-white" />
+                  </motion.div>
+                  <motion.div 
+                    className="rounded-full bg-white/20 p-2 backdrop-blur-sm"
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <ExternalLinkIcon className="h-4 w-4 text-white" />
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Zoom hint */}
+          {!showOverlay && !isLoading && !imageError && (
+            <motion.div 
+              className="absolute top-4 right-4 text-xs text-white/70 bg-black/30 px-2 py-1 rounded"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              Klik untuk memperbesar
+            </motion.div>
+          )}
+        </div>
       </MorphingDialogTrigger>
       <MorphingDialogContainer>
         <MorphingDialogContent className="relative aspect-video rounded-2xl bg-zinc-50 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950 dark:ring-zinc-800/50">
-          <video
-            src={src}
-            autoPlay
-            loop
-            muted
-            className="aspect-video h-[50vh] w-full rounded-xl md:h-[70vh]"
-          />
+          <motion.div
+            variants={{
+              initial: { 
+                opacity: 0,
+                y: 100,
+                scale: 0.9,
+                filter: 'blur(10px)'
+              },
+              animate: { 
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                filter: 'blur(0px)',
+                transition: {
+                  type: 'spring',
+                  bounce: 0.1,
+                  duration: 0.6,
+                  delay: 0.1
+                }
+              },
+              exit: { 
+                opacity: 0,
+                y: 100,
+                scale: 0.9,
+                filter: 'blur(10px)',
+                transition: {
+                  type: 'spring',
+                  bounce: 0,
+                  duration: 0.4
+                }
+              }
+            }}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="relative"
+          >
+            {!imageError ? (
+              <Image
+                src={src}
+                alt={project.name}
+                width={800}
+                height={600}
+                className="w-full h-auto max-h-[80vh] object-contain md:object-cover rounded-xl"
+                onError={handleImageError}
+              />
+            ) : (
+              <div className="w-full h-auto max-h-[80vh] bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center rounded-xl">
+                <div className="text-zinc-500 dark:text-zinc-400 text-center">
+                  <Eye className="h-16 w-16 mx-auto mb-4 opacity-50" />
+                  <p className="text-lg">Gambar tidak tersedia</p>
+                </div>
+              </div>
+            )}
+            
+            {/* Project info overlay in modal */}
+            <motion.div 
+              className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-xl md:block hidden"
+              variants={{
+                initial: { 
+                  opacity: 0,
+                  y: 50
+                },
+                animate: { 
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    delay: 0.3,
+                    duration: 0.4
+                  }
+                },
+                exit: { 
+                  opacity: 0,
+                  y: 50,
+                  transition: {
+                    duration: 0.2
+                  }
+                }
+              }}
+            >
+              <div className="space-y-3">
+                <div className="flex items-start justify-between">
+                  <div className="text-white flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="inline-flex items-center rounded-full bg-orange-500/30 px-3 py-1 text-sm font-medium text-orange-200 backdrop-blur-sm border border-orange-400/30">
+                        {project.category}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2 drop-shadow-lg">
+                      <motion.a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block cursor-pointer hover:drop-shadow-2xl transition-all duration-300 text-white hover:text-orange-300"
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        {project.name}
+                      </motion.a>
+                    </h3>
+                    <div className="min-h-[3rem] flex items-start">
+                      <p className="text-sm leading-relaxed text-zinc-200">
+                        {project.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Tech Stack */}
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-white/80">
+                    <Tag className="h-4 w-4" />
+                    <span className="text-sm font-medium">Tech Stack:</span>
+                  </div>
+                  <div className="min-h-[2rem] flex flex-wrap gap-1 items-start">
+                    {project.techStack.map((tech, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center rounded-full bg-white/15 px-3 py-1.5 text-sm font-medium text-white/90 backdrop-blur-sm border border-white/25 hover:bg-white/25 transition-colors"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <motion.a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/30 border border-white/30"
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Github className="h-4 w-4" />
+                  <span>Source Code</span>
+                </motion.a>
+              </div>
+            </motion.div>
+          </motion.div>
         </MorphingDialogContent>
         <MorphingDialogClose
-          className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1"
+          className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1 shadow-lg"
           variants={{
-            initial: { opacity: 0 },
+            initial: { 
+              opacity: 0,
+              scale: 0.8,
+              y: -20
+            },
             animate: {
               opacity: 1,
-              transition: { delay: 0.3, duration: 0.1 },
+              scale: 1,
+              y: 0,
+              transition: { 
+                delay: 0.4, 
+                duration: 0.3,
+                type: 'spring',
+                bounce: 0.2
+              },
             },
-            exit: { opacity: 0, transition: { duration: 0 } },
+            exit: { 
+              opacity: 0,
+              scale: 0.8,
+              y: -20,
+              transition: { 
+                duration: 0.2 
+              } 
+            },
           }}
         >
           <XIcon className="h-5 w-5 text-zinc-500" />
@@ -143,39 +394,101 @@ export default function Personal() {
               Tentang Saya
             </h2>
             <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-m">
-              Seorang penggemar Crypto dan pembangun Web3 yang berdedikasi untuk merancang masa depan terdesentralisasi. Perjalanan saya dalam teknologi blockchain didukung oleh fondasi yang kuat dalam Pengembangan Web, memungkinkan saya membangun aplikasi terdesentralisasi (dApps) yang aman dan ramah pengguna. Saya terus berinovasi dengan memanfaatkan Prompt Engineering untuk mengintegrasikan fitur AI yang cerdas, menciptakan pengalaman generasi berikutnya yang benar-benar luar biasa. Misi utama saya adalah berkontribusi pada internet yang lebih transparan, adil, dan dimiliki oleh pengguna.
+            Crypto enthusiast & web developer specializing in Laravel, Tailwind, PHP, and modern web stacks. Aktif di testnet project dan gemar eksplorasi ekosistem web3. Also passionate about AI—especially prompt engineering for learning and problem solving. Always curious, always building, always learning.
             </p>
           </div>
         </motion.section>
 
-        {/* <motion.section
+        <motion.section
           variants={VARIANTS_SECTION}
           transition={TRANSITION_SECTION}
         >
-          <h3 className="mb-5 text-lg font-medium">Selected Projects</h3>
+          <h3 className="mb-5 text-lg font-medium flex items-center gap-2">
+            <Code2 className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+            Project Pilihan
+          </h3>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {PROJECTS.map((project) => (
-              <div key={project.name} className="space-y-2">
-                <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
-                  <ProjectVideo src={project.video} />
+              <motion.div 
+                key={project.name} 
+                className="group relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30 transition-all duration-300 hover:bg-zinc-400/40 dark:hover:bg-zinc-500/40"
+                transition={{ duration: 0.2 }}
+              >
+                <Spotlight
+                  className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
+                  size={64}
+                />
+                <div className="relative h-full w-full rounded-[15px] bg-white dark:bg-zinc-950">
+                  <div className="relative flex w-full flex-col">
+                    <div className="relative p-2">
+                      <ProjectImage src={project.image} project={project} />
+                    </div>
+                    
+                    <div className="p-6 space-y-3">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="inline-flex items-center rounded-full bg-orange-100 px-2.5 py-0.5 text-xs font-medium text-orange-800 dark:bg-orange-900/30 dark:text-orange-300">
+                              {project.category}
+                            </span>
+                          </div>
+                          <h4 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-1 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors drop-shadow-lg">
+                            <motion.a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-block cursor-pointer hover:drop-shadow-2xl transition-all duration-300 hover:text-orange-600 dark:hover:text-orange-400"
+                              whileTap={{ scale: 0.98 }}
+                            >
+                              {project.name}
+                            </motion.a>
+                          </h4>
+                          <div className="min-h-[3rem] flex items-start">
+                            <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+                              {project.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Tech Stack */}
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400">
+                          <Tag className="h-4 w-4" />
+                          <span className="text-xs font-medium">Tech Stack</span>
+                        </div>
+                        <div className="min-h-[2rem] flex flex-wrap gap-1 items-start">
+                          {project.techStack.map((tech, index) => (
+                            <span
+                              key={index}
+                              className="inline-flex items-center rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      {/* Action Button */}
+                      <div className="flex items-center gap-2 pt-1">
+                        <motion.a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-full bg-zinc-100 px-3 py-1.5 text-xs font-medium text-zinc-700 transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <Github className="h-3 w-3" />
+                          <span>Source Code</span>
+                        </motion.a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="px-1">
-                  <a
-                    className="font-base group relative inline-block font-[450] text-zinc-900 dark:text-zinc-50"
-                    href={project.link}
-                    target="_blank"
-                  >
-                    {project.name}
-                    <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 dark:bg-zinc-50 transition-all duration-200 group-hover:max-w-full"></span>
-                  </a>
-                  <p className="text-base text-zinc-600 dark:text-zinc-400">
-                    {project.description}
-                  </p>
-                </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </motion.section> */}
+        </motion.section>
 
         <motion.section
           variants={VARIANTS_SECTION}

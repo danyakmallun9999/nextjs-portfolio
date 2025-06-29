@@ -23,7 +23,7 @@ export function Header() {
           className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed"
           delay={0.5}
         >
-          Penggemar Crypto • Web Developer • Prompt Engineer
+          Crypto enthusiast • Web Developer • Lifelong learner
         </TextEffect>
         <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-1">
           Membangun masa depan terdesentralisasi
