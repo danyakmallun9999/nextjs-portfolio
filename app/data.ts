@@ -24,6 +24,7 @@ type BlogPost = {
   description: string
   link: string
   uid: string
+  date: string // ISO string
 }
 
 type SocialLink = {
@@ -73,18 +74,21 @@ export const BLOG_POSTS: BlogPost[] = [
     description: 'Web3, Lebih dari Sekadar Internet Biasa',
     link: '/blog/apa-itu-web3',
     uid: 'blog-1',
+    date: '2023-04-01',
   },
   {
     title: 'Peran vital Testnet dalam ekosistem kripto',
     description: 'Testnet adalah replika jaringan blockchain yang berfungsi sebagai laboratorium aman bagi developer untuk menguji aplikasi dan smart contract tanpa risiko finansial. Pelajari perbedaannya dengan mainnet dan mengapa ini krusial.',
     link: '/blog/peran-vital-testnet-dalam-ekosistem-kripto',
     uid: 'blog-2',
+    date: '2023-04-02',
   },
   {
     title: 'Madilog: Materialisme, Dialektika, & Logika Tan Malaka',
     description: 'Madilog, gagasan Tan Malaka, adalah kerangka berpikir ilmiah yang menggabungkan Materialisme, Dialektika, dan Logika untuk membebaskan bangsa dari pemikiran irasional. Pelajari tiga konsep dasarnya.',
     link: '/blog/materialisme-dialektika-dan-logika',
     uid: 'blog-3',
+    date: '2023-04-03',
   },
 ]
 

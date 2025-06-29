@@ -228,7 +228,7 @@ function ProjectImage({ src, project }: ProjectImageProps) {
           )}
         </div>
       </MorphingDialogTrigger>
-      
+
       <MorphingDialogContainer>
         <MorphingDialogContent className="relative max-w-5xl mx-auto rounded-2xl bg-zinc-50 p-2 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950 dark:ring-zinc-800/50 shadow-2xl">
           <motion.div
@@ -279,7 +279,7 @@ function ProjectImage({ src, project }: ProjectImageProps) {
                   onError={handleImageError}
                   priority={true}
                 />
-                
+
                 {/* Image loading indicator for modal */}
                 {isLoading && (
                   <motion.div
@@ -387,7 +387,7 @@ function ProjectImage({ src, project }: ProjectImageProps) {
             </motion.div>
           </motion.div>
         </MorphingDialogContent>
-        
+
         <MorphingDialogClose
           className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white/90 dark:bg-zinc-800/90 p-2 shadow-lg backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-700/50 hover:bg-white dark:hover:bg-zinc-800 transition-colors"
           variants={{
@@ -646,6 +646,16 @@ export default function Personal() {
                       {post.title}
                       <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                     </h4>
+                    <div className="flex items-center gap-2 text-xs text-green-300 dark:text-green-300 mb-1">
+                      <Calendar className="w-3 h-3" />
+                      <span>
+                        {new Date(post.date).toLocaleDateString('id-ID', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </span>
+                    </div>
                     <p className="text-zinc-500 dark:text-zinc-400">
                       {post.description}
                     </p>
