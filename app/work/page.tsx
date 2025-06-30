@@ -47,7 +47,7 @@ export default function WorkPage() {
             <span>Back to Home</span>
           </Link>
         </div>
-        
+
         <div className="flex items-center gap-3 mb-10">
           <Briefcase className="w-8 h-8 text-blue-600 dark:text-blue-400" />
           <div>
@@ -69,7 +69,7 @@ export default function WorkPage() {
         <div className="relative">
           {/* Timeline Line */}
           <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-blue-400 to-blue-600 dark:from-blue-400 dark:via-blue-300 dark:to-blue-500"></div>
-          
+
           {/* Work Items */}
           <div className="space-y-8">
             {WORK_EXPERIENCE.map((job, index) => (
@@ -82,7 +82,7 @@ export default function WorkPage() {
               >
                 {/* Timeline Dot */}
                 <div className="absolute left-6 top-6 w-4 h-4 bg-blue-600 dark:bg-blue-400 rounded-full border-4 border-white dark:border-zinc-950 shadow-lg group-hover:scale-125 transition-transform duration-300 z-10"></div>
-                
+
                 {/* Work Card */}
                 <div className="ml-16">
                   <motion.article

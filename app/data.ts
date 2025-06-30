@@ -24,7 +24,7 @@ type BlogPost = {
   description: string
   link: string
   uid: string
-  date: string // ISO string
+  date: string
 }
 
 type SocialLink = {
@@ -57,24 +57,6 @@ export const PROJECTS: Project[] = [
 ]
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
-  // {
-  //   company: 'Freelance Web Developer',
-  //   title: 'Junior Web Developer',
-  //   start: '2020',
-  //   end: '2021',
-  //   link: '#',
-  //   id: 'work1',
-  //   description: 'Memulai karir sebagai freelance web developer, mengerjakan proyek-proyek kecil untuk klien lokal. Fokus pada pengembangan website sederhana menggunakan HTML, CSS, dan JavaScript. Belajar dasar-dasar web development dan memahami kebutuhan klien.',
-  // },
-  // {
-  //   company: 'Digital Agency XYZ',
-  //   title: 'Frontend Developer',
-  //   start: '2021',
-  //   end: '2022',
-  //   link: '#',
-  //   id: 'work2',
-  //   description: 'Bergabung dengan digital agency sebagai frontend developer. Mengembangkan website responsif menggunakan React.js dan Tailwind CSS. Bekerja dalam tim untuk proyek-proyek e-commerce dan landing page. Meningkatkan skill dalam modern web development.',
-  // },
   {
     company: 'Klinik Pratama Amalia',
     title: 'IT Support',
@@ -84,24 +66,6 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     id: 'work1',
     description: 'Mengelola dan memelihara infrastruktur teknologi informasi klinik, termasuk sistem komputer, jaringan, dan perangkat lunak. Memberikan dukungan teknis kepada seluruh staf, melakukan troubleshooting hardware dan software, serta memastikan kelancaran operasional sistem IT untuk mendukung pelayanan kesehatan yang optimal.',
   },
-  // {
-  //   company: 'Tech Startup ABC',
-  //   title: 'Full Stack Developer',
-  //   start: '2023',
-  //   end: '2024',
-  //   link: '#',
-  //   id: 'work4',
-  //   description: 'Bergabung dengan startup teknologi sebagai full stack developer. Mengembangkan aplikasi web menggunakan Laravel, Vue.js, dan MySQL. Bertanggung jawab atas pengembangan fitur-fitur baru, maintenance sistem, dan optimasi performa. Belajar tentang scalable architecture dan best practices.',
-  // },
-  // {
-  //   company: 'Blockchain Company DEF',
-  //   title: 'Web3 Developer',
-  //   start: '2024',
-  //   end: 'Present',
-  //   link: '#',
-  //   id: 'work5',
-  //   description: 'Beralih ke pengembangan Web3 dan blockchain. Mengembangkan smart contracts menggunakan Solidity, dApps menggunakan React dan Web3.js. Fokus pada DeFi protocols dan NFT marketplace. Aktif berpartisipasi dalam berbagai testnet dan hackathon untuk meningkatkan skill di ekosistem blockchain.',
-  // },
 ]
 
 export const BLOG_POSTS: BlogPost[] = [
