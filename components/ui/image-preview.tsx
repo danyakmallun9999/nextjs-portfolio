@@ -269,7 +269,7 @@ export function ImagePreview({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+              className="fixed inset-0 z-[9999] flex items-center justify-center p-2 sm:p-4 bg-black/70 backdrop-blur-sm"
             >
               {/* Modal Content */}
               <motion.div
@@ -278,52 +278,51 @@ export function ImagePreview({
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 50 }}
                 transition={{ type: 'spring', bounce: 0.15, duration: 0.6 }}
-                className="relative w-full max-w-4xl max-h-[85vh] bg-white dark:bg-zinc-950 rounded-2xl shadow-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800"
+                className="relative w-full max-w-[98vw] sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl 2xl:max-w-4xl max-h-[90vh] sm:max-h-[85vh] bg-white dark:bg-zinc-950 rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex flex-col"
               >
                 {/* Image Container */}
-                <div className="relative">
+                <div className="relative flex-1 flex items-center justify-center bg-zinc-100 dark:bg-zinc-900">
                   {!imageError ? (
                     <Image
                       src={src}
                       alt={alt}
                       width={1200}
                       height={800}
-                      className="w-full h-auto max-h-[60vh] object-contain"
+                      className="w-full h-auto max-h-[40vh] sm:max-h-[55vh] md:max-h-[60vh] object-contain mx-auto"
                       priority={true}
                     />
                   ) : (
-                    <div className="w-full h-auto max-h-[60vh] bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center min-h-[300px]">
+                    <div className="w-full h-auto max-h-[40vh] sm:max-h-[55vh] md:max-h-[60vh] bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center min-h-[200px] sm:min-h-[300px]">
                       <div className="text-zinc-500 dark:text-zinc-400 text-center">
-                        <Eye className="h-16 w-16 mx-auto mb-3 opacity-50" />
-                        <p className="text-lg font-medium">Gambar tidak tersedia</p>
-                        <p className="text-sm mt-2 opacity-70">Coba refresh halaman atau periksa koneksi internet</p>
+                        <Eye className="h-12 sm:h-16 w-12 sm:w-16 mx-auto mb-2 sm:mb-3 opacity-50" />
+                        <p className="text-base sm:text-lg font-medium">Gambar tidak tersedia</p>
+                        <p className="text-xs sm:text-sm mt-1 sm:mt-2 opacity-70">Coba refresh halaman atau periksa koneksi internet</p>
                       </div>
                     </div>
                   )}
 
                   {/* Action Buttons */}
-                  <div className="absolute top-4 right-4 flex items-center gap-2">
+                  <div className="absolute top-2 right-2 sm:top-4 sm:right-4 flex items-center gap-1 sm:gap-2">
                     <motion.button
                       onClick={handleDownload}
                       disabled={isDownloading}
-                      className="rounded-full bg-white/90 dark:bg-zinc-800/90 p-2 shadow-lg backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-700/50 hover:bg-white dark:hover:bg-zinc-800 transition-colors disabled:opacity-50"
+                      className="rounded-full bg-white/90 dark:bg-zinc-800/90 p-1.5 sm:p-2 shadow-lg backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-700/50 hover:bg-white dark:hover:bg-zinc-800 transition-colors disabled:opacity-50"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       {isDownloading ? (
-                        <Loader2 className="h-5 w-5 text-zinc-600 dark:text-zinc-400 animate-spin" />
+                        <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 text-zinc-600 dark:text-zinc-400 animate-spin" />
                       ) : (
-                        <Download className="h-5 w-5 text-zinc-600 dark:text-zinc-400" />
+                        <Download className="h-4 w-4 sm:h-5 sm:w-5 text-zinc-600 dark:text-zinc-400" />
                       )}
                     </motion.button>
-                    
                     <motion.button
                       onClick={() => setIsModalOpen(false)}
-                      className="rounded-full bg-white/90 dark:bg-zinc-800/90 p-2 shadow-lg backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-700/50 hover:bg-white dark:hover:bg-zinc-800 transition-colors"
+                      className="rounded-full bg-white/90 dark:bg-zinc-800/90 p-1.5 sm:p-2 shadow-lg backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-700/50 hover:bg-white dark:hover:bg-zinc-800 transition-colors"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <X className="h-5 w-5 text-zinc-600 dark:text-zinc-400" />
+                      <X className="h-4 w-4 sm:h-5 sm:w-5 text-zinc-600 dark:text-zinc-400" />
                     </motion.button>
                   </div>
                 </div>
@@ -334,42 +333,39 @@ export function ImagePreview({
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.4 }}
-                    className="p-4 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800"
+                    className="p-3 sm:p-4 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 overflow-x-auto"
                   >
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       {category && (
                         <div className="flex items-center gap-2">
-                          <span className="inline-flex items-center rounded-full bg-orange-500/20 px-2.5 py-1 text-sm font-medium text-orange-700 dark:text-orange-300">
+                          <span className="inline-flex items-center rounded-full bg-orange-500/20 px-2 py-0.5 sm:px-2.5 sm:py-1 text-xs sm:text-sm font-medium text-orange-700 dark:text-orange-300">
                             {category}
                           </span>
                         </div>
                       )}
-                      
                       {title && (
-                        <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
+                        <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100">
                           {title}
                         </h3>
                       )}
-                      
                       {description && (
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                           {description}
                         </p>
                       )}
-
                       {techStack.length > 0 && (
-                        <div className="space-y-2">
+                        <div className="space-y-1 sm:space-y-2">
                           <h4 className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
                             Tech Stack:
                           </h4>
-                          <div className="flex flex-wrap gap-1.5">
+                          <div className="flex flex-wrap gap-1 sm:gap-1.5">
                             {techStack.map((tech, index) => (
                               <motion.span
                                 key={index}
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.3 + index * 0.1, duration: 0.3 }}
-                                className="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800 px-2 py-1 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700"
+                                className="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800 px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700"
                               >
                                 {tech}
                               </motion.span>
@@ -377,13 +373,12 @@ export function ImagePreview({
                           </div>
                         </div>
                       )}
-
                       {link && (
                         <motion.a
                           href={link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 rounded-full bg-zinc-900 dark:bg-zinc-100 px-4 py-2 text-sm font-semibold text-white dark:text-zinc-900 transition-all hover:scale-105"
+                          className="inline-flex flex-wrap items-center gap-2 rounded-full bg-zinc-900 dark:bg-zinc-100 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-white dark:text-zinc-900 transition-all hover:scale-105 whitespace-nowrap"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.98 }}
                         >
