@@ -318,34 +318,38 @@ export default function Personal() {
               }}
             >
               {/* Show only the 3 most recent blog posts */}
-              {BLOG_POSTS.slice(-3).map((post) => (
-                <Link
-                  key={post.uid}
-                  className="-mx-3 rounded-xl px-3 py-3"
-                  href={post.link}
-                  data-id={post.uid}
-                >
-                  <div className="flex flex-col space-y-1">
-                    <h4 className="font-normal dark:text-zinc-100 flex items-center gap-2 group">
-                      {post.title}
-                      <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                    </h4>
-                    <div className="flex items-center gap-2 text-xs text-green-300 dark:text-green-300 mb-1">
-                      <Calendar className="w-3 h-3" />
-                      <span>
-                        {new Date(post.date).toLocaleDateString('id-ID', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric'
-                        })}
-                      </span>
+              {BLOG_POSTS
+                .slice() // copy array agar tidak mutasi original
+                .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                .slice(0, 3)
+                .map((post) => (
+                  <Link
+                    key={post.uid}
+                    className="-mx-3 rounded-xl px-3 py-3"
+                    href={post.link}
+                    data-id={post.uid}
+                  >
+                    <div className="flex flex-col space-y-1">
+                      <h4 className="font-normal dark:text-zinc-100 flex items-center gap-2 group">
+                        {post.title}
+                        <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                      </h4>
+                      <div className="flex items-center gap-2 text-xs text-green-300 dark:text-green-300 mb-1">
+                        <Calendar className="w-3 h-3" />
+                        <span>
+                          {new Date(post.date).toLocaleDateString('id-ID', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                          })}
+                        </span>
+                      </div>
+                      <p className="text-zinc-500 dark:text-zinc-400">
+                        {post.description}
+                      </p>
                     </div>
-                    <p className="text-zinc-500 dark:text-zinc-400">
-                      {post.description}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                ))}
             </AnimatedBackground>
           </div>
           {/* Instructions to view all posts */}
