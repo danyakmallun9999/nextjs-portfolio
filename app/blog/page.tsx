@@ -25,6 +25,8 @@ const TRANSITION_SECTION = {
 }
 
 export default function BlogPage() {
+  // Urutkan post berdasarkan tanggal terbaru
+  const sortedPosts = [...BLOG_POSTS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   return (
     <motion.div
       variants={VARIANTS_CONTAINER}
@@ -67,7 +69,7 @@ export default function BlogPage() {
         transition={TRANSITION_SECTION}
       >
         <div className="space-y-6">
-          {BLOG_POSTS.map((post, index) => (
+          {sortedPosts.map((post, index) => (
             <motion.article
               key={post.uid}
               initial={{ opacity: 0, y: 20 }}
