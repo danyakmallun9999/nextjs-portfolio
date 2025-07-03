@@ -51,12 +51,12 @@ export default function BlogPage() {
         </div>
         
         <div className="flex items-center gap-3 mb-10">
-          <BookOpen className="w-8 h-8 text-green-600 dark:text-green-400" />
+          <BookOpen className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 dark:text-green-400" />
           <div>
-            <h1 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
+            <h1 className="text-base sm:text-lg md:text-xl font-bold text-zinc-900 dark:text-zinc-100">
               Blog Posts
             </h1>
-            <p className="text-zinc-600 dark:text-zinc-400 mt-1">
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1">
               Thoughts, insights, and discoveries about technology and beyond
             </p>
           </div>

@@ -50,12 +50,12 @@ export default function ProjectsPage() {
         </div>
         
         <div className="flex items-center gap-3 mb-10">
-          <Code2 className="w-8 h-8 text-orange-600 dark:text-orange-400" />
+          <Code2 className="w-6 h-6 sm:w-8 sm:h-8 text-orange-600 dark:text-orange-400" />
           <div>
-            <h1 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
+            <h1 className="text-base sm:text-lg md:text-xl font-bold text-zinc-900 dark:text-zinc-100">
               Projects
             </h1>
-            <p className="text-zinc-600 dark:text-zinc-400 mt-1">
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1">
               A collection of my work and creative endeavors
             </p>
           </div>

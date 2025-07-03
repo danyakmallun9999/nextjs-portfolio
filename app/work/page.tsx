@@ -49,12 +49,12 @@ export default function WorkPage() {
         </div>
 
         <div className="flex items-center gap-3 mb-10">
-          <Briefcase className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+          <Briefcase className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600 dark:text-blue-400" />
           <div>
-            <h1 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
+            <h1 className="text-base sm:text-lg md:text-xl font-bold text-zinc-900 dark:text-zinc-100">
               Work Experience
             </h1>
-            <p className="text-zinc-600 dark:text-zinc-400 mt-1">
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1">
               My professional journey and career progression
             </p>
           </div>
