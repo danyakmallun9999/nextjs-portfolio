@@ -73,9 +73,8 @@ export function Footer() {
         <div className="flex flex-col space-y-1">
           <a href="https://github.com/danyakmallun9999" target="_blank" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
             <TextLoop className="text-xs text-zinc-500">
-              <span>© 2025 danyakmallun. Hak cipta dilindungi.</span>
-              <span>Dibuat dengan Next.js & Vercel.</span>
-              <span>Dari Indonesia untuk dunia.</span>
+              <span>© 2025 danyakmallun.</span>
+              <span>Hak cipta dilindungi.</span>
             </TextLoop>
           </a>
           <p className="text-xs text-zinc-400">

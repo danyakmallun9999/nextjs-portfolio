@@ -18,6 +18,7 @@ import React from 'react'
 import Image from 'next/image'
 import { FaGithub, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa'
 import { ImagePreview } from '@/components/ui/image-preview'
+import ParticlesBg from '@/components/ui/particles-bg'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -96,8 +97,9 @@ export default function Personal() {
   return (
     <>
       <ScrollProgress />
+      <ParticlesBg />
       <motion.main
-        className="space-y-24"
+        className="relative space-y-24"
         variants={VARIANTS_CONTAINER}
         initial="hidden"
         animate="visible"
