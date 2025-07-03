@@ -4,6 +4,7 @@ import { BookOpen, ExternalLink, Calendar, ArrowLeft } from 'lucide-react'
 import { Spotlight } from '@/components/ui/spotlight'
 import { BLOG_POSTS } from '@/app/data'
 import Link from 'next/link'
+import { useState } from 'react'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -27,6 +28,15 @@ const TRANSITION_SECTION = {
 export default function BlogPage() {
   // Urutkan post berdasarkan tanggal terbaru
   const sortedPosts = [...BLOG_POSTS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  // Pagination logic
+  const POSTS_PER_PAGE = 3;
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
+  const startIdx = (currentPage - 1) * POSTS_PER_PAGE;
+  const endIdx = startIdx + POSTS_PER_PAGE;
+  const paginatedPosts = sortedPosts.slice(startIdx, endIdx);
+
   return (
     <motion.div
       variants={VARIANTS_CONTAINER}
@@ -69,7 +79,7 @@ export default function BlogPage() {
         transition={TRANSITION_SECTION}
       >
         <div className="space-y-6">
-          {sortedPosts.map((post, index) => (
+          {paginatedPosts.map((post, index) => (
             <motion.article
               key={post.uid}
               initial={{ opacity: 0, y: 20 }}
@@ -122,6 +132,34 @@ export default function BlogPage() {
             </motion.article>
           ))}
         </div>
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex justify-center gap-2 mt-8">
+            <button
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="px-3 py-1 rounded bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                key={i + 1}
+                onClick={() => setCurrentPage(i + 1)}
+                className={`px-3 py-1 rounded ${currentPage === i + 1 ? 'bg-green-600 text-white dark:bg-green-400 dark:text-zinc-900' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200'}`}
+              >
+                {i + 1}
+              </button>
+            ))}
+            <button
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+              className="px-3 py-1 rounded bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
+          </div>
+        )}
       </motion.section>
 
       {/* Empty State (if no posts) */}
