@@ -97,6 +97,13 @@ export const BLOG_POSTS: BlogPost[] = [
     uid: 'blog-4',
     date: '2025-06-30',
   },
+  {
+    title: 'Monad: Blockchain Layer 1 Berkinerja Tinggi yang Kompatibel dengan EVM',
+    description: 'Monad hadir sebagai blockchain Layer 1 yang menjanjikan, dirancang dari nol untuk performa tak tertandingi dan kompatibilitas penuh dengan EVM, siap mendefinisikan ulang standar kinerja blockchain.',
+    link: '/blog/monad-blockchain-layer1-berkinerja-tinggi-yang-kompatibel-dengan-evm',
+    uid: 'blog-5',
+    date: '2025-07-04',
+  },
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
