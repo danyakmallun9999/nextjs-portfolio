@@ -104,6 +104,13 @@ export const BLOG_POSTS: BlogPost[] = [
     uid: 'blog-5',
     date: '2025-07-04',
   },
+  {
+    title: 'Psikologi Uang dalam Dunia Crypto: Panduan dari Morgan Housel',
+    description: 'Meski "The Psychology of Money" tidak spesifik membahas crypto, prinsip-prinsip Morgan Housel tentang perilaku finansial sangat relevan. Pelajari cara mengelola emosi dan membuat keputusan bijak di pasar crypto yang volatil.',
+    link: '/blog/psikologi-uang-dalam-dunia-kripto',
+    uid: 'blog-6',
+    date: '2025-07-13',
+  },
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
