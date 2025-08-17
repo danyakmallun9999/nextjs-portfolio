@@ -23,10 +23,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
-    "react-tsparticles": "^2.12.0",
     "sugar-high": "^0.9.3",
-    "tailwind-merge": "^2.5.5",
-    "tsparticles": "^2.12.0"
+    "tailwind-merge": "^2.5.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

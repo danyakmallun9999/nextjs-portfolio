@@ -111,7 +111,16 @@ export const BLOG_POSTS: BlogPost[] = [
     uid: 'blog-6',
     date: '2025-07-13',
   },
+  {
+    title: 'MegaETH: Blockchain Real-Time yang Mengubah Masa Depan Ethereum',
+    description: 'Selami arsitektur, ekosistem, dan visi MegaETH untuk menciptakan "World Computer" yang membawa performa Web2 ke dalam ekosistem Ethereum yang terdesentralisasi.',
+    link: '/blog/blockchain-real-time-yang-mengubah-masa-depan-ethereum',
+    uid: 'blog-7',
+    date: '2025-08-17',
+  },
 ]
+
+
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
