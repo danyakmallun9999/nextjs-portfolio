@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { Fira_Code } from 'next/font/google'
 import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
@@ -68,6 +69,11 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
+const firaCode = Fira_Code({
+  variable: '--font-fira-code',
+  subsets: ['latin'],
+})
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -76,7 +82,7 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning>
       <body
-        className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
+        className={`${geist.variable} ${geistMono.variable} ${firaCode.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
       >
         <ThemeProvider
           enableSystem={true}

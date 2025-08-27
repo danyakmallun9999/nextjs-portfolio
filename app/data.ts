@@ -118,6 +118,13 @@ export const BLOG_POSTS: BlogPost[] = [
     uid: 'blog-7',
     date: '2025-08-17',
   },
+    {
+    title: 'Tutorial GitHub: Cara Menghubungkan Proyek Lokal ke Repository',
+    description: 'Panduan lengkap untuk menghubungkan proyek lokal ke GitHub. Tutorial ini mencakup persiapan, inisialisasi Git, koneksi via HTTPS atau SSH, serta workflow harian untuk developer.',
+    link: '/blog/menghubungkan-proyek-lokal-ke-github',
+    uid: 'blog-8',
+    date: '2025-08-27',
+  },
 ]
 
 

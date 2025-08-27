@@ -1,0 +1,445 @@
+export const metadata = {
+  title: 'Contoh Tampilan Kode yang Menarik',
+  description: 'Demonstrasi berbagai komponen kode yang menarik untuk blog dan dokumentasi.',
+  alternates: {
+    canonical: '/blog/contoh-kode-menarik',
+  },
+  openGraph: {
+    title: 'Contoh Tampilan Kode yang Menarik',
+    description: 'Lihat berbagai cara menampilkan kode dengan styling yang menarik dan interaktif.',
+    url: 'https://danyakmallun.com/blog/contoh-kode-menarik',
+    type: 'article',
+    images: [
+      {
+        url: '/posts/cover-github-connect.png',
+        width: 1200,
+        height: 630,
+        alt: 'Ilustrasi kode dengan styling yang menarik.',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contoh Tampilan Kode yang Menarik',
+    description: 'Demonstrasi komponen kode dengan styling modern dan interaktif.',
+    images: [
+      {
+        url: '/posts/cover-github-connect.png',
+        width: 1200,
+        height: 630,
+        alt: 'Ilustrasi kode dengan styling yang menarik.',
+      },
+    ],
+  },
+};
+
+<Cover
+  src="/posts/cover-github-connect.png"
+  alt="Ilustrasi kode dengan styling yang menarik dan modern."
+  caption="Contoh Tampilan Kode yang Menarik"
+/>
+
+# Contoh Tampilan Kode yang Menarik
+
+Artikel ini mendemonstrasikan berbagai cara menampilkan kode dengan styling yang menarik dan interaktif. Setiap komponen memiliki fitur unik yang membuat pembacaan kode menjadi lebih menyenangkan.
+
+---
+
+## 1. Code Block dengan Syntax Highlighting
+
+Berikut adalah contoh kode JavaScript dengan syntax highlighting yang menarik:
+
+```javascript
+// Fungsi untuk menghitung fibonacci
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Menggunakan async/await
+async function fetchUserData(userId) {
+  try {
+    const response = await fetch(`/api/users/${userId}`);
+    const userData = await response.json();
+    return userData;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    throw error;
+  }
+}
+
+// Arrow function dengan destructuring
+const processData = ({ name, age, email }) => {
+  return {
+    fullName: name.toUpperCase(),
+    isAdult: age >= 18,
+    contact: email
+  };
+};
+```
+
+---
+
+## 2. Terminal Commands
+
+Berikut adalah contoh command terminal yang bisa di-copy:
+
+```bash
+# Inisialisasi proyek Next.js
+npx create-next-app@latest my-app --typescript --tailwind --eslint
+
+# Install dependencies
+npm install lucide-react framer-motion
+
+# Run development server
+npm run dev
+
+# Build untuk production
+npm run build
+```
+
+---
+
+## 3. File Structure
+
+Berikut adalah contoh struktur file proyek:
+
+```text
+my-project/
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── globals.css
+├── components/
+│   ├── ui/
+│   │   ├── button.tsx
+│   │   └── card.tsx
+│   └── layout/
+│       ├── header.tsx
+│       └── footer.tsx
+├── lib/
+│   └── utils.ts
+├── public/
+│   └── images/
+├── package.json
+└── README.md
+```
+
+---
+
+## 4. CSS Styling
+
+Berikut adalah contoh CSS modern dengan custom properties:
+
+```css
+:root {
+  --primary-color: #3b82f6;
+  --secondary-color: #8b5cf6;
+  --accent-color: #10b981;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+}
+
+.card {
+  background: var(--bg-primary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+}
+
+.button {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+```
+
+---
+
+## 5. TypeScript Interface
+
+Berikut adalah contoh TypeScript interface dan type definitions:
+
+```typescript
+// User interface
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar?: string;
+  createdAt: Date;
+  isActive: boolean;
+}
+
+// API response types
+type ApiResponse<T> = {
+  data: T;
+  status: 'success' | 'error';
+  message?: string;
+  timestamp: Date;
+};
+
+// Component props
+interface ButtonProps {
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  children: React.ReactNode;
+  onClick?: () => void;
+  disabled?: boolean;
+  className?: string;
+}
+
+// Generic function
+function createApiClient<T>(baseUrl: string): {
+  get: (endpoint: string) => Promise<ApiResponse<T>>;
+  post: (endpoint: string, data: Partial<T>) => Promise<ApiResponse<T>>;
+  put: (endpoint: string, data: T) => Promise<ApiResponse<T>>;
+  delete: (endpoint: string) => Promise<ApiResponse<void>>;
+} {
+  return {
+    get: async (endpoint) => {
+      const response = await fetch(`${baseUrl}${endpoint}`);
+      return response.json();
+    },
+    post: async (endpoint, data) => {
+      const response = await fetch(`${baseUrl}${endpoint}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      return response.json();
+    },
+    put: async (endpoint, data) => {
+      const response = await fetch(`${baseUrl}${endpoint}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      return response.json();
+    },
+    delete: async (endpoint) => {
+      const response = await fetch(`${baseUrl}${endpoint}`, {
+        method: 'DELETE',
+      });
+      return response.json();
+    },
+  };
+}
+```
+
+---
+
+## 6. React Component
+
+Berikut adalah contoh React component dengan hooks:
+
+```tsx
+import { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+interface TodoItem {
+  id: string;
+  text: string;
+  completed: boolean;
+  createdAt: Date;
+}
+
+export function TodoList() {
+  const [todos, setTodos] = useState<TodoItem[]>([]);
+  const [newTodo, setNewTodo] = useState('');
+  const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
+
+  // Load todos from localStorage
+  useEffect(() => {
+    const savedTodos = localStorage.getItem('todos');
+    if (savedTodos) {
+      setTodos(JSON.parse(savedTodos));
+    }
+  }, []);
+
+  // Save todos to localStorage
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
+  const addTodo = useCallback((text: string) => {
+    const newTodoItem: TodoItem = {
+      id: Date.now().toString(),
+      text,
+      completed: false,
+      createdAt: new Date(),
+    };
+    setTodos(prev => [...prev, newTodoItem]);
+    setNewTodo('');
+  }, []);
+
+  const toggleTodo = useCallback((id: string) => {
+    setTodos(prev => 
+      prev.map(todo => 
+        todo.id === id 
+          ? { ...todo, completed: !todo.completed }
+          : todo
+      )
+    );
+  }, []);
+
+  const deleteTodo = useCallback((id: string) => {
+    setTodos(prev => prev.filter(todo => todo.id !== id));
+  }, []);
+
+  const filteredTodos = todos.filter(todo => {
+    if (filter === 'active') return !todo.completed;
+    if (filter === 'completed') return todo.completed;
+    return true;
+  });
+
+  return (
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold mb-4">Todo List</h2>
+      
+      {/* Add new todo */}
+      <div className="flex gap-2 mb-4">
+        <input
+          type="text"
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && addTodo(newTodo)}
+          placeholder="Add new todo..."
+          className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+          onClick={() => addTodo(newTodo)}
+          disabled={!newTodo.trim()}
+          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50"
+        >
+          Add
+        </button>
+      </div>
+
+      {/* Filter buttons */}
+      <div className="flex gap-2 mb-4">
+        {(['all', 'active', 'completed'] as const).map(filterType => (
+          <button
+            key={filterType}
+            onClick={() => setFilter(filterType)}
+            className={`px-3 py-1 rounded-md text-sm ${
+              filter === filterType
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            {filterType.charAt(0).toUpperCase() + filterType.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      {/* Todo list */}
+      <AnimatePresence>
+        {filteredTodos.map(todo => (
+          <motion.div
+            key={todo.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="flex items-center gap-3 p-3 bg-gray-50 rounded-md mb-2"
+          >
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => toggleTodo(todo.id)}
+              className="w-4 h-4 text-blue-500"
+            />
+            <span className={`flex-1 ${todo.completed ? 'line-through text-gray-500' : ''}`}>
+              {todo.text}
+            </span>
+            <button
+              onClick={() => deleteTodo(todo.id)}
+              className="text-red-500 hover:text-red-700"
+            >
+              ×
+            </button>
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </div>
+  );
+}
+```
+
+---
+
+## 7. SQL Query
+
+Berikut adalah contoh SQL query dengan JOIN dan subquery:
+
+```sql
+-- Query untuk mendapatkan data user dengan post count
+SELECT 
+    u.id,
+    u.username,
+    u.email,
+    u.created_at,
+    COUNT(p.id) as post_count,
+    AVG(p.rating) as avg_rating
+FROM users u
+LEFT JOIN posts p ON u.id = p.user_id
+WHERE u.is_active = true
+    AND u.created_at >= '2024-01-01'
+GROUP BY u.id, u.username, u.email, u.created_at
+HAVING COUNT(p.id) > 0
+ORDER BY post_count DESC, avg_rating DESC
+LIMIT 10;
+
+-- Subquery untuk mendapatkan top posts
+SELECT 
+    p.title,
+    p.content,
+    p.created_at,
+    u.username as author,
+    (SELECT COUNT(*) FROM comments c WHERE c.post_id = p.id) as comment_count
+FROM posts p
+JOIN users u ON p.user_id = u.id
+WHERE p.id IN (
+    SELECT post_id 
+    FROM (
+        SELECT post_id, COUNT(*) as like_count
+        FROM post_likes
+        GROUP BY post_id
+        ORDER BY like_count DESC
+        LIMIT 5
+    ) top_posts
+)
+ORDER BY p.created_at DESC;
+```
+
+---
+
+## Kesimpulan
+
+Dengan komponen kode yang menarik ini, pembaca akan lebih mudah memahami dan menikmati membaca kode dalam blog atau dokumentasi. Setiap komponen memiliki fitur unik seperti:
+
+- **Syntax highlighting** yang berwarna-warni
+- **Copy button** untuk menyalin kode
+- **Window controls** yang menyerupai terminal
+- **Hover effects** dan animasi
+- **Responsive design** untuk berbagai ukuran layar
+- **Dark mode support**
+
+Semua komponen ini membuat pengalaman membaca kode menjadi lebih interaktif dan menyenangkan!

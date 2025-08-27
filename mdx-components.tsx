@@ -1,6 +1,9 @@
 import type { MDXComponents } from 'mdx/types'
 import { ComponentPropsWithoutRef } from 'react'
 import { highlight } from 'sugar-high'
+import { CodeBlock } from '@/components/ui/code-block'
+import { Terminal } from '@/components/ui/terminal'
+import { FileTree } from '@/components/ui/file-tree'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -30,6 +33,20 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       )
     },
     code: ({ children, className, ...props }: ComponentPropsWithoutRef<'code'>) => {
+      // Check if this is inline code (no className) or block code (has className)
+      if (!className) {
+        // Inline code with solid colors and no shadow
+        return (
+          <code
+            className="bg-zinc-100 px-2 py-1 rounded-lg text-sm font-mono text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200"
+            {...props}
+          >
+            {children}
+          </code>
+        )
+      }
+      
+      // Block code with syntax highlighting
       const codeHTML = highlight(children as string)
       return (
         <code
@@ -73,14 +90,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     blockquote: ({ children, ...props }) => (
       <blockquote
-        className="relative my-8 border-l-4 border-blue-500 bg-gradient-to-r from-blue-50/80 via-purple-50/60 to-blue-50/80 py-6 px-8 rounded-lg shadow-sm dark:from-blue-950/30 dark:via-purple-950/20 dark:to-blue-950/30 dark:shadow-zinc-900/20"
+        className="relative my-8 border-l-4 border-blue-500 bg-blue-50 py-6 px-8 rounded-lg dark:bg-blue-950"
         {...props}
       >
-        <div className="absolute -left-2.5 top-6 h-5 w-5 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 shadow-sm" />
         <div className="relative text-lg font-medium leading-relaxed text-zinc-800 dark:text-zinc-200">
           {children}
         </div>
-        <div className="absolute -bottom-1 -right-1 h-8 w-8 rounded-full bg-gradient-to-br from-blue-400/20 to-purple-400/20 blur-sm" />
       </blockquote>
     ),
     ul: ({ children, ...props }) => (
@@ -126,25 +141,35 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </a>
     ),
-    pre: ({ children, ...props }) => (
-      <pre
-        className="group relative my-8 overflow-x-auto rounded-xl bg-gradient-to-br from-zinc-900 to-zinc-800 p-6 shadow-lg dark:from-zinc-950 dark:to-zinc-900"
-        {...props}
-      >
-        <div className="absolute right-4 top-4 flex space-x-2">
-          <div className="h-3 w-3 rounded-full bg-red-500" />
-          <div className="h-3 w-3 rounded-full bg-yellow-500" />
-          <div className="h-3 w-3 rounded-full bg-green-500" />
-        </div>
-        {children}
-      </pre>
-    ),
+    pre: ({ children, ...props }) => {
+      // Extract language from className if available
+      const className = (children as any)?.props?.className || ''
+      const language = className.replace('language-', '') || 'text'
+      
+      return (
+        <CodeBlock language={language}>
+          {children}
+        </CodeBlock>
+      )
+    },
     hr: ({ ...props }) => (
       <hr
-        className="my-12 border-0 bg-gradient-to-r from-transparent via-zinc-300 to-transparent dark:via-zinc-700"
+        className="my-12 border-0 bg-zinc-300 dark:bg-zinc-700"
         style={{ height: '1px' }}
         {...props}
       />
+    ),
+    // Custom components for enhanced code display
+    Terminal: ({ commands, autoType, typingSpeed, ...props }: any) => (
+      <Terminal 
+        commands={commands} 
+        autoType={autoType} 
+        typingSpeed={typingSpeed}
+        {...props}
+      />
+    ),
+    FileTree: ({ data, ...props }: any) => (
+      <FileTree data={data} {...props} />
     ),
   }
 }
