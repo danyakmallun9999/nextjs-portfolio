@@ -1,0 +1,167 @@
+export const metadata = {
+title: 'Konfigurasi Virtual Environment (venv) di Linux',
+description:
+'Panduan lengkap membuat dan mengonfigurasi Python virtual environment (venv) di Linux. Tutorial ini mencakup instalasi, aktivasi, alias, serta tips penggunaan untuk workflow developer.',
+alternates: {
+canonical: '/blog/konfigurasi-virtual-environment-di-linux',
+},
+openGraph: {
+title: 'Konfigurasi Virtual Environment (venv) di Linux',
+description: 'Pelajari cara membuat, mengaktifkan, dan mengatur alias untuk Python virtual environment (venv) di Linux agar workflow development lebih rapi dan aman.',
+url: '[https://danyakmallun.com/blog/konfigurasi-virtual-environment-di-linux](https://danyakmallun.com/blog/konfigurasi-virtual-environment-di-linux)',
+type: 'article',
+images: [
+{
+url: '/posts/cover-venv-linux.png',
+width: 1200,
+height: 630,
+alt: 'Ilustrasi konfigurasi Python virtual environment di Linux dengan terminal.',
+},
+],
+},
+twitter: {
+card: 'summary\_large\_image',
+title: 'Konfigurasi Virtual Environment (venv) di Linux',
+description: 'Panduan praktis setup Python virtual environment (venv) di Linux. Lengkap dengan langkah instalasi, aktivasi, alias, dan tips penggunaan.',
+images: [
+{
+url: '/posts/cover-venv-linux.png',
+width: 1200,
+height: 630,
+alt: 'Ilustrasi penggunaan Python venv di Linux dengan terminal.',
+},
+],
+},
+};
+
+<Cover
+src="/posts/cover-venv-linux.png"
+alt="Ilustrasi terminal Linux dengan simbol Python venv."
+caption="Konfigurasi Python Virtual Environment di Linux"
+/>
+
+# Konfigurasi Python Virtual Environment (venv) di Linux
+
+Sebagai seorang developer Python, menjaga agar dependensi proyek tidak bercampur dengan sistem adalah hal penting. **Virtual Environment (venv)** hadir sebagai solusi untuk membuat lingkungan Python terisolasi. Dengan venv, setiap proyek dapat memiliki paket dan versinya sendiri tanpa mengganggu instalasi Python utama.
+
+Pada artikel ini, kita akan membahas langkah-langkah **membuat, mengaktifkan, dan mengonfigurasi venv di Linux**, termasuk cara membuat **alias** agar proses aktivasi lebih praktis.
+
+---
+
+## 1. Persiapan
+
+Sebelum membuat venv, pastikan modul `venv` sudah tersedia di sistem Linux kamu.
+
+```bash
+sudo apt update
+sudo apt install -y python3-venv
+```
+
+Langkah ini memastikan kamu bisa menggunakan perintah `python3 -m venv`.
+
+---
+
+## 2. Membuat Virtual Environment
+
+Masuk ke folder proyek lalu jalankan perintah berikut:
+
+```bash
+cd /path/ke/proyek
+python3 -m venv .venv
+```
+
+Perintah ini akan membuat folder bernama `.venv` di dalam proyek. Di dalamnya terdapat Python interpreter, pip, dan direktori paket terpisah.
+
+👉 Konvensi umum adalah menggunakan nama folder `.venv` agar mudah dikenali.
+
+---
+
+## 3. Mengaktifkan Virtual Environment
+
+Untuk mulai menggunakan venv:
+
+```bash
+source .venv/bin/activate
+```
+
+Jika berhasil, kamu akan melihat prefix `(venv)` di terminal:
+
+```bash
+(venv) user@linux:~/proyek$
+```
+
+Ini menandakan semua perintah `python` atau `pip` yang kamu jalankan sekarang hanya berlaku di venv tersebut.
+
+Untuk keluar dari venv:
+
+```bash
+deactivate
+```
+
+---
+
+## 4. Upgrade pip (opsional tapi direkomendasikan)
+
+Setelah masuk ke venv, upgrade pip agar lebih kompatibel dengan paket terbaru:
+
+```bash
+python -m pip install --upgrade pip
+```
+
+---
+
+## 5. Install Paket di dalam venv
+
+Sekarang kamu bisa install paket tanpa mengganggu Python global.
+
+```bash
+pip install ebooklib reportlab
+```
+
+Cek apakah paket berhasil diinstal:
+
+```bash
+python -c "import ebooklib, reportlab; print('OK')"
+```
+
+Jika output `OK` muncul, berarti instalasi berhasil.
+
+---
+
+## 6. Membuat Alias untuk Aktivasi Cepat
+
+Agar tidak perlu mengetik panjang setiap kali mengaktifkan venv, tambahkan alias di file `~/.bashrc` atau `~/.zshrc`:
+
+```bash
+alias aktivasivenv='source .venv/bin/activate'
+```
+
+Setelah itu, reload shell:
+
+```bash
+source ~/.bashrc   # atau source ~/.zshrc
+```
+
+Sekarang kamu cukup mengetik:
+
+```bash
+aktivasivenv
+```
+
+Dan venv akan langsung aktif.
+
+---
+
+## 7. Kesimpulan
+
+Dengan menggunakan **virtual environment (venv)**, kamu bisa:
+
+* Menjaga agar dependensi proyek tidak bentrok.
+* Menggunakan versi paket yang berbeda di tiap proyek.
+* Memiliki workflow yang lebih rapi dan terkontrol.
+
+Penggunaan alias seperti `aktivasivenv` membuat proses aktivasi lebih cepat dan nyaman. Ini sangat membantu jika kamu bekerja dengan banyak proyek Python di Linux.
+
+---
+
+💡 **Tips**: Biasakan membuat venv di setiap proyek baru. Ini adalah praktik standar di dunia Python untuk menghindari masalah dependency di masa depan.

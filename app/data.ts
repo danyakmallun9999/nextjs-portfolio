@@ -125,6 +125,13 @@ export const BLOG_POSTS: BlogPost[] = [
     uid: 'blog-8',
     date: '2025-08-27',
   },
+  {
+    title: 'Konfigurasi Virtual Environment (venv) di Linux',
+    description: 'Panduan praktis setup Python virtual environment (venv) di Linux. Lengkap dengan langkah instalasi, aktivasi, alias, dan tips penggunaan.',
+    link: '/blog/konfigurasi-virtual-environment-di-linux',
+    uid: 'blog-9',
+    date: '2025-08-28',
+  },
 ]
 
 
