@@ -62,7 +62,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'IT Support',
     start: '2022',
     end: '2023',
-    link: 'https://g.co/kgs/J4TYsiu',
+    link: 'https://share.google/oQu6fhXU0meamcNkH',
     id: 'work1',
     description: 'Mengelola dan memelihara infrastruktur teknologi informasi klinik, termasuk sistem komputer, jaringan, dan perangkat lunak. Memberikan dukungan teknis kepada seluruh staf, melakukan troubleshooting hardware dan software, serta memastikan kelancaran operasional sistem IT untuk mendukung pelayanan kesehatan yang optimal.',
   },
