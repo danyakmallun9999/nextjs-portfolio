@@ -132,6 +132,13 @@ export const BLOG_POSTS: BlogPost[] = [
     uid: 'blog-9',
     date: '2025-08-28',
   },
+  {
+    title: 'Cryptocurrency Lebih dari Sekadar Trading',
+    description: 'Jangan hanya melihat cryptocurrency dari sisi trading. Artikel ini membahas fondasi kriptografi, desentralisasi, dan inovasi teknologi di baliknya.',
+    link: '/blog/cryptocurrency-lebih-dari-sekadar-trading',
+    uid: 'blog-10',
+    date: '2025-08-29',
+  },
 ]
 
 
