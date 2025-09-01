@@ -1,12 +1,14 @@
 export const metadata = {
   title: 'Contoh Tampilan Kode yang Menarik',
-  description: 'Demonstrasi berbagai komponen kode yang menarik untuk blog dan dokumentasi.',
+  description:
+    'Demonstrasi berbagai komponen kode yang menarik untuk blog dan dokumentasi.',
   alternates: {
     canonical: '/blog/contoh-kode-menarik',
   },
   openGraph: {
     title: 'Contoh Tampilan Kode yang Menarik',
-    description: 'Lihat berbagai cara menampilkan kode dengan styling yang menarik dan interaktif.',
+    description:
+      'Lihat berbagai cara menampilkan kode dengan styling yang menarik dan interaktif.',
     url: 'https://danyakmallun.com/blog/contoh-kode-menarik',
     type: 'article',
     images: [
@@ -21,7 +23,8 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Contoh Tampilan Kode yang Menarik',
-    description: 'Demonstrasi komponen kode dengan styling modern dan interaktif.',
+    description:
+      'Demonstrasi komponen kode dengan styling modern dan interaktif.',
     images: [
       {
         url: '/posts/cover-github-connect.png',
@@ -31,7 +34,7 @@ export const metadata = {
       },
     ],
   },
-};
+}
 
 <Cover
   src="/posts/cover-github-connect.png"
@@ -52,19 +55,19 @@ Berikut adalah contoh kode JavaScript dengan syntax highlighting yang menarik:
 ```javascript
 // Fungsi untuk menghitung fibonacci
 function fibonacci(n) {
-  if (n <= 1) return n;
-  return fibonacci(n - 1) + fibonacci(n - 2);
+  if (n <= 1) return n
+  return fibonacci(n - 1) + fibonacci(n - 2)
 }
 
 // Menggunakan async/await
 async function fetchUserData(userId) {
   try {
-    const response = await fetch(`/api/users/${userId}`);
-    const userData = await response.json();
-    return userData;
+    const response = await fetch(`/api/users/${userId}`)
+    const userData = await response.json()
+    return userData
   } catch (error) {
-    console.error('Error fetching user data:', error);
-    throw error;
+    console.error('Error fetching user data:', error)
+    throw error
   }
 }
 
@@ -73,9 +76,9 @@ const processData = ({ name, age, email }) => {
   return {
     fullName: name.toUpperCase(),
     isAdult: age >= 18,
-    contact: email
-  };
-};
+    contact: email,
+  }
+}
 ```
 
 ---
@@ -156,7 +159,11 @@ Berikut adalah contoh CSS modern dengan custom properties:
 }
 
 .button {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
@@ -180,67 +187,67 @@ Berikut adalah contoh TypeScript interface dan type definitions:
 ```typescript
 // User interface
 interface User {
-  id: string;
-  name: string;
-  email: string;
-  avatar?: string;
-  createdAt: Date;
-  isActive: boolean;
+  id: string
+  name: string
+  email: string
+  avatar?: string
+  createdAt: Date
+  isActive: boolean
 }
 
 // API response types
 type ApiResponse<T> = {
-  data: T;
-  status: 'success' | 'error';
-  message?: string;
-  timestamp: Date;
-};
+  data: T
+  status: 'success' | 'error'
+  message?: string
+  timestamp: Date
+}
 
 // Component props
 interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
-  children: React.ReactNode;
-  onClick?: () => void;
-  disabled?: boolean;
-  className?: string;
+  variant?: 'primary' | 'secondary' | 'outline'
+  size?: 'sm' | 'md' | 'lg'
+  children: React.ReactNode
+  onClick?: () => void
+  disabled?: boolean
+  className?: string
 }
 
 // Generic function
 function createApiClient<T>(baseUrl: string): {
-  get: (endpoint: string) => Promise<ApiResponse<T>>;
-  post: (endpoint: string, data: Partial<T>) => Promise<ApiResponse<T>>;
-  put: (endpoint: string, data: T) => Promise<ApiResponse<T>>;
-  delete: (endpoint: string) => Promise<ApiResponse<void>>;
+  get: (endpoint: string) => Promise<ApiResponse<T>>
+  post: (endpoint: string, data: Partial<T>) => Promise<ApiResponse<T>>
+  put: (endpoint: string, data: T) => Promise<ApiResponse<T>>
+  delete: (endpoint: string) => Promise<ApiResponse<void>>
 } {
   return {
     get: async (endpoint) => {
-      const response = await fetch(`${baseUrl}${endpoint}`);
-      return response.json();
+      const response = await fetch(`${baseUrl}${endpoint}`)
+      return response.json()
     },
     post: async (endpoint, data) => {
       const response = await fetch(`${baseUrl}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
-      });
-      return response.json();
+      })
+      return response.json()
     },
     put: async (endpoint, data) => {
       const response = await fetch(`${baseUrl}${endpoint}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
-      });
-      return response.json();
+      })
+      return response.json()
     },
     delete: async (endpoint) => {
       const response = await fetch(`${baseUrl}${endpoint}`, {
         method: 'DELETE',
-      });
-      return response.json();
+      })
+      return response.json()
     },
-  };
+  }
 }
 ```
 
@@ -251,33 +258,33 @@ function createApiClient<T>(baseUrl: string): {
 Berikut adalah contoh React component dengan hooks:
 
 ```tsx
-import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface TodoItem {
-  id: string;
-  text: string;
-  completed: boolean;
-  createdAt: Date;
+  id: string
+  text: string
+  completed: boolean
+  createdAt: Date
 }
 
 export function TodoList() {
-  const [todos, setTodos] = useState<TodoItem[]>([]);
-  const [newTodo, setNewTodo] = useState('');
-  const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
+  const [todos, setTodos] = useState<TodoItem[]>([])
+  const [newTodo, setNewTodo] = useState('')
+  const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all')
 
   // Load todos from localStorage
   useEffect(() => {
-    const savedTodos = localStorage.getItem('todos');
+    const savedTodos = localStorage.getItem('todos')
     if (savedTodos) {
-      setTodos(JSON.parse(savedTodos));
+      setTodos(JSON.parse(savedTodos))
     }
-  }, []);
+  }, [])
 
   // Save todos to localStorage
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
 
   const addTodo = useCallback((text: string) => {
     const newTodoItem: TodoItem = {
@@ -285,61 +292,59 @@ export function TodoList() {
       text,
       completed: false,
       createdAt: new Date(),
-    };
-    setTodos(prev => [...prev, newTodoItem]);
-    setNewTodo('');
-  }, []);
+    }
+    setTodos((prev) => [...prev, newTodoItem])
+    setNewTodo('')
+  }, [])
 
   const toggleTodo = useCallback((id: string) => {
-    setTodos(prev => 
-      prev.map(todo => 
-        todo.id === id 
-          ? { ...todo, completed: !todo.completed }
-          : todo
-      )
-    );
-  }, []);
+    setTodos((prev) =>
+      prev.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    )
+  }, [])
 
   const deleteTodo = useCallback((id: string) => {
-    setTodos(prev => prev.filter(todo => todo.id !== id));
-  }, []);
+    setTodos((prev) => prev.filter((todo) => todo.id !== id))
+  }, [])
 
-  const filteredTodos = todos.filter(todo => {
-    if (filter === 'active') return !todo.completed;
-    if (filter === 'completed') return todo.completed;
-    return true;
-  });
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === 'active') return !todo.completed
+    if (filter === 'completed') return todo.completed
+    return true
+  })
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-4">Todo List</h2>
-      
+    <div className="mx-auto max-w-md rounded-lg bg-white p-6 shadow-lg">
+      <h2 className="mb-4 text-2xl font-bold">Todo List</h2>
+
       {/* Add new todo */}
-      <div className="flex gap-2 mb-4">
+      <div className="mb-4 flex gap-2">
         <input
           type="text"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && addTodo(newTodo)}
           placeholder="Add new todo..."
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 rounded-md border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
         <button
           onClick={() => addTodo(newTodo)}
           disabled={!newTodo.trim()}
-          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50"
+          className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:opacity-50"
         >
           Add
         </button>
       </div>
 
       {/* Filter buttons */}
-      <div className="flex gap-2 mb-4">
-        {(['all', 'active', 'completed'] as const).map(filterType => (
+      <div className="mb-4 flex gap-2">
+        {(['all', 'active', 'completed'] as const).map((filterType) => (
           <button
             key={filterType}
             onClick={() => setFilter(filterType)}
-            className={`px-3 py-1 rounded-md text-sm ${
+            className={`rounded-md px-3 py-1 text-sm ${
               filter === filterType
                 ? 'bg-blue-500 text-white'
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -352,21 +357,23 @@ export function TodoList() {
 
       {/* Todo list */}
       <AnimatePresence>
-        {filteredTodos.map(todo => (
+        {filteredTodos.map((todo) => (
           <motion.div
             key={todo.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="flex items-center gap-3 p-3 bg-gray-50 rounded-md mb-2"
+            className="mb-2 flex items-center gap-3 rounded-md bg-gray-50 p-3"
           >
             <input
               type="checkbox"
               checked={todo.completed}
               onChange={() => toggleTodo(todo.id)}
-              className="w-4 h-4 text-blue-500"
+              className="h-4 w-4 text-blue-500"
             />
-            <span className={`flex-1 ${todo.completed ? 'line-through text-gray-500' : ''}`}>
+            <span
+              className={`flex-1 ${todo.completed ? 'text-gray-500 line-through' : ''}`}
+            >
               {todo.text}
             </span>
             <button
@@ -379,7 +386,7 @@ export function TodoList() {
         ))}
       </AnimatePresence>
     </div>
-  );
+  )
 }
 ```
 
@@ -391,7 +398,7 @@ Berikut adalah contoh SQL query dengan JOIN dan subquery:
 
 ```sql
 -- Query untuk mendapatkan data user dengan post count
-SELECT 
+SELECT
     u.id,
     u.username,
     u.email,
@@ -408,7 +415,7 @@ ORDER BY post_count DESC, avg_rating DESC
 LIMIT 10;
 
 -- Subquery untuk mendapatkan top posts
-SELECT 
+SELECT
     p.title,
     p.content,
     p.created_at,
@@ -417,7 +424,7 @@ SELECT
 FROM posts p
 JOIN users u ON p.user_id = u.id
 WHERE p.id IN (
-    SELECT post_id 
+    SELECT post_id
     FROM (
         SELECT post_id, COUNT(*) as like_count
         FROM post_likes
