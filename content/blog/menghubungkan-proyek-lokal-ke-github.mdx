@@ -1,44 +1,10 @@
-export const metadata = {
-  title: 'Tutorial GitHub: Cara Menghubungkan Proyek Lokal ke Repository',
-  description:
-    'Panduan lengkap untuk menghubungkan proyek lokal ke GitHub. Tutorial ini mencakup persiapan, inisialisasi Git, koneksi via HTTPS atau SSH, serta workflow harian untuk developer.',
-  alternates: {
-    canonical: '/blog/tutorial-koneksi-github',
-  },
-  openGraph: {
-    title: 'Tutorial GitHub: Cara Menghubungkan Proyek Lokal ke Repository',
-    description: 'Pelajari langkah-langkah mudah menghubungkan proyek lokal ke GitHub menggunakan HTTPS atau SSH, dilengkapi tips dan workflow standar untuk developer.',
-    url: 'https://danyakmallun.com/blog/tutorial-koneksi-github',
-    type: 'article',
-    images: [
-      {
-        url: '/posts/cover-github-connect.png',
-        width: 1200,
-        height: 630,
-        alt: 'Ilustrasi koneksi GitHub dengan simbol komputer, kode, dan repositori.',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Tutorial GitHub: Cara Menghubungkan Proyek Lokal ke Repository',
-    description: 'Panduan praktis untuk menghubungkan proyek lokal ke GitHub. Lengkap dengan instruksi HTTPS, SSH, dan tips workflow.',
-    images: [
-      {
-        url: '/posts/cover-github-connect.png',
-        width: 1200,
-        height: 630,
-        alt: 'Ilustrasi koneksi GitHub dengan simbol komputer, kode, dan repositori.',
-      },
-    ],
-  },
-};
-
-<Cover
-  src="/posts/cover-github-connect.png"
-  alt="Ilustrasi abstrak yang menggambarkan koneksi kode lokal ke GitHub dengan jaringan dan repositori."
-  caption="Tutorial: Cara Menghubungkan Proyek ke GitHub"
-/>
+---
+title: "Tutorial GitHub: Cara Menghubungkan Proyek Lokal ke Repository"
+description: "Panduan lengkap untuk menghubungkan proyek lokal ke GitHub. Tutorial ini mencakup persiapan, inisialisasi Git, koneksi via HTTPS atau SSH, serta workflow harian untuk developer."
+publishedAt: "2025-08-27"
+coverImage: "/posts/cover-github-connect.png"
+tags: ["github","git","tutorial","development"]
+---
 
 # Tutorial: Cara Menghubungkan Proyek ke GitHub
 
@@ -70,7 +36,11 @@ Setelah itu, GitHub akan memberikan instruksi untuk menghubungkan repo lokal ke 
 Buka terminal di folder proyek kamu lalu jalankan:
 ```bash
 git init
+```
+```bash
 git add .
+```
+```bash
 git commit -m "Inisialisasi proyek"
 ```
 
@@ -93,6 +63,8 @@ Ada dua cara untuk koneksi ke GitHub: **HTTPS** atau **SSH**.
 3. Push ke GitHub:
    ```bash
    git branch -M main
+   ```
+   ```bash
    git push -u origin main
    ```
 
@@ -116,6 +88,8 @@ git config --global credential.helper store
 2. Tambahkan key ke agent:
    ```bash
    eval "$(ssh-agent -s)"
+   ```
+   ```bash
    ssh-add ~/.ssh/id_ed25519
    ```
 3. Salin public key:
@@ -142,7 +116,14 @@ git config --global credential.helper store
 Setelah repository terkoneksi, workflow standar biasanya:
 ```bash
 git add .
+```
+```bash
+git push
+```
+```bash
 git commit -m "Pesan commit kamu"
+```
+```bash
 git push
 ```
 Jika bekerja dengan tim, jangan lupa menarik perubahan terbaru:

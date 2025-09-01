@@ -8,7 +8,6 @@ import { AnimatedBackground } from '@/components/ui/animated-background'
 import {
   PROJECTS,
   WORK_EXPERIENCE,
-  BLOG_POSTS,
   EMAIL,
   SOCIAL_LINKS,
 } from './data'
@@ -18,6 +17,7 @@ import React from 'react'
 import Image from 'next/image'
 import { FaGithub, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa'
 import { ImagePreview } from '@/components/ui/image-preview'
+import { BlogPost } from '@/lib/blog'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -93,6 +93,25 @@ function MagneticSocialLink({
 }
 
 export default function Personal() {
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchBlogPosts() {
+      try {
+        const response = await fetch('/api/blog-posts')
+        const data = await response.json()
+        setBlogPosts(data)
+      } catch (error) {
+        console.error('Error fetching blog posts:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchBlogPosts()
+  }, [])
+
   return (
     <>
       <ScrollProgress />
@@ -317,39 +336,49 @@ export default function Personal() {
                 duration: 0.2,
               }}
             >
-              {/* Show only the 3 most recent blog posts */}
-              {BLOG_POSTS
-                .slice() // copy array agar tidak mutasi original
-                .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-                .slice(0, 3)
-                .map((post) => (
-                  <Link
-                    key={post.uid}
-                    className="-mx-3 rounded-xl px-3 py-3"
-                    href={post.link}
-                    data-id={post.uid}
-                  >
-                    <div className="flex flex-col space-y-1">
-                      <h4 className="font-normal dark:text-zinc-100 flex items-center gap-2 group">
-                        {post.title}
-                        <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                      </h4>
-                      <div className="flex items-center gap-2 text-xs text-green-300 dark:text-green-300 mb-1">
-                        <Calendar className="w-3 h-3" />
-                        <span>
-                          {new Date(post.date).toLocaleDateString('id-ID', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                          })}
-                        </span>
+              {loading ? (
+                <div className="flex items-center justify-center py-8">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
+                </div>
+              ) : blogPosts.length === 0 ? (
+                <div className="text-center py-8">
+                  <p className="text-zinc-500 dark:text-zinc-400">No blog posts available</p>
+                </div>
+              ) : (
+                /* Show only the 3 most recent blog posts */
+                blogPosts
+                  .slice() // copy array agar tidak mutasi original
+                  .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+                  .slice(0, 3)
+                  .map((post) => (
+                    <Link
+                      key={post.slug}
+                      className="-mx-3 rounded-xl px-3 py-3"
+                      href={`/blog/${post.slug}`}
+                      data-id={post.slug}
+                    >
+                      <div className="flex flex-col space-y-1">
+                        <h4 className="font-normal dark:text-zinc-100 flex items-center gap-2 group">
+                          {post.title}
+                          <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                        </h4>
+                        <div className="flex items-center gap-2 text-xs text-green-300 dark:text-green-300 mb-1">
+                          <Calendar className="w-3 h-3" />
+                          <span>
+                            {new Date(post.publishedAt).toLocaleDateString('id-ID', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric'
+                            })}
+                          </span>
+                        </div>
+                        <p className="text-zinc-500 dark:text-zinc-400">
+                          {post.description}
+                        </p>
                       </div>
-                      <p className="text-zinc-500 dark:text-zinc-400">
-                        {post.description}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
+                    </Link>
+                  ))
+              )}
             </AnimatedBackground>
           </div>
           {/* Instructions to view all posts */}

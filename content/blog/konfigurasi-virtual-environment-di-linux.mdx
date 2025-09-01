@@ -1,44 +1,10 @@
-export const metadata = {
-title: 'Konfigurasi Virtual Environment (venv) di Linux',
-description:
-'Panduan lengkap membuat dan mengonfigurasi Python virtual environment (venv) di Linux. Tutorial ini mencakup instalasi, aktivasi, alias, serta tips penggunaan untuk workflow developer.',
-alternates: {
-canonical: '/blog/konfigurasi-virtual-environment-di-linux',
-},
-openGraph: {
-title: 'Konfigurasi Virtual Environment (venv) di Linux',
-description: 'Pelajari cara membuat, mengaktifkan, dan mengatur alias untuk Python virtual environment (venv) di Linux agar workflow development lebih rapi dan aman.',
-url: '[https://danyakmallun.com/blog/konfigurasi-virtual-environment-di-linux](https://danyakmallun.com/blog/konfigurasi-virtual-environment-di-linux)',
-type: 'article',
-images: [
-{
-url: '/posts/cover-venv-linux.png',
-width: 1200,
-height: 630,
-alt: 'Ilustrasi konfigurasi Python virtual environment di Linux dengan terminal.',
-},
-],
-},
-twitter: {
-card: 'summary\_large\_image',
-title: 'Konfigurasi Virtual Environment (venv) di Linux',
-description: 'Panduan praktis setup Python virtual environment (venv) di Linux. Lengkap dengan langkah instalasi, aktivasi, alias, dan tips penggunaan.',
-images: [
-{
-url: '/posts/cover-venv-linux.png',
-width: 1200,
-height: 630,
-alt: 'Ilustrasi penggunaan Python venv di Linux dengan terminal.',
-},
-],
-},
-};
-
-<Cover
-src="/posts/cover-venv-linux.png"
-alt="Ilustrasi terminal Linux dengan simbol Python venv."
-caption="Konfigurasi Python Virtual Environment di Linux"
-/>
+---
+title: "Konfigurasi Virtual Environment (venv) di Linux"
+description: "Panduan praktis setup Python virtual environment (venv) di Linux. Lengkap dengan langkah instalasi, aktivasi, alias, dan tips penggunaan."
+publishedAt: "2025-08-28"
+coverImage: "/posts/cover-venv-linux.png"
+tags: ["python","venv","linux","development"]
+---
 
 # Konfigurasi Python Virtual Environment (venv) di Linux
 
@@ -72,7 +38,7 @@ python3 -m venv .venv
 
 Perintah ini akan membuat folder bernama `.venv` di dalam proyek. Di dalamnya terdapat Python interpreter, pip, dan direktori paket terpisah.
 
-👉 Konvensi umum adalah menggunakan nama folder `.venv` agar mudah dikenali.
+Konvensi umum adalah menggunakan nama folder `.venv` agar mudah dikenali.
 
 ---
 
@@ -164,4 +130,4 @@ Penggunaan alias seperti `aktivasivenv` membuat proses aktivasi lebih cepat dan 
 
 ---
 
-💡 **Tips**: Biasakan membuat venv di setiap proyek baru. Ini adalah praktik standar di dunia Python untuk menghindari masalah dependency di masa depan.
+**Tips**: Biasakan membuat venv di setiap proyek baru. Ini adalah praktik standar di dunia Python untuk menghindari masalah dependency di masa depan.

@@ -2,9 +2,9 @@
 import { motion } from 'motion/react'
 import { BookOpen, ExternalLink, Calendar, ArrowLeft } from 'lucide-react'
 import { Spotlight } from '@/components/ui/spotlight'
-import { BLOG_POSTS } from '@/app/data'
+import { BlogPost } from '@/lib/blog';
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -26,16 +26,44 @@ const TRANSITION_SECTION = {
 }
 
 export default function BlogPage() {
-  // Urutkan post berdasarkan tanggal terbaru
-  const sortedPosts = [...BLOG_POSTS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const [posts, setPosts] = useState<BlogPost[]>([])
+  const [loading, setLoading] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1)
+  const POSTS_PER_PAGE = 3
 
-  // Pagination logic
-  const POSTS_PER_PAGE = 3;
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
-  const startIdx = (currentPage - 1) * POSTS_PER_PAGE;
-  const endIdx = startIdx + POSTS_PER_PAGE;
-  const paginatedPosts = sortedPosts.slice(startIdx, endIdx);
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const response = await fetch('/api/blog-posts')
+        const data = await response.json()
+        setPosts(data)
+      } catch (error) {
+        console.error('Error fetching posts:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchPosts()
+  }, [])
+
+  // Urutkan post berdasarkan tanggal terbaru
+  const sortedPosts = [...posts].sort((a, b) => 
+    new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  )
+
+  const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE)
+  const startIdx = (currentPage - 1) * POSTS_PER_PAGE
+  const endIdx = startIdx + POSTS_PER_PAGE
+  const paginatedPosts = sortedPosts.slice(startIdx, endIdx)
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-green-600"></div>
+      </div>
+    )
+  }
 
   return (
     <motion.div
@@ -81,7 +109,7 @@ export default function BlogPage() {
         <div className="space-y-6">
           {paginatedPosts.map((post, index) => (
             <motion.article
-              key={post.uid}
+              key={post.slug}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -97,7 +125,7 @@ export default function BlogPage() {
                   <div className="flex items-center gap-2 text-xs text-green-600 dark:text-green-400 mb-3">
                     <Calendar className="w-3 h-3" />
                     <span>
-                      {new Date(post.date).toLocaleDateString('id-ID', { 
+                      {new Date(post.publishedAt).toLocaleDateString('id-ID', { 
                         year: 'numeric', 
                         month: 'long', 
                         day: 'numeric' 
@@ -107,7 +135,7 @@ export default function BlogPage() {
 
                   {/* Title */}
                   <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-3 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
-                    <Link href={post.link} className="block">
+                    <Link href={`/blog/${post.slug}`} className="block">
                       {post.title}
                     </Link>
                   </h2>
@@ -120,7 +148,7 @@ export default function BlogPage() {
                   {/* Read More Link */}
                   <div className="flex justify-end">
                     <Link
-                      href={post.link}
+                      href={`/blog/${post.slug}`}
                       className="inline-flex items-center gap-2 text-sm font-medium text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 transition-colors group/link"
                     >
                       <span>Read more</span>
@@ -162,8 +190,8 @@ export default function BlogPage() {
         )}
       </motion.section>
 
-      {/* Empty State (if no posts) */}
-      {BLOG_POSTS.length === 0 && (
+      {/* Empty State */}
+      {posts.length === 0 && !loading && (
         <motion.section
           variants={VARIANTS_SECTION}
           transition={TRANSITION_SECTION}

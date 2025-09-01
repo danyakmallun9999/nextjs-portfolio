@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import { TextEffect } from '@/components/ui/text-effect'
 import { Spotlight } from '@/components/ui/spotlight'
-import { BLOG_POSTS } from '@/app/data'
 
 export const ClientComponents = {
   ReadingTime: () => {
@@ -110,55 +109,5 @@ export const ClientComponents = {
     )
   },
 
-  RelatedPosts: () => {
-    const currentPath = typeof window !== 'undefined' ? window.location.pathname : ''
-    const relatedPosts = BLOG_POSTS.filter((post: any) => post.link !== currentPath).slice(0, 3)
-
-    return (
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="mt-16 border-t border-zinc-200 pt-12 dark:border-zinc-800"
-      >
-        <TextEffect
-          className="mb-8 text-2xl font-bold text-zinc-900 dark:text-zinc-100"
-          preset="fade-in-blur"
-        >
-          Related Posts
-        </TextEffect>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {relatedPosts.map((post: any, index: number) => (
-            <motion.article
-              key={post.uid}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative overflow-hidden rounded-xl border border-zinc-200 bg-white p-6 transition-all duration-300 hover:border-zinc-300 hover:shadow-lg dark:border-zinc-700 dark:bg-zinc-900 dark:hover:border-zinc-600"
-            >
-              <Spotlight className="from-blue-500/10 via-purple-500/10 to-pink-500/10" size={150} />
-              <h3 className="mb-2 text-lg font-semibold text-zinc-900 transition-colors group-hover:text-blue-600 dark:text-zinc-100 dark:group-hover:text-blue-400">
-                {post.title}
-              </h3>
-              <p className="mb-4 text-sm text-zinc-600 dark:text-zinc-400">
-                {post.description}
-              </p>
-              <motion.a
-                href={post.link}
-                className="inline-flex items-center text-sm font-medium text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-                whileHover={{ x: 4 }}
-              >
-                Read more
-                <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </motion.a>
-            </motion.article>
-          ))}
-        </div>
-      </motion.section>
-    )
-  },
+  // RelatedPosts component removed - using new blog system
 } 
