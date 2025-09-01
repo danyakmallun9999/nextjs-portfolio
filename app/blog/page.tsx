@@ -88,20 +88,18 @@ export default function BlogPage() {
     ? posts.filter(post => post.category === selectedCategory)
     : posts
 
-  // Urutkan post berdasarkan tanggal terbaru
-  const sortedPosts = [...filteredPosts].sort((a, b) => 
-    new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-  )
+  // Posts are already sorted by date (newest first) from lib/blog.ts
+  // No need for additional sorting here
 
   // Reset to first page when category changes
   useEffect(() => {
     setCurrentPage(1)
   }, [selectedCategory])
 
-  const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE)
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
   const startIdx = (currentPage - 1) * POSTS_PER_PAGE
   const endIdx = startIdx + POSTS_PER_PAGE
-  const paginatedPosts = sortedPosts.slice(startIdx, endIdx)
+  const paginatedPosts = filteredPosts.slice(startIdx, endIdx)
 
   if (loading) {
     return (
