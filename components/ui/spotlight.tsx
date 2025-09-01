@@ -73,6 +73,7 @@ export function Spotlight({
         height: size,
         left: spotlightLeft,
         top: spotlightTop,
+        zIndex: 1,
       }}
     />
   )

@@ -12,6 +12,7 @@ export interface BlogPost {
   publishedAt: string;
   coverImage?: string;
   tags?: string[];
+  category?: string;
 }
 
 export function getAllBlogPosts(): BlogPost[] {
@@ -71,4 +72,24 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
     console.error(`Error reading blog post ${slug}:`, error);
     return null;
   }
+}
+
+export function getAllCategories(): string[] {
+  const posts = getAllBlogPosts();
+  const categories = posts
+    .map(post => post.category)
+    .filter((category): category is string => !!category);
+  
+  // Remove duplicates and sort
+  return [...new Set(categories)].sort();
+}
+
+export function getBlogPostsByCategory(category: string): BlogPost[] {
+  const posts = getAllBlogPosts();
+  return posts.filter(post => post.category === category);
+}
+
+export function getBlogPostsByTag(tag: string): BlogPost[] {
+  const posts = getAllBlogPosts();
+  return posts.filter(post => post.tags?.includes(tag));
 }

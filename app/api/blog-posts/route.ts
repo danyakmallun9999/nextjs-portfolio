@@ -1,10 +1,20 @@
 import { NextResponse } from 'next/server';
-import { getAllBlogPosts } from '@/lib/blog';
+import { getAllBlogPosts, getAllCategories, getBlogPostsByCategory } from '@/lib/blog';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    console.log('Fetching blog posts...');
-    const posts = getAllBlogPosts();
+    const { searchParams } = new URL(request.url);
+    const category = searchParams.get('category');
+    
+    console.log('Fetching blog posts...', category ? `with category: ${category}` : 'all posts');
+    
+    let posts;
+    if (category) {
+      posts = getBlogPostsByCategory(category);
+    } else {
+      posts = getAllBlogPosts();
+    }
+    
     console.log(`Found ${posts.length} blog posts`);
     return NextResponse.json(posts);
   } catch (error) {
