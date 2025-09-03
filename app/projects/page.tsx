@@ -49,16 +49,16 @@ export default function ProjectsPage() {
           </Link>
         </div>
         
-        <div className="flex items-center gap-3 mb-10">
-          <Code2 className="w-5 h-5 text-orange-600 dark:text-orange-400" />
-          <div>
+        <div className="flex flex-col gap-3 mb-10">
+          <div className="flex items-center gap-3">
+            <Code2 className="w-5 h-5 text-orange-600 dark:text-orange-400" />
             <h1 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
               Projects
             </h1>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-              A collection of my work and creative endeavors
-            </p>
           </div>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400 ml-8">
+            A collection of my work and creative endeavors
+          </p>
         </div>
       </motion.section>
 

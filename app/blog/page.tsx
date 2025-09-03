@@ -132,16 +132,16 @@ export default function BlogPage() {
           </Link>
         </div>
         
-        <div className="flex items-center gap-3 mb-8 sm:mb-10">
-          <BookOpen className="w-5 h-5 text-green-600 dark:text-green-400" />
-          <div>
+        <div className="flex flex-col gap-3 mb-8 sm:mb-10">
+          <div className="flex items-center gap-3">
+            <BookOpen className="w-5 h-5 text-green-600 dark:text-green-400" />
             <h1 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
               Blog Posts
             </h1>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-              Thoughts, insights, and discoveries about technology and beyond
-            </p>
           </div>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400 ml-8">
+            Thoughts, insights, and discoveries about technology and beyond
+          </p>
         </div>
       </motion.section>
 
