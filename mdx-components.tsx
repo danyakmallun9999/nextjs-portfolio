@@ -90,10 +90,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     blockquote: ({ children, ...props }) => (
       <blockquote
-        className="relative my-8 border-l-4 border-blue-500 bg-blue-50 py-6 px-8 rounded-lg dark:bg-blue-950"
+        className="relative my-8 border-l-4 border-zinc-300 dark:border-zinc-600 bg-zinc-50 dark:bg-zinc-900/50 py-4 px-6 rounded-r-lg"
         {...props}
       >
-        <div className="relative text-lg font-medium leading-relaxed text-zinc-800 dark:text-zinc-200">
+        <div className="relative text-base leading-relaxed text-zinc-700 dark:text-zinc-300 italic">
           {children}
         </div>
       </blockquote>

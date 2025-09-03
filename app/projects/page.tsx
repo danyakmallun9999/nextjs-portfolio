@@ -45,17 +45,17 @@ export default function ProjectsPage() {
             className="group flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span>Back to Home</span>
+            <span className="text-sm">Back to Home</span>
           </Link>
         </div>
         
         <div className="flex items-center gap-3 mb-10">
-          <Code2 className="w-6 h-6 sm:w-8 sm:h-8 text-orange-600 dark:text-orange-400" />
+          <Code2 className="w-5 h-5 text-orange-600 dark:text-orange-400" />
           <div>
-            <h1 className="text-base sm:text-lg md:text-xl font-bold text-zinc-900 dark:text-zinc-100">
+            <h1 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
               Projects
             </h1>
-            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
               A collection of my work and creative endeavors
             </p>
           </div>
@@ -108,7 +108,7 @@ export default function ProjectsPage() {
                             {project.category}
                           </span>
                         </div>
-                        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                                                 <h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
                           {project.name}
                         </h2>
                         <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300 mb-4">
@@ -174,7 +174,7 @@ export default function ProjectsPage() {
           className="text-center py-12"
         >
           <Code2 className="w-16 h-16 text-zinc-400 dark:text-zinc-600 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+                     <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-2">
             No projects yet
           </h3>
           <p className="text-zinc-600 dark:text-zinc-400">

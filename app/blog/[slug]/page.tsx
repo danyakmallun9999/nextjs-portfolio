@@ -153,7 +153,7 @@ const components = {
     </strong>
   ),
   blockquote: ({ children }: any) => (
-    <blockquote className="my-4 border-l-4 border-blue-500 bg-blue-50 py-2 pl-4 text-zinc-700 italic dark:bg-blue-900/20 dark:text-zinc-300">
+    <blockquote className="my-4 border-l-4 border-zinc-300 dark:border-zinc-600 bg-zinc-50 dark:bg-zinc-900/50 py-2 pl-4 text-zinc-700 dark:text-zinc-300 italic">
       {children}
     </blockquote>
   ),

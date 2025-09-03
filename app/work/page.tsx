@@ -44,17 +44,17 @@ export default function WorkPage() {
             className="group flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span>Back to Home</span>
+            <span className="text-sm">Back to Home</span>
           </Link>
         </div>
 
         <div className="flex items-center gap-3 mb-10">
-          <Briefcase className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600 dark:text-blue-400" />
+          <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
           <div>
-            <h1 className="text-base sm:text-lg md:text-xl font-bold text-zinc-900 dark:text-zinc-100">
+            <h1 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
               Work Experience
             </h1>
-            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
               My professional journey and career progression
             </p>
           </div>
@@ -98,10 +98,10 @@ export default function WorkPage() {
                         {/* Header */}
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
-                            <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                            <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                               {job.title}
                             </h3>
-                            <p className="text-lg font-medium text-blue-600 dark:text-blue-400 mb-2">
+                            <p className="text-base font-medium text-blue-600 dark:text-blue-400 mb-2">
                               {job.company}
                             </p>
                             <div className="flex items-center gap-2">

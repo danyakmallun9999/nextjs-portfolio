@@ -128,17 +128,17 @@ export default function BlogPage() {
             className="group flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span>Back to Home</span>
+            <span className="text-sm">Back to Home</span>
           </Link>
         </div>
         
         <div className="flex items-center gap-3 mb-8 sm:mb-10">
-          <BookOpen className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 dark:text-green-400" />
+          <BookOpen className="w-5 h-5 text-green-600 dark:text-green-400" />
           <div>
-            <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+            <h1 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
               Blog Posts
             </h1>
-            <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mt-1">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
               Thoughts, insights, and discoveries about technology and beyond
             </p>
           </div>
@@ -203,7 +203,7 @@ export default function BlogPage() {
                   </div>
 
                   {/* Title */}
-                  <h2 className="text-lg sm:text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-3 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                                     <h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-3 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
                     <Link href={`/blog/${post.slug}`} className="block">
                       {post.title}
                     </Link>
@@ -287,7 +287,7 @@ export default function BlogPage() {
           className="text-center py-12"
         >
           <BookOpen className="w-16 h-16 text-zinc-400 dark:text-zinc-600 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+                     <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-2">
             {selectedCategory ? `No posts in "${selectedCategory}"` : 'No posts yet'}
           </h3>
           <p className="text-zinc-600 dark:text-zinc-400">

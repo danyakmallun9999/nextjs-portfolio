@@ -224,3 +224,60 @@
     }
   }
 }
+
+/* Fix for sugar-high library white backgrounds in dark mode */
+.code-block pre code * {
+  background: transparent !important;
+}
+
+/* Override any white backgrounds from syntax highlighting */
+.code-block pre code .sh {
+  background: transparent !important;
+}
+
+/* Ensure all syntax highlighting elements have transparent backgrounds */
+.code-block pre code .sh-class,
+.code-block pre code .sh-sign,
+.code-block pre code .sh-string,
+.code-block pre code .sh-keyword,
+.code-block pre code .sh-comment,
+.code-block pre code .sh-jsxliterals,
+.code-block pre code .sh-property,
+.code-block pre code .sh-entity {
+  background: transparent !important;
+}
+
+/* Additional fixes for react-syntax-highlighter */
+.react-syntax-highlighter {
+  background: transparent !important;
+}
+
+.react-syntax-highlighter pre {
+  background: transparent !important;
+}
+
+.react-syntax-highlighter code {
+  background: transparent !important;
+}
+
+/* Force dark backgrounds for code blocks in dark mode */
+.dark .react-syntax-highlighter {
+  background-color: #1f2937 !important;
+}
+
+.dark .react-syntax-highlighter pre {
+  background-color: #1f2937 !important;
+}
+
+.dark .react-syntax-highlighter code {
+  background-color: #1f2937 !important;
+}
+
+/* Override any inline styles that might set white backgrounds */
+.dark pre[style*="background"] {
+  background-color: #1f2937 !important;
+}
+
+.dark code[style*="background"] {
+  background-color: #1f2937 !important;
+}

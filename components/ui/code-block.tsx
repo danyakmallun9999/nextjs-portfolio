@@ -33,9 +33,9 @@ export function CodeBlock({
 
   return (
     <div className={`code-block-wrapper my-8 ${className}`}>
-      <div className="code-block bg-zinc-900 rounded-xl overflow-hidden border border-zinc-700 dark:border-zinc-600 relative">
+      <div className="code-block bg-zinc-900 dark:bg-zinc-900 rounded-xl overflow-hidden border border-zinc-700 dark:border-zinc-600 relative">
         {/* Window Header */}
-        <div className="window-header bg-zinc-800 px-4 py-3 flex items-center justify-between border-b border-zinc-700 dark:border-zinc-600">
+        <div className="window-header bg-zinc-800 dark:bg-zinc-800 px-4 py-3 flex items-center justify-between border-b border-zinc-700 dark:border-zinc-600">
           <div className="flex items-center space-x-2">
             {/* Window Controls */}
             <div className="flex space-x-2">
@@ -45,8 +45,8 @@ export function CodeBlock({
             </div>
             
             {/* Language Badge */}
-            <div className="ml-3 px-3 py-1 bg-zinc-700 rounded-md border border-zinc-600">
-              <span className="text-xs font-mono text-zinc-300 uppercase tracking-wider">
+            <div className="ml-3 px-3 py-1 bg-zinc-700 dark:bg-zinc-700 rounded-md border border-zinc-600 dark:border-zinc-600">
+              <span className="text-xs font-mono text-zinc-300 dark:text-zinc-300 uppercase tracking-wider">
                 {language}
               </span>
             </div>
@@ -54,7 +54,7 @@ export function CodeBlock({
           
           {/* Copy Button */}
           <button 
-            className="copy-button px-3 py-1.5 text-xs font-medium text-zinc-400 hover:text-zinc-200 bg-zinc-700 hover:bg-zinc-600 rounded-md transition-colors flex items-center space-x-2"
+            className="copy-button px-3 py-1.5 text-xs font-medium text-zinc-400 dark:text-zinc-400 hover:text-zinc-200 dark:hover:text-zinc-200 bg-zinc-700 dark:bg-zinc-700 hover:bg-zinc-600 dark:hover:bg-zinc-600 rounded-md transition-colors flex items-center space-x-2"
             onClick={handleCopy}
           >
             {copied ? (
@@ -72,15 +72,15 @@ export function CodeBlock({
         </div>
         
         {/* Code Content */}
-        <div className="code-content p-4">
+        <div className="code-content p-4 bg-zinc-900 dark:bg-zinc-900">
           <div className="relative">
             {showLineNumbers && (
-              <div className="absolute left-0 top-0 w-12 h-full border-r border-zinc-700 bg-zinc-800">
+              <div className="absolute left-0 top-0 w-12 h-full border-r border-zinc-700 dark:border-zinc-700 bg-zinc-800 dark:bg-zinc-800">
                 {/* Line numbers will be added via CSS */}
               </div>
             )}
             <pre 
-              className={`text-sm leading-relaxed text-zinc-100 font-mono overflow-x-auto ${
+              className={`text-sm leading-relaxed text-zinc-100 dark:text-zinc-100 font-mono overflow-x-auto bg-transparent ${
                 showLineNumbers ? 'pl-16' : ''
               }`}
             >
