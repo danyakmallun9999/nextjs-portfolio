@@ -1,181 +1,284 @@
-<img src="/public/cover.jpg" alt="Cover image representing Nim, a personal website template" width="100%" />
+# Dany Akmallun Ni'am - Personal Portfolio & Blog
 
-Nim is a free and open-source personal website template built with Next.js 15, React 19, Tailwind CSS v4, and Motion. Designed for developers, designers, and founders, it combines minimalism with delightful animated components powered by [Motion-Primitives](https://motion-primitives.com).
+<div align="center">
+  <img src="/public/opengraph.jpg" alt="Dany Akmallun Ni'am - Personal Portfolio" width="100%" />
+</div>
 
-Live demo: [https://nim-fawn.vercel.app](https://nim-fawn.vercel.app)
+<div align="center">
+  <strong>Crypto enthusiast • Web Developer • Lifelong learner</strong>
+</div>
 
-## Features
+<div align="center">
+  <a href="https://danyakmallun.com">🌐 Live Website</a> •
+  <a href="https://github.com/danyakmallun9999">📱 GitHub</a> •
+  <a href="https://twitter.com/danyakmallun">🐦 Twitter</a>
+</div>
 
-- Minimal one-page portfolio layout.
-- Blog support with MDX.
-- Responsive and accessible design.
-- Easy to use
-- [Motion-Primitives](https://motion-primitives.com) for animated components.
+---
 
-## Getting Started
+## 🚀 Overview
 
-For detailed setup instructions, refer to the [Installation Guide](./INSTALLATION.md).
+Personal portfolio website built with **Next.js 15**, **React 19**, **Tailwind CSS v4**, and **Motion** animations. Features a modern, responsive design with a flexible blog system, project showcase, and professional presentation of skills and experience.
 
+## ✨ Features
+
+### 🎨 **Modern Design & Animations**
+- **Motion-Primitives** powered animations for smooth interactions
+- **Dark/Light mode** with system preference detection
+- **Responsive design** optimized for all devices
+- **Custom UI components** with magnetic effects and spotlights
+- **Smooth scrolling** with progress indicators
+
+### 📝 **Flexible Blog System**
+- **File-based CMS** with auto-discovery from `content/blog/`
+- **MDX support** with syntax highlighting and custom components
+- **Frontmatter metadata** (title, description, tags, cover images)
+- **Category and tag filtering**
+- **SEO-optimized** URLs and metadata
+- **Command-line tool** for creating new blog posts
+
+### 💼 **Project Showcase**
+- **Interactive project cards** with image previews
+- **Tech stack display** with categorized tags
+- **External links** to source code and live demos
+- **Featured projects** highlighting on homepage
+
+### 🔧 **Developer Experience**
+- **TypeScript** for type safety
+- **ESLint & Prettier** for code quality
+- **Hot reload** during development
+- **Optimized builds** for production
+- **Vercel Analytics** integration
+
+## 🛠️ Tech Stack
+
+### **Frontend**
+- **Next.js 15** - React framework with App Router
+- **React 19** - Latest React with concurrent features
+- **Tailwind CSS v4** - Utility-first CSS framework
+- **Motion** - Animation library for React
+- **TypeScript** - Type-safe JavaScript
+
+### **Content & Blog**
+- **MDX** - Markdown with JSX components
+- **gray-matter** - Frontmatter parsing
+- **react-syntax-highlighter** - Code syntax highlighting
+- **next-mdx-remote** - MDX rendering
+
+### **UI Components**
+- **Lucide React** - Icon library
+- **React Icons** - Additional icon sets
+- **next-themes** - Theme switching
+- **clsx & tailwind-merge** - Conditional styling
+
+### **Development Tools**
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **PostCSS** - CSS processing
+- **Vercel Analytics** - Performance monitoring
+
+## 📦 Installation
+
+### Prerequisites
+- **Node.js** 18.17 or later
+- **npm** or **yarn** package manager
+- **Git** for version control
+
+### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/ibelick/nim.git
-cd nim
-npm install
-npm run dev
+git clone https://github.com/danyakmallun9999/nextjs-portfolio.git
+cd nextjs-portfolio
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Step 2: Install Dependencies
+```bash
+npm install
+# or
+yarn install
+```
 
-## Contributing
+### Step 3: Environment Setup
+Create a `.env.local` file in the root directory (optional):
+```env
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+```
 
-Contributions are welcome! Feel free to open issues or submit pull requests to improve Nim.
+### Step 4: Run Development Server
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-## Deployment
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-You can deploy your site to any hosting platform that supports Next.js. For the easiest deployment experience, consider using Vercel:
+## 📝 Blog System Usage
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fibelick%2Fnim&env=NEXT_PUBLIC_SITE_URL&project-name=nim&repository-name=nim&redirect-url=https%3A%2F%2Ftwitter.com%2Fibelick&demo-title=Nim&demo-description=Nim%20is%20a%20free%20and%20open-source%20minimal%20personal%20website%20template%20built%20with%20Next.js%2015%2C%20React%2019%2C%20and%20Motion-Primitives.&demo-url=https%3A%2F%2Fnim.vercel.app&demo-image=https%3A%2F%2Fraw.githubusercontent.com%2Fibelick%2Fnim%2Frefs%2Fheads%2Fmain%2F.github%2Fassets%2Freadme.png&teamSlug=ibelick)
+### Creating New Blog Posts
 
-## About
-
-Nim is designed to make personal branding effortless and beautiful. If you enjoy it, consider sharing it and exploring [Motion-Primitives Pro](https://pro.motion-primitives.com/).
-
-# Sistem Blog Fleksibel - Next.js Portfolio
-
-Sistem blog yang telah di-upgrade untuk memberikan fleksibilitas maksimal dalam pembuatan konten blog tanpa perlu coding manual.
-
-## 🚀 Fitur Baru
-
-### ✅ File-based CMS dengan Auto-discovery
-- Blog post otomatis terdeteksi dari folder `content/blog/`
-- Tidak perlu menambah data manual di `data.ts`
-- Support Markdown lengkap dengan frontmatter
-- Metadata terstruktur (title, description, date, tags, dll)
-
-### ✅ Script Pembuatan Blog Post
-- Command line tool untuk membuat blog post baru
-- Template otomatis dengan frontmatter
-- Validasi input dan error handling
-
-### ✅ API Routes
-- Endpoint `/api/blog-posts` untuk mengambil data blog
-- Support untuk pagination dan filtering
-- Error handling yang robust
-
-## 📝 Cara Menggunakan
-
-### Membuat Blog Post Baru
-
-#### Metode 1: Menggunakan Script (Recommended)
+#### Method 1: Using the CLI Tool (Recommended)
 ```bash
 npm run create-post
 ```
 
-Script akan meminta input:
-- Judul blog post
-- Deskripsi singkat
-- Slug (URL-friendly)
-- Tags
-- Cover image (opsional)
+The script will prompt you for:
+- **Title** - Blog post title
+- **Description** - Brief description
+- **Slug** - URL-friendly identifier
+- **Tags** - Comma-separated tags
+- **Cover Image** - Optional cover image path
 
-#### Metode 2: Manual
-1. Buat file `.mdx` baru di folder `content/blog/`
-2. Tambahkan frontmatter di bagian atas:
+#### Method 2: Manual Creation
+1. Create a new `.mdx` file in `content/blog/`
+2. Add frontmatter at the top:
 
 ```mdx
 ---
-title: "Judul Blog Post"
-description: "Deskripsi singkat blog post"
+title: "Your Blog Post Title"
+description: "Brief description of your post"
 publishedAt: "2025-01-15"
 coverImage: "/posts/cover-image.jpg"
-tags: ["teknologi", "web3", "blockchain"]
+tags: ["technology", "web3", "blockchain"]
 ---
 
-# Judul Blog Post
+# Your Blog Post Title
 
-Konten blog Anda di sini...
+Your content here...
 ```
 
-## 📁 Struktur File
-
+### Blog Post Structure
 ```
 content/
 └── blog/
-    ├── cara-membuat-blog-fleksibel-dengan-nextjs.mdx
-    ├── paradoks-bangsa-digital-yang-percaya-dukun.mdx
-    └── contoh-blog-post-baru.mdx
+    ├── your-first-post.mdx
+    ├── another-post.mdx
+    └── ...
 ```
 
-## 🔧 Development
-
+### Available Scripts
 ```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-
 # Create new blog post
 npm run create-post
 
-# Build for production
-npm run build
+# Migrate existing posts (if needed)
+npm run migrate-posts
+
+# Clean up old blog structure
+npm run cleanup-old-blog
 ```
+
+## 🎨 Customization
+
+### Personal Information
+Edit `app/data.ts` to update:
+- **Projects** - Your portfolio projects
+- **Work Experience** - Professional experience
+- **Social Links** - Social media profiles
+- **Email** - Contact information
+
+### Styling
+- **Colors**: Modify `app/globals.css` for theme colors
+- **Components**: Customize UI components in `components/ui/`
+- **Layout**: Adjust layout in `app/layout.tsx`
+
+### Blog Configuration
+- **Categories**: Add categories in blog frontmatter
+- **Tags**: Use consistent tags for better organization
+- **Cover Images**: Store in `public/posts/` directory
 
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
-1. Push perubahan ke GitHub
-2. Vercel akan otomatis rebuild dan deploy
-3. Blog post baru akan langsung tersedia
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Deploy automatically on every push
 
-## 📊 Perbandingan Sistem
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/danyakmallun9999/nextjs-portfolio)
 
-### Sebelum (Manual)
-- ❌ Harus buat file MDX manual
-- ❌ Harus update `data.ts` manual
-- ❌ Harus push ke GitHub untuk update
-- ❌ Tidak ada validasi metadata
-- ❌ Sulit untuk non-developer
+### Other Platforms
+The project can be deployed to any platform supporting Next.js:
+- **Netlify**
+- **Railway**
+- **DigitalOcean App Platform**
+- **AWS Amplify**
 
-### Sesudah (Otomatis)
-- ✅ Auto-discovery file MDX
-- ✅ Tidak perlu update data manual
-- ✅ Script helper untuk pembuatan
-- ✅ Validasi metadata otomatis
-- ✅ User-friendly untuk non-developer
-- ✅ Support untuk tags dan filtering
-- ✅ SEO-friendly URLs
+## 📁 Project Structure
 
-## 🎯 Tips Penggunaan
+```
+nextjs-portfolio/
+├── app/                    # Next.js App Router
+│   ├── api/               # API routes
+│   ├── blog/              # Blog pages
+│   ├── projects/          # Projects pages
+│   ├── work/              # Work experience pages
+│   ├── components/        # App-specific components
+│   ├── data.ts           # Static data
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Homepage
+├── components/            # Reusable UI components
+│   └── ui/               # Custom UI components
+├── content/              # Content files
+│   └── blog/             # Blog posts (MDX)
+├── hooks/                # Custom React hooks
+├── lib/                  # Utility functions
+├── public/               # Static assets
+│   └── posts/            # Blog post images
+├── scripts/              # Build and utility scripts
+└── package.json          # Dependencies and scripts
+```
 
-1. **Nama File**: Gunakan format kebab-case dan SEO-friendly
-   - ✅ `cara-membuat-blog-dengan-nextjs.mdx`
-   - ❌ `blog post 1.mdx`
+## 🔧 Development Scripts
 
-2. **Tags**: Gunakan tags yang konsisten untuk grouping
-   - `teknologi`, `web3`, `blockchain`, `tutorial`, `tips`
+```bash
+# Development
+npm run dev              # Start development server
+npm run build            # Build for production
+npm run start            # Start production server
+npm run lint             # Run ESLint
 
-3. **Cover Image**: Simpan di folder `public/posts/` untuk konsistensi
+# Blog Management
+npm run create-post      # Create new blog post
+npm run migrate-posts    # Migrate existing posts
+npm run cleanup-old-blog # Clean up old blog structure
+```
 
-4. **Content**: Gunakan Markdown untuk formatting yang kaya
+## 📊 Performance Features
 
-## 🔍 Troubleshooting
+- **Image Optimization** - Next.js automatic image optimization
+- **Code Splitting** - Automatic route-based code splitting
+- **Static Generation** - Pre-rendered pages for better performance
+- **Analytics** - Vercel Analytics integration
+- **SEO Optimization** - Meta tags and structured data
 
-### Blog post tidak muncul
-1. Pastikan file ada di `content/blog/`
-2. Pastikan ekstensi file `.mdx`
-3. Pastikan frontmatter valid
-4. Restart development server
+## 🤝 Contributing
 
-### Error saat build
-1. Check syntax frontmatter
-2. Pastikan semua field required ada
-3. Check console untuk error detail
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 📚 Dokumentasi Lengkap
+## 📄 License
 
-Lihat [BLOG_SYSTEM.md](./BLOG_SYSTEM.md) untuk dokumentasi lengkap sistem blog.
+This project is open source and available under the [MIT License](LICENSE).
 
-## 🤝 Support
+## 🙏 Acknowledgments
 
-Jika ada masalah atau pertanyaan, buat issue di GitHub repository.
+- **Motion-Primitives** for amazing animations
+- **Next.js team** for the excellent framework
+- **Tailwind CSS** for the utility-first approach
+- **Vercel** for seamless deployment
+
+## 📞 Contact
+
+- **Website**: [danyakmallun.com](https://danyakmallun.com)
+- **Email**: danyclasher9999@gmail.com
+- **GitHub**: [@danyakmallun9999](https://github.com/danyakmallun9999)
+- **Twitter**: [@danyakmallun](https://twitter.com/danyakmallun)
+- **LinkedIn**: [Dany Akmallun Ni'am](https://www.linkedin.com/in/danyakmallun/)
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ by Dany Akmallun Ni'am</sub>
+</div>
