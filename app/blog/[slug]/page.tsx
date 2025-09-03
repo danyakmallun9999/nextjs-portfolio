@@ -1,40 +1,39 @@
-import { getAllBlogPosts } from '@/lib/blog';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { Metadata } from 'next';
+import { getAllBlogPosts } from '@/lib/blog'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import { Metadata } from 'next'
+import CodeHighlighter from '@/app/components/SyntaxHighlighter'
 
 // Generate metadata for blog posts
-export async function generateMetadata({ 
-  params 
-}: { 
-  params: Promise<{ slug: string }> 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  const resolvedParams = await params;
-  const { getBlogPostBySlug } = await import('@/lib/blog');
-  const post = await getBlogPostBySlug(resolvedParams.slug);
+  const resolvedParams = await params
+  const { getBlogPostBySlug } = await import('@/lib/blog')
+  const post = await getBlogPostBySlug(resolvedParams.slug)
 
   if (!post) {
     return {
       title: 'Blog Post Not Found',
       description: 'The requested blog post could not be found.',
-    };
+    }
   }
 
   const publishedDate = new Date(post.publishedAt).toLocaleDateString('id-ID', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
-  });
+    day: 'numeric',
+  })
 
   return {
     title: `${post.title} - Dany Akmallun Ni'am`,
     description: post.description,
     keywords: post.tags?.join(', ') || '',
-    authors: [{ name: 'Dany Akmallun Ni\'am' }],
-    creator: 'Dany Akmallun Ni\'am',
-    publisher: 'Dany Akmallun Ni\'am',
+    authors: [{ name: "Dany Akmallun Ni'am" }],
+    creator: "Dany Akmallun Ni'am",
+    publisher: "Dany Akmallun Ni'am",
     formatDetection: {
       email: false,
       address: false,
@@ -48,33 +47,37 @@ export async function generateMetadata({
       title: post.title,
       description: post.description,
       url: `https://danyakmallun.com/blog/${post.slug}`,
-      siteName: 'Dany Akmallun Ni\'am',
+      siteName: "Dany Akmallun Ni'am",
       locale: 'id_ID',
       type: 'article',
       publishedTime: post.publishedAt,
-      authors: ['Dany Akmallun Ni\'am'],
+      authors: ["Dany Akmallun Ni'am"],
       tags: post.tags || [],
-      images: post.coverImage ? [
-        {
-          url: `https://danyakmallun.com${post.coverImage}`,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        }
-      ] : [
-        {
-          url: 'https://danyakmallun.com/opengraph.jpg',
-          width: 1366,
-          height: 768,
-          alt: 'Dany Akmallun Ni\'am - Profile Picture',
-        }
-      ],
+      images: post.coverImage
+        ? [
+            {
+              url: `https://danyakmallun.com${post.coverImage}`,
+              width: 1200,
+              height: 630,
+              alt: post.title,
+            },
+          ]
+        : [
+            {
+              url: 'https://danyakmallun.com/opengraph.jpg',
+              width: 1366,
+              height: 768,
+              alt: "Dany Akmallun Ni'am - Profile Picture",
+            },
+          ],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      images: post.coverImage ? `https://danyakmallun.com${post.coverImage}` : 'https://danyakmallun.com/opengraph.jpg',
+      images: post.coverImage
+        ? `https://danyakmallun.com${post.coverImage}`
+        : 'https://danyakmallun.com/opengraph.jpg',
       creator: '@danyakmallun',
     },
     robots: {
@@ -88,62 +91,61 @@ export async function generateMetadata({
         'max-snippet': -1,
       },
     },
-  };
+  }
 }
 
 // Custom components for ReactMarkdown
 const components = {
   code({ node, inline, className, children, ...props }: any) {
-    const match = /language-(\w+)/.exec(className || '');
+    const match = /language-(\w+)/.exec(className || '')
     return !inline && match ? (
-      <SyntaxHighlighter
-        style={tomorrow}
+      <CodeHighlighter
         language={match[1]}
-        PreTag="div"
         {...props}
       >
         {String(children).replace(/\n$/, '')}
-      </SyntaxHighlighter>
+      </CodeHighlighter>
     ) : (
-      <code className="bg-zinc-200 dark:bg-zinc-700 px-1 py-0.5 rounded text-sm font-mono text-zinc-800 dark:text-zinc-200" {...props}>
+      <code
+        className="rounded bg-zinc-200 px-1 py-0.5 font-mono text-sm text-zinc-800 dark:bg-zinc-700 dark:text-zinc-200"
+        {...props}
+      >
         {children}
       </code>
-    );
+    )
   },
   h1: ({ children }: any) => (
-    <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-6 mt-8">
+    <h1 className="mt-8 mb-6 text-3xl font-bold text-zinc-900 dark:text-zinc-100">
       {children}
     </h1>
   ),
   h2: ({ children }: any) => (
-    <h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4 mt-6">
+    <h2 className="mt-6 mb-4 text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
       {children}
     </h2>
   ),
   h3: ({ children }: any) => (
-    <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-3 mt-5">
+    <h3 className="mt-5 mb-3 text-xl font-semibold text-zinc-900 dark:text-zinc-100">
       {children}
     </h3>
   ),
   p: ({ children }: any) => (
-    <p className="text-zinc-700 dark:text-zinc-300 mb-4 leading-relaxed">
+    <p className="mb-4 leading-relaxed text-zinc-700 dark:text-zinc-300">
       {children}
     </p>
   ),
   ul: ({ children }: any) => (
-    <ul className="list-disc list-inside text-zinc-700 dark:text-zinc-300 mb-4 space-y-1">
+    <ul className="mb-4 list-inside list-disc space-y-1 text-zinc-700 dark:text-zinc-300">
       {children}
     </ul>
   ),
   ol: ({ children }: any) => (
-    <ol className="list-decimal list-inside text-zinc-700 dark:text-zinc-300 mb-4 space-y-1">
+    <ol className="mb-4 list-inside list-decimal space-y-1 text-zinc-700 dark:text-zinc-300">
       {children}
     </ol>
   ),
   li: ({ children }: any) => (
-    <li className="text-zinc-700 dark:text-zinc-300">
-      {children}
-    </li>
+    <li className="text-zinc-700 dark:text-zinc-300">{children}</li>
   ),
   strong: ({ children }: any) => (
     <strong className="font-semibold text-zinc-900 dark:text-zinc-100">
@@ -151,26 +153,22 @@ const components = {
     </strong>
   ),
   blockquote: ({ children }: any) => (
-    <blockquote className="border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20 pl-4 py-2 my-4 italic text-zinc-700 dark:text-zinc-300">
+    <blockquote className="my-4 border-l-4 border-blue-500 bg-blue-50 py-2 pl-4 text-zinc-700 italic dark:bg-blue-900/20 dark:text-zinc-300">
       {children}
     </blockquote>
   ),
   table: ({ children }: any) => (
-    <div className="overflow-x-auto my-6">
+    <div className="my-6 overflow-x-auto">
       <table className="min-w-full border border-zinc-300 dark:border-zinc-600">
         {children}
       </table>
     </div>
   ),
   thead: ({ children }: any) => (
-    <thead className="bg-zinc-100 dark:bg-zinc-800">
-      {children}
-    </thead>
+    <thead className="bg-zinc-100 dark:bg-zinc-800">{children}</thead>
   ),
   tbody: ({ children }: any) => (
-    <tbody className="bg-white dark:bg-zinc-900">
-      {children}
-    </tbody>
+    <tbody className="bg-white dark:bg-zinc-900">{children}</tbody>
   ),
   tr: ({ children }: any) => (
     <tr className="border-b border-zinc-300 dark:border-zinc-600">
@@ -183,57 +181,55 @@ const components = {
     </th>
   ),
   td: ({ children }: any) => (
-    <td className="px-4 py-2 text-zinc-700 dark:text-zinc-300">
-      {children}
-    </td>
+    <td className="px-4 py-2 text-zinc-700 dark:text-zinc-300">{children}</td>
   ),
   a: ({ href, children }: any) => (
-    <a 
-      href={href} 
-      className="text-blue-600 dark:text-blue-400 hover:underline"
+    <a
+      href={href}
+      className="text-blue-600 hover:underline dark:text-blue-400"
       target="_blank"
       rel="noopener noreferrer"
     >
       {children}
     </a>
   ),
-};
-
-export async function generateStaticParams() {
-  const posts = await getAllBlogPosts();
-  
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
 }
 
-export default async function BlogPostPage({ 
-  params 
-}: { 
-  params: Promise<{ slug: string }> 
+export async function generateStaticParams() {
+  const posts = await getAllBlogPosts()
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
+}
+
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
 }) {
-  const resolvedParams = await params;
-  const { getBlogPostBySlug } = await import('@/lib/blog');
-  const post = await getBlogPostBySlug(resolvedParams.slug);
+  const resolvedParams = await params
+  const { getBlogPostBySlug } = await import('@/lib/blog')
+  const post = await getBlogPostBySlug(resolvedParams.slug)
 
   if (!post) {
-    return <div>Post not found</div>;
+    return <div>Post not found</div>
   }
 
   return (
-    <article className="max-w-4xl mx-auto">
+    <article className="mx-auto max-w-4xl">
       <header className="mb-8">
         {post.coverImage && (
           <div className="mb-6 w-full overflow-hidden rounded-lg">
             <img
               src={post.coverImage}
               alt={post.title}
-              className="w-full h-auto max-h-96 object-contain"
+              className="h-auto max-h-96 w-full object-contain"
             />
           </div>
         )}
-        <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-        <p className="text-xl text-gray-600 mb-4">{post.description}</p>
+        <h1 className="mb-4 text-4xl font-bold">{post.title}</h1>
+        <p className="mb-4 text-xl text-gray-600">{post.description}</p>
         <time className="text-gray-500">
           {new Date(post.publishedAt).toLocaleDateString('id-ID')}
         </time>
@@ -250,9 +246,9 @@ export default async function BlogPostPage({
           </div>
         )}
       </header>
-      
+
       <div className="prose prose-lg max-w-none">
-        <ReactMarkdown 
+        <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
             ...components,
@@ -263,5 +259,5 @@ export default async function BlogPostPage({
         </ReactMarkdown>
       </div>
     </article>
-  );
+  )
 }
