@@ -6,6 +6,7 @@ import { Header } from './header'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
 import { Analytics } from '@vercel/analytics/react'
+import { personStructuredData, websiteStructuredData } from '@/lib/structured-data'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -29,12 +30,25 @@ export const metadata: Metadata = {
   keywords: ['crypto', 'web3', 'blockchain', 'web developer', 'prompt engineer', 'indonesia', 'dany akmallun'],
   authors: [{ name: 'Dany Akmallun Ni\'am' }],
   creator: 'Dany Akmallun Ni\'am',
+  publisher: 'Dany Akmallun Ni\'am',
+  category: 'Technology',
+  classification: 'Portfolio Website',
+  other: {
+    'mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'default',
+    'apple-mobile-web-app-title': 'Dany Akmallun',
+    'application-name': 'Dany Akmallun Portfolio',
+    'msapplication-TileColor': '#09090b',
+    'theme-color': '#09090b',
+  },
   openGraph: {
     title: 'Dany Akmallun Ni\'am - Crypto enthusiast • Web Developer • Lifelong learner',
     description: 'Portfolio pribadi Dany Akmallun Ni\'am, seorang Crypto enthusiast • Web Developer • Lifelong learner yang berdedikasi untuk membangun masa depan terdesentralisasi.',
     url: 'https://danyakmallun.com/',
     type: 'website',
     locale: 'id_ID',
+    siteName: 'Dany Akmallun Ni\'am',
     images: [
       {
         url: '/opengraph.jpg',
@@ -56,6 +70,28 @@ export const metadata: Metadata = {
         alt: 'Dany Akmallun Ni\'am - Profile Picture',
       },
     ],
+    creator: '@danyakmallun',
+    site: '@danyakmallun',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-verification-code', // Ganti dengan kode verifikasi Google Anda
+  },
+  manifest: '/manifest.json',
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
   },
 };
 
@@ -81,6 +117,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personStructuredData),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteStructuredData),
+          }}
+        />
+      </head>
       <body
         className={`${geist.variable} ${geistMono.variable} ${firaCode.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
       >

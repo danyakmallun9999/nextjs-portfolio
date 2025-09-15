@@ -6,6 +6,7 @@ import { CategoryFilter } from '@/components/ui/category-filter'
 import { BlogPost } from '@/lib/blog';
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -116,6 +117,11 @@ export default function BlogPage() {
       animate="visible"
       className="space-y-8"
     >
+      {/* Breadcrumbs */}
+      <div className="mb-6">
+        <Breadcrumbs items={[{ label: 'Blog', href: '/blog' }]} />
+      </div>
+      
       {/* Header Section */}
       <motion.section
         variants={VARIANTS_SECTION}

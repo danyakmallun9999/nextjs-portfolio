@@ -3,6 +3,9 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Metadata } from 'next'
 import CodeHighlighter from '@/app/components/SyntaxHighlighter'
+import Image from 'next/image'
+import { generateArticleStructuredData, generateBreadcrumbStructuredData, BreadcrumbItem } from '@/lib/structured-data'
+import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 
 // Generate metadata for blog posts
 export async function generateMetadata({
@@ -216,48 +219,78 @@ export default async function BlogPostPage({
     return <div>Post not found</div>
   }
 
-  return (
-    <article className="mx-auto max-w-4xl">
-      <header className="mb-8">
-        {post.coverImage && (
-          <div className="mb-6 w-full overflow-hidden rounded-lg">
-            <img
-              src={post.coverImage}
-              alt={post.title}
-              className="h-auto max-h-96 w-full object-contain"
-            />
-          </div>
-        )}
-        <h1 className="mb-4 text-4xl font-bold">{post.title}</h1>
-        <p className="mb-4 text-xl text-gray-600">{post.description}</p>
-        <time className="text-gray-500">
-          {new Date(post.publishedAt).toLocaleDateString('id-ID')}
-        </time>
-        {post.tags && post.tags.length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {post.tags.map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900/30 dark:text-green-300"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-      </header>
+  const articleStructuredData = generateArticleStructuredData(post)
+  
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: 'Blog', href: '/blog' },
+    { label: post.title }
+  ]
+  
+  const breadcrumbStructuredData = generateBreadcrumbStructuredData(breadcrumbItems)
 
-      <div className="prose prose-lg max-w-none">
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          components={{
-            ...components,
-            h1: () => null, // Hapus h1 dari konten karena sudah ada di header
-          }}
-        >
-          {post.content}
-        </ReactMarkdown>
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleStructuredData),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbStructuredData),
+        }}
+      />
+      <div className="mb-6">
+        <Breadcrumbs items={breadcrumbItems} />
       </div>
-    </article>
+      <article className="mx-auto max-w-4xl">
+        <header className="mb-8">
+          {post.coverImage && (
+            <div className="mb-6 w-full overflow-hidden rounded-lg">
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                width={1200}
+                height={630}
+                className="h-auto max-h-96 w-full object-contain"
+                priority={true}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </div>
+          )}
+          <h1 className="mb-4 text-4xl font-bold">{post.title}</h1>
+          <p className="mb-4 text-xl text-gray-600">{post.description}</p>
+          <time className="text-gray-500" dateTime={post.publishedAt}>
+            {new Date(post.publishedAt).toLocaleDateString('id-ID')}
+          </time>
+          {post.tags && post.tags.length > 0 && (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900/30 dark:text-green-300"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </header>
+
+        <div className="prose prose-lg max-w-none">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              ...components,
+              h1: () => null, // Hapus h1 dari konten karena sudah ada di header
+            }}
+          >
+            {post.content}
+          </ReactMarkdown>
+        </div>
+      </article>
+    </>
   )
 }
