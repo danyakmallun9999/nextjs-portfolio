@@ -362,7 +362,7 @@ export default function Personal() {
                           {post.title}
                           <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                         </h4>
-                        <div className="flex items-center gap-2 text-xs text-green-300 dark:text-green-300 mb-1">
+                        <div className="flex items-center gap-2 text-xs text-green-700 dark:text-green-700 mb-1">
                           <Calendar className="w-3 h-3" />
                           <span>
                             {new Date(post.publishedAt).toLocaleDateString('id-ID', {
