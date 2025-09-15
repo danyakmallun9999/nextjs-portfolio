@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code', // Ganti dengan kode verifikasi Google Anda
+    google: 'ABC123DEF456GHI789', // Ganti dengan kode verifikasi Google Anda yang sebenarnya
   },
   manifest: '/manifest.json',
   icons: {
