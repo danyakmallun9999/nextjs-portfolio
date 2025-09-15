@@ -46,6 +46,36 @@ export const PROJECTS: Project[] = [
     category: 'Portfolio',
     featured: true,
   },
+    {
+    name: 'Venture Capital Website',
+    description: 'Elegant venture capital website specializing in cryptocurrency and blockchain investments.',
+    link: 'https://capital.danyakmallun.com',
+    image: '/projek/capital-website.png',
+    id: 'project3',
+    techStack: ['NextJS 15', 'React 19', 'NodeJS', 'Tailwind CSS','TypeScript','Framer Motion','Three.js'],
+    category: 'Web Application',
+    featured: true,
+  },
+    {
+    name: 'Manufacturing Management System',
+    description: 'A comprehensive manufacturing management system built with Laravel 12, designed to streamline order management, production tracking, inventory control, and financial reporting for manufacturing businesses.',
+    link: 'https://manufaktur.idefu.co.id/',
+    image: '/projek/manufaktur.png',
+    id: 'project4',
+    techStack: ['Laravel 12', 'Blade', 'NodeJS', 'Tailwind CSS',],
+    category: 'Web Application',
+    featured: true,
+  },
+      {
+    name: 'Course Schedule App',
+    description: 'Aplikasi web jadwal kuliah dengan desain modern dan minimalis yang terinspirasi dari Apple Reminders.',
+    link: 'https://jadwal.danyakmallun.com',
+    image: '/projek/jadwal.png',
+    id: 'project3',
+    techStack: ['NextJS 15', 'React 19', 'NodeJS', 'Tailwind CSS','TypeScript'],
+    category: 'Web Application',
+    featured: true,
+  },
 ]
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
@@ -57,6 +87,15 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     link: 'https://share.google/oQu6fhXU0meamcNkH',
     id: 'work1',
     description: 'Mengelola dan memelihara infrastruktur teknologi informasi klinik, termasuk sistem komputer, jaringan, dan perangkat lunak. Memberikan dukungan teknis kepada seluruh staf, melakukan troubleshooting hardware dan software, serta memastikan kelancaran operasional sistem IT untuk mendukung pelayanan kesehatan yang optimal.',
+  },
+    {
+    company: 'Pengabdian Dosen Universitas Nahdlatul Ulama Jepara',
+    title: 'Anggota Pengabdian Dosen',
+    start: '2025',
+    end: '2025',
+    link: 'https://radarkudus.jawapos.com/jepara/696474276/industri-furnitur-jepara-naik-kelas-lewat-teknologi-steam-berbasis-internet-of-things',
+    id: 'work2',
+    description: 'Saya berkontribusi dalam program pengabdian dosen di bidang informatika dengan fokus pada pengembangan teknologi berbasis Internet of Things (IoT) untuk industri furnitur di Jepara. Peran saya mencakup pengembangan dan pembuatan sistem manufaktur mebel yang mendukung manajemen pesanan, pelacakan produksi, pengendalian inventori, hingga pelaporan keuangan. Selain itu, saya juga memberikan pelatihan kepada pelaku industri terkait pengelolaan keuangan, penggunaan aplikasi invoice, serta pemanfaatan teknologi untuk meningkatkan efisiensi dan daya saing bisnis.',
   },
 ]
 

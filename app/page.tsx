@@ -249,7 +249,7 @@ export default function Personal() {
           <div className="flex items-center justify-between mb-5">
             <h3 className="text-lg font-medium flex items-center gap-2">
               <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-              Latest Work Experience
+              Latest Experience
             </h3>
             <Link
               href="/work"

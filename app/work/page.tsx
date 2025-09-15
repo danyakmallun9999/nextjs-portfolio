@@ -52,7 +52,7 @@ export default function WorkPage() {
           <div className="flex items-center gap-3">
             <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             <h1 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
-              Work Experience
+              Experience
             </h1>
           </div>
           <p className="text-sm text-zinc-600 dark:text-zinc-400 ml-8">
