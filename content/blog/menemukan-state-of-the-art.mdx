@@ -1,0 +1,100 @@
+---
+title: 'Menemukan State of the Art (SOTA)'
+description: 'langkah demi langkah untuk menemukan, menganalisis, dan memetakan State of the Art (SOTA) dalam penelitian skripsi, lengkap dengan studi kasus dan tentunya dengan praktik terbaik.'
+publishedAt: '2025-09-22'
+coverImage: '/posts/cover-sota-skripsi.png'
+tags: ['skripsi', 'penelitian', 'sota', 'metodologi', 'informatika']
+---
+
+# Menemukan State of the Art (SOTA)
+
+Secara sederhana temen2, **State of the Art (SOTA)** adalah level pencapaian tertinggi atau sebuah metode tercanggih yang ada pada suatu bidang penelitian saat ini. SOTA itu merepresentasikan "siapa yang paling jago" atau "teknik apa yang paling hebat" untuk menyelesaikan suatu masalah spesifik berdasarkan bukti-bukti dari publikasi ilmiah terkini.
+
+> **Analogi sederhananya gini:** Bayangkan dunia smartphone. Setiap tahun, Apple dan Samsung merilis model terbaru. SOTA untuk kamera smartphone di tahun 2025 adalah kamera pada model terbaru mereka, bukan model dari lima tahun yang lalu. Penelitian harus bisa bersaing dengan (atau setidaknya memahami) kemampuan model terbaru ini, bukan model lama.
+
+---
+
+## Mengapa SOTA Sangat Penting untuk Skripsi?
+
+Memahami SOTA adalah langkah awal yang paling krusial dalam penelitian. Tanpa ini, skripsi memiliki resiko:
+
+- **Mengulang Penelitian Orang Lain (Redundant):** kita bisa saja menghabiskan waktu berbulan-bulan untuk meneliti sesuatu yang solusinya sudah ditemukan orang lain.
+- **Tidak Relevan:** Menggunakan metode yang sudah usang akan membuat penelitianmu kurang bernilai dan tidak menarik bagi komunitas ilmiah.
+- **Kesulitan Menemukan "Celah" (Research Gap):** Tujuan utama skripsi adalah menawarkan sesuatu yang baru, sekecil apapun itu. kita hanya bisa menemukan "celah" atau "ruang untuk perbaikan" jika kita tahu di mana batas terdepan (SOTA) dari pengetahuan saat ini.
+- **Menunjukkan Kualitas:** Kemampuan mengidentifikasi dan menjelaskan SOTA menunjukkan kepada dosen pembimbing dan penguji bahwa kita benar-benar memahami bidang yang kita teliti.
+
+---
+
+## Tahapan Menemukan SOTA (Ambil contoh prodi Teknik Informatika)
+
+Mari kita gunakan studi kasus agar lebih mudah dipahami. Misalkan tertarik dengan topik **"Sistem Rekomendasi Film"**. Berikut adalah langkah-langkahnya:
+
+### Langkah 1: Tentukan Topik yang Lebih Spesifik
+
+"Sistem Rekomendasi Film" terlalu luas. Mari kita persempit menjadi: **"Meningkatkan akurasi sistem rekomendasi film untuk pengguna baru (mengatasi masalah _cold start_)"**.
+
+- **Masalah _Cold Start_:** Pengguna baru belum punya riwayat rating, jadi sistem sulit merekomendasikan film yang cocok. Ini adalah masalah klasik dan spesifik.
+
+### Langkah 2: Tentukan Kata Kunci Pencarian (Keywords)
+
+Dari topik spesifik di atas, kita bisa menentukan beberapa kata kunci utama untuk mencari literatur:
+
+- `movie recommendation system`
+- `cold start problem recommendation`
+- `collaborative filtering cold start`
+- `hybrid recommendation system new user`
+- `graph neural network for recommendation` (ini lebih canggih, bisa jadi SOTA-nya)
+
+### Langkah 3: Pilih "Medan Perang" (Pusat Publikasi Ilmiah)
+
+Jangan mencari di sembarang tempat. Fokuskan pencarian pada database ilmiah yang terkemuka:
+
+- **Google Scholar:** Titik awal yang paling mudah dan luas cakupannya.
+- **IEEE Xplore:** Sangat baik untuk bidang teknik, komputer, dan elektro.
+- **ACM Digital Library:** Salah satu yang terbaik untuk ilmu komputer.
+- **arXiv.org:** Tempat para peneliti mempublikasikan _pre-print paper_. Di sini bisa menemukan penelitian paling _up-to-date_, bahkan yang belum terbit resmi.
+- **Jurnal dan Konferensi Top:** Cari tahu konferensi top di bidang Anda (misal: RecSys, NeurIPS, ICML untuk AI/ML). Paper yang diterima di sini sering kali merupakan SOTA.
+
+### Langkah 4: Lakukan Pencarian dan Filter
+
+Gunakan kata kunci yang sudah disiapkan. Saat hasil pencarian muncul, jangan langsung diunduh semua ya gengs. Lakukan filterisasi:
+
+- **Filter Waktu:** Batasi pencarian pada **3-5 tahun terakhir**. SOTA di bidang informatika berubah sangat cepat.
+- **Filter Relevansi & Sitasi:** Urutkan berdasarkan relevansi atau jumlah sitasi (_cited by_). Paper yang banyak disitasi biasanya berpengaruh besar.
+
+### Langkah 5: Prioritaskan Bacaan Anda
+
+Anda akan menemukan puluhan atau ratusan paper. Lakukan triase:
+
+- **Baca Judul dan Abstrak:** Ini langkah tercepat untuk mengetahui relevansi paper.
+- **Cari _Review Paper_ atau _Survey Paper_:** Ini adalah "harta karun". Paper jenis ini merangkum perkembangan suatu topik, membandingkan berbagai metode, dan sering kali secara eksplisit menyebutkan mana yang SOTA.
+- **Prioritaskan Paper Terbaru dari Konferensi Top:** Paper dari konferensi RecSys tahun 2024 atau 2025 kemungkinan besar adalah SOTA.
+
+### Langkah 6: Baca, Sintesiskan, dan Buat Peta
+
+Saat membaca, buatlah sebuah tabel perbandingan. Ini sangat membantu saat menulis Bab 2 Tinjauan Pustaka.
+
+**Contoh Tabel Sintesis SOTA untuk Masalah _Cold Start_**
+
+| Paper (Penulis, Tahun) | Metode yang Diusulkan                               | Dataset yang Digunakan       | Hasil (Akurasi/Metrik) | Kelemahan / Keterbatasan                        |
+| ---------------------- | --------------------------------------------------- | ---------------------------- | ---------------------- | ----------------------------------------------- |
+| Smith et al. (2022)    | Hybrid (Content-based + Collab. Filtering)          | MovieLens 1M                 | RMSE = 0.91            | Kurang efektif jika info profil pengguna minim. |
+| Chen & Li (2023)       | Atribut Pengguna (Demografi) + Matrix Factorization | Internal Dataset             | RMSE = 0.88            | Sulit digeneralisasi, butuh data demografi.     |
+| Wang et al. (2024)     | Graph Neural Network (GNN)                          | MovieLens 10M, Netflix Prize | RMSE = 0.85            | Butuh komputasi besar untuk training.           |
+| Kumar (2025, arXiv)    | GNN dengan Attention Mechanism                      | MovieLens 10M, Last.fm       | RMSE = 0.84            | Kompleks untuk diimplementasikan.               |
+
+Dari tabel ini, Anda bisa menyimpulkan:
+
+> "Saat ini, State of the Art untuk mengatasi masalah cold start dalam sistem rekomendasi film adalah menggunakan pendekatan berbasis Graph Neural Network (GNN), khususnya yang dikombinasikan dengan attention mechanism, yang terbukti mencapai nilai RMSE terendah sekitar 0.84 pada dataset standar."
+
+---
+
+## Praktik Terbaik (Best Practices)
+
+- **Gunakan Tools Manajemen Referensi:** Sejak awal, gunakan aplikasi seperti **Zotero** atau **Mendeley**. Ini akan membantumu menyimpan, mengorganisir, dan membuat sitasi secara otomatis. Wajib!
+- **Jangan Hanya Deskripsikan, tapi Analisis:** Saat menulis Tinjauan Pustaka, jangan hanya bilang "Peneliti A melakukan X, Peneliti B melakukan Y". Analisis. "Metode yang diusulkan oleh Peneliti B lebih unggul dari A karena mampu mengatasi masalah Z, namun masih memiliki kelemahan pada aspek W."
+- **Identifikasi "Research Gap":** Setelah memetakan SOTA, tanyakan:
+  - Apa kelemahan dari metode SOTA yang ada? (misal: komputasi mahal, rumit, hanya bekerja di dataset tertentu)
+  - Adakah aspek yang belum mereka jelajahi? (misal: belum dicoba untuk konteks lokal Indonesia)
+  - Bisakah saya menggabungkan dua metode yang ada untuk hasil lebih baik?
+- **Diskusi Rutin dengan Dosen Pembimbing:** Tunjukkan tabel sintesis SOTA Anda kepada dosen. Beliau akan sangat menghargainya dan bisa memberikan arahan apakah pemahaman Anda sudah tepat dan di mana "celah" riset yang paling menjanjikan.
