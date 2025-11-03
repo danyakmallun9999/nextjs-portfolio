@@ -9,6 +9,11 @@ type Project = {
   featured?: boolean
 }
 
+type SocialLink = {
+  label: string
+  link: string
+}
+
 type WorkExperience = {
   company: string
   title: string
@@ -19,10 +24,6 @@ type WorkExperience = {
   description: string
 }
 
-type SocialLink = {
-  label: string
-  link: string
-}
 
 export const PROJECTS: Project[] = [
   {
