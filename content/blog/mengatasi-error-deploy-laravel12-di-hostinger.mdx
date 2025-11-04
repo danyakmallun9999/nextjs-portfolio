@@ -1,0 +1,185 @@
+---
+title: "Mengatasi Error Deploy Laravel 12 di Hostinger"
+description: "Solusi lengkap mengatasi masalah PHP CLI vs Web PHP saat deploy Laravel 12 di Hostinger"
+publishedAt: "2025-09-10"
+coverImage: "/posts/cover-laravel-deploy-checklist.png"
+category: "Development"
+tags: ["laravel","hostinger","php","deployment","tutorial","cloudlinux"]
+---
+
+# Mengatasi Error Deploy Laravel 12 di Hostinger
+
+Saat pertama kali mencoba deploy Laravel 12 di Hostinger, banyak developer mengalami error ketika menjalankan `composer install`. Artikel ini akan membahas **penyebab dan solusi lengkap** untuk masalah PHP CLI vs Web PHP yang sering terjadi di Hostinger.
+
+---
+
+## Latar Belakang Masalah
+
+Ketika menjalankan perintah berikut di server Hostinger:
+
+```bash
+composer install
+```
+
+Muncul pesan error seperti ini:
+
+```
+Your lock file does not contain a compatible set of packages. Please run composer update.
+
+Problem 1
+  - Root composer.json requires php ^8.2 but your php version (8.1.33) does not satisfy that requirement.
+```
+
+**Intinya:**
+
+- Laravel 12 dan semua dependency (Symfony 7.x, PHPUnit 11, Laravel Breeze, dsb) butuh minimal PHP 8.2
+- Di Hostinger, PHP versi web (yang bisa diubah di hPanel) sudah di-set ke 8.4
+- Tapi, di SSH default masih terdeteksi PHP 8.1.33
+- → Inilah penyebab `composer install` gagal
+
+---
+
+## Analisis Penyebab
+
+Masalah utama terletak pada perbedaan versi PHP antara:
+
+### PHP Web vs PHP CLI
+- **PHP Web** (diatur lewat hPanel Hostinger → PHP Version) hanya berlaku untuk request via Apache/Nginx (akses domain)
+- **PHP CLI** (yang dipakai via SSH, artisan, composer, dll.) default-nya masih menggunakan system PHP (`/usr/bin/php`), dan ternyata masih 8.1
+
+Laravel 12 tidak support PHP 8.1 → semua perintah composer/artisan gagal.
+
+---
+
+## Solusi yang Ditemukan
+
+### 1. Cek Versi PHP di Server
+
+```bash
+php -v
+```
+
+Hasilnya: PHP 8.1.33 (CLI).
+
+Lalu cek binary yang tersedia:
+
+```bash
+ls -lah /usr/bin/php*
+```
+
+Ternyata `php` hanyalah symlink ke `/etc/cl.selector/php-cli` → ini bawaan CloudLinux PHP Selector. Artinya versi CLI bisa berbeda dengan versi web.
+
+### 2. Cek Folder /opt/alt/
+
+```bash
+ls -lah /opt/alt/
+```
+
+Outputnya ada folder untuk beberapa versi PHP:
+
+```
+php81
+php82
+php83
+php84
+```
+
+Nah, di situlah letak binary PHP 8.4.
+
+### 3. Menjalankan PHP 8.4 Langsung
+
+Daripada pakai `php` (yang masih 8.1), jalankan binary PHP 8.4 langsung:
+
+```bash
+/opt/alt/php84/usr/bin/php -v
+```
+
+Hasil:
+
+```
+PHP 8.4.x (cli) (built: ...)
+```
+
+Berarti PHP 8.4 siap dipakai di CLI.
+
+### 4. Composer dengan PHP 8.4
+
+Untuk menjalankan Composer dengan PHP 8.4:
+
+```bash
+/opt/alt/php84/usr/bin/php /usr/local/bin/composer install
+```
+
+Atau kalau pakai composer.phar lokal:
+
+```bash
+/opt/alt/php84/usr/bin/php composer.phar install
+```
+
+### 5. Artisan dengan PHP 8.4
+
+Kalau langsung jalankan:
+
+```bash
+php artisan migrate
+```
+
+→ masih pakai PHP 8.1 (error).
+
+Solusinya, jalankan lewat binary 8.4:
+
+```bash
+/opt/alt/php84/usr/bin/php artisan migrate
+```
+
+### 6. Membuat Alias (Lebih Praktis)
+
+Supaya tidak perlu mengetik path panjang, buat alias di file `~/.bashrc`:
+
+```bash
+nano ~/.bashrc
+```
+
+Tambahkan:
+
+```bash
+alias php="/opt/alt/php84/usr/bin/php"
+alias composer="/opt/alt/php84/usr/bin/php /usr/local/bin/composer"
+```
+
+Reload:
+
+```bash
+source ~/.bashrc
+```
+
+Sekarang cukup pakai:
+
+```bash
+php -v        # sudah 8.4
+composer -V   # jalan dengan PHP 8.4
+php artisan   # jalan dengan PHP 8.4
+```
+
+---
+
+## Hasil Akhir
+
+Setelah menerapkan solusi di atas:
+
+- ✅ PHP CLI sudah sinkron dengan versi 8.4
+- ✅ `composer install` berhasil tanpa error
+- ✅ Semua perintah artisan (`php artisan migrate`, `php artisan serve`, dll.) jalan mulus
+- ✅ Laravel 12 bisa jalan normal di Hostinger
+
+---
+
+## Kesimpulan
+
+Masalah utama bukan di Laravel, tapi di **perbedaan versi PHP antara web dan SSH** di Hostinger. Solusi terbaik adalah selalu jalankan Composer & Artisan dengan binary PHP 8.4, atau buat alias agar lebih praktis.
+
+Dengan begini, proses deploy Laravel 12 di Hostinger berjalan lancar tanpa error dependency PHP lagi.
+
+---
+
+💡 **Tips**: Setelah membuat alias, pastikan untuk melakukan `source ~/.bashrc` setiap kali login SSH baru agar alias aktif.
