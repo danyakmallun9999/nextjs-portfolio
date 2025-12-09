@@ -1,88 +1,35 @@
 'use client'
-import { AnimatedBackground } from '@/components/ui/animated-background'
 import { TextLoop } from '@/components/ui/text-loop'
-import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
-import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
-
-const THEMES_OPTIONS = [
-  {
-    label: 'Light',
-    id: 'light',
-    icon: <SunIcon className="h-4 w-4" />,
-  },
-  {
-    label: 'Dark',
-    id: 'dark',
-    icon: <MoonIcon className="h-4 w-4" />,
-  },
-  {
-    label: 'System',
-    id: 'system',
-    icon: <MonitorIcon className="h-4 w-4" />,
-  },
-]
-
-function ThemeSwitch() {
-  const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return null
-  }
-
-  return (
-    <AnimatedBackground
-      className="pointer-events-none rounded-lg bg-zinc-100 dark:bg-zinc-800"
-      defaultValue={theme}
-      transition={{
-        type: 'spring',
-        bounce: 0,
-        duration: 0.2,
-      }}
-      enableHover={false}
-      onValueChange={(id) => {
-        setTheme(id as string)
-      }}
-    >
-      {THEMES_OPTIONS.map((theme) => {
-        return (
-          <button
-            key={theme.id}
-            className="inline-flex h-7 w-7 items-center justify-center text-zinc-500 transition-colors duration-100 focus-visible:outline-2 data-[checked=true]:text-zinc-950 dark:text-zinc-400 dark:data-[checked=true]:text-zinc-50"
-            type="button"
-            aria-label={`Switch to ${theme.label} theme`}
-            data-id={theme.id}
-          >
-            {theme.icon}
-          </button>
-        )
-      })}
-    </AnimatedBackground>
-  )
-}
+import { SOCIAL_LINKS } from './data'
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-zinc-100 px-0 py-6 dark:border-zinc-800">
-      <div className="flex items-center justify-between">
-        <div className="flex flex-col space-y-1">
-          <a href="https://github.com/danyakmallun9999" target="_blank" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
-            <TextLoop className="text-xs text-zinc-500">
-              <span>© 2025 danyakmallun.</span>
-              <span>Hak cipta dilindungi.</span>
+    <footer className="mt-24 border-t border-white/5 py-12">
+      <div className="flex flex-col-reverse items-start justify-between gap-8 md:flex-row md:items-center">
+        <div className="flex flex-col space-y-2">
+          <a href="https://github.com/danyakmallun9999" target="_blank" className="group transition-colors duration-200">
+            <TextLoop className="text-sm text-[#888888] group-hover:text-white lg:text-base">
+              <span>© 2025 Dany Akmallun.</span>
+              <span>All rights reserved.</span>
             </TextLoop>
           </a>
-          <p className="text-xs text-zinc-400">
-            Terakhir diperbarui: {new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+          <p className="text-xs text-[#666] lg:text-sm">
+            Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
         </div>
-        <div className="text-xs text-zinc-400">
-          <ThemeSwitch />
+
+        <div className="flex gap-6">
+          {SOCIAL_LINKS.map((link) => (
+            <a
+              key={link.label}
+              href={link.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-[#888888] transition hover:text-white lg:text-base"
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
       </div>
     </footer>
