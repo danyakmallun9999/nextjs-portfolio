@@ -1,12 +1,12 @@
 'use client'
 import { motion } from 'motion/react'
-import { BookOpen, ExternalLink, Calendar, ArrowLeft } from 'lucide-react'
+import { ArrowUpRight, ArrowLeft } from 'lucide-react'
 import { Spotlight } from '@/components/ui/spotlight'
 import { CategoryFilter } from '@/components/ui/category-filter'
 import { BlogPost } from '@/lib/blog';
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -33,18 +33,18 @@ export default function BlogPage() {
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-  const POSTS_PER_PAGE = 3
+  const POSTS_PER_PAGE = 5
 
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true)
-        
+
         // Fetch categories
         const categoriesResponse = await fetch('/api/categories')
         const categoriesData = await categoriesResponse.json()
         setCategories(categoriesData)
-        
+
         // Fetch posts
         const postsResponse = await fetch('/api/blog-posts')
         const postsData = await postsResponse.json()
@@ -63,7 +63,7 @@ export default function BlogPage() {
   useEffect(() => {
     async function fetchPostsByCategory() {
       if (!selectedCategory) return
-      
+
       try {
         const response = await fetch(`/api/blog-posts?category=${encodeURIComponent(selectedCategory)}`)
         const data = await response.json()
@@ -85,12 +85,9 @@ export default function BlogPage() {
   }, [selectedCategory])
 
   // Filter posts by category
-  const filteredPosts = selectedCategory 
+  const filteredPosts = selectedCategory
     ? posts.filter(post => post.category === selectedCategory)
     : posts
-
-  // Posts are already sorted by date (newest first) from lib/blog.ts
-  // No need for additional sorting here
 
   // Reset to first page when category changes
   useEffect(() => {
@@ -104,8 +101,8 @@ export default function BlogPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-green-600"></div>
+      <div className="flex items-center justify-center min-h-[50vh]">
+        <div className="text-[#888888] animate-pulse">Loading...</div>
       </div>
     )
   }
@@ -115,38 +112,28 @@ export default function BlogPage() {
       variants={VARIANTS_CONTAINER}
       initial="hidden"
       animate="visible"
-      className="space-y-8"
+      className="mx-auto max-w-2xl space-y-12 py-12"
     >
-      {/* Breadcrumbs */}
-      <div className="mb-6">
-        <Breadcrumbs items={[{ label: 'Blog', href: '/blog' }]} />
-      </div>
-      
       {/* Header Section */}
       <motion.section
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
-        className="relative"
+        className="space-y-6"
       >
-        <div className="flex items-center gap-4 mb-8 sm:mb-12">
-          <Link
-            href="/"
-            className="group flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span className="text-sm">Back to Home</span>
-          </Link>
-        </div>
-        
-        <div className="flex flex-col gap-3 mb-8 sm:mb-10">
-          <div className="flex items-center gap-3">
-            <BookOpen className="w-5 h-5 text-green-600 dark:text-green-400" />
-            <h1 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
-              Blog Posts
-            </h1>
-          </div>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400 ml-8">
-            Thoughts, insights, and discoveries about technology and beyond
+        <Link
+          href="/"
+          className="group inline-flex items-center gap-2 text-sm text-[#888888] hover:text-white transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+          <span>Back to Home</span>
+        </Link>
+
+        <div className="space-y-4">
+          <h1 className="text-4xl font-semibold text-white lg:text-5xl">
+            Writing
+          </h1>
+          <p className="text-lg leading-relaxed text-[#888888]">
+            Thoughts, insights, and discoveries about technology and beyond.
           </p>
         </div>
       </motion.section>
@@ -156,153 +143,113 @@ export default function BlogPage() {
         <motion.section
           variants={VARIANTS_SECTION}
           transition={TRANSITION_SECTION}
-          className="relative z-10"
+          className="flex flex-wrap gap-2"
         >
-          <CategoryFilter
-            categories={categories}
-            selectedCategory={selectedCategory}
-            onCategoryChange={setSelectedCategory}
-            totalPosts={posts.length}
-            filteredPosts={filteredPosts.length}
-          />
+          <button
+            onClick={() => setSelectedCategory(null)}
+            className={`rounded-full px-3 py-1 text-sm transition-colors ${!selectedCategory ? 'bg-white text-black' : 'bg-white/5 text-[#888888] hover:bg-white/10 hover:text-white'}`}
+          >
+            All
+          </button>
+
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`rounded-full px-3 py-1 text-sm transition-colors ${selectedCategory === category ? 'bg-white text-black' : 'bg-white/5 text-[#888888] hover:bg-white/10 hover:text-white'}`}
+            >
+              {category}
+            </button>
+          ))}
         </motion.section>
       )}
 
-      {/* Blog Posts List - Single Column */}
+      {/* Blog Posts List */}
       <motion.section
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
-        className="relative z-0"
+        className="space-y-8"
       >
-        <div className="space-y-4 sm:space-y-6">
-          {paginatedPosts.map((post, index) => (
-            <motion.article
-              key={post.slug}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded-xl sm:rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30 transition-all duration-300 hover:bg-zinc-400/40 dark:hover:bg-zinc-500/40"
-            >
-              <Spotlight
-                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
-                size={64}
-              />
-              <div className="relative h-full w-full rounded-[11px] sm:rounded-[15px] bg-white dark:bg-zinc-950 p-4 sm:p-6">
-                <div className="flex flex-col">
-                  {/* Date and Category */}
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-3">
-                    <div className="flex items-center gap-2 text-xs text-green-600 dark:text-green-400">
-                      <Calendar className="w-3 h-3 flex-shrink-0" />
-                      <span className="whitespace-nowrap">
-                        {new Date(post.publishedAt).toLocaleDateString('id-ID', { 
-                          year: 'numeric', 
-                          month: 'long', 
-                          day: 'numeric' 
-                        })}
-                      </span>
-                    </div>
-                    {post.category && (
-                      <span className="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-full w-fit max-w-[120px] sm:max-w-[150px] truncate" title={post.category}>
-                        {post.category}
-                      </span>
-                    )}
-                  </div>
+        {paginatedPosts.map((post, index) => (
+          <motion.article
+            key={post.slug}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="group border-b border-white/5 pb-8 last:border-0"
+          >
+            <Link href={`/blog/${post.slug}`} className="flex flex-col gap-6 sm:flex-row sm:items-start group">
+              {post.coverImage && (
+                <div className="relative aspect-video w-full flex-shrink-0 overflow-hidden rounded-lg sm:w-48 bg-white/5 border border-white/5">
+                  <Image
+                    src={post.coverImage}
+                    alt={post.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, 192px"
+                  />
+                </div>
+              )}
 
-                  {/* Title */}
-                                     <h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-3 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
-                    <Link href={`/blog/${post.slug}`} className="block">
-                      {post.title}
-                    </Link>
-                  </h2>
-
-                  {/* Description */}
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
-                    {post.description}
-                  </p>
-
-                  {/* Tags */}
-                  {post.tags && post.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {post.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-1 text-xs bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-full flex-shrink-0"
-                        >
-                          #{tag}
-                        </span>
-                      ))}
-                      {post.tags.length > 3 && (
-                        <span className="px-2 py-1 text-xs text-zinc-500 dark:text-zinc-400">
-                          +{post.tags.length - 3} more
-                        </span>
-                      )}
-                    </div>
+              <div className="flex-1 space-y-3">
+                <div className="flex items-center justify-between text-sm text-[#888888]">
+                  <span>
+                    {new Date(post.publishedAt).toLocaleDateString('id-ID', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </span>
+                  {post.category && (
+                    <span className="capitalize">{post.category}</span>
                   )}
+                </div>
 
-                  {/* Read More Link */}
-                  <div className="flex justify-end">
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-medium text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 transition-colors group/link"
-                    >
-                      <span>Read more</span>
-                      <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform" />
-                    </Link>
-                  </div>
+                <h2 className="text-2xl font-medium text-white group-hover:text-[#888888] transition-colors">
+                  {post.title}
+                </h2>
+
+                <p className="text-base text-[#888888] leading-relaxed line-clamp-2">
+                  {post.description}
+                </p>
+
+                <div className="inline-flex items-center gap-1 text-sm text-white group-hover:underline underline-offset-4 decoration-white/30">
+                  Read article <ArrowUpRight className="h-4 w-4" />
                 </div>
               </div>
-            </motion.article>
-          ))}
-        </div>
-
-        {/* Pagination Controls - Mobile Responsive */}
-        {totalPages > 1 && (
-          <div className="flex flex-wrap justify-center gap-2 mt-6 sm:mt-8">
-            <button
-              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              disabled={currentPage === 1}
-              className="px-3 py-2 text-sm rounded bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Previous
-            </button>
-            {Array.from({ length: totalPages }, (_, i) => (
-              <button
-                key={i + 1}
-                onClick={() => setCurrentPage(i + 1)}
-                className={`px-3 py-2 text-sm rounded ${currentPage === i + 1 ? 'bg-green-600 text-white dark:bg-green-400 dark:text-zinc-900' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200'}`}
-              >
-                {i + 1}
-              </button>
-            ))}
-            <button
-              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              disabled={currentPage === totalPages}
-              className="px-3 py-2 text-sm rounded bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Next
-            </button>
-          </div>
-        )}
+            </Link>
+          </motion.article>
+        ))}
       </motion.section>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex justify-center gap-2 pt-8">
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+            className="px-4 py-2 text-sm rounded-lg border border-white/5 bg-white/5 text-white disabled:opacity-50 hover:bg-white/10 transition-colors"
+          >
+            Previous
+          </button>
+          <span className="flex items-center px-4 text-sm text-[#888888]">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 text-sm rounded-lg border border-white/5 bg-white/5 text-white disabled:opacity-50 hover:bg-white/10 transition-colors"
+          >
+            Next
+          </button>
+        </div>
+      )}
 
       {/* Empty State */}
       {paginatedPosts.length === 0 && !loading && (
-        <motion.section
-          variants={VARIANTS_SECTION}
-          transition={TRANSITION_SECTION}
-          className="text-center py-12"
-        >
-          <BookOpen className="w-16 h-16 text-zinc-400 dark:text-zinc-600 mx-auto mb-4" />
-                     <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-2">
-            {selectedCategory ? `No posts in "${selectedCategory}"` : 'No posts yet'}
-          </h3>
-          <p className="text-zinc-600 dark:text-zinc-400">
-            {selectedCategory 
-              ? 'Try selecting a different category or clear the filter.'
-              : 'Check back soon for new content!'
-            }
-          </p>
-        </motion.section>
+        <div className="text-center py-12 text-[#888888]">
+          No posts found.
+        </div>
       )}
     </motion.div>
   )

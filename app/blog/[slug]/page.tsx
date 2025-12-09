@@ -5,7 +5,6 @@ import { Metadata } from 'next'
 import CodeHighlighter from '@/app/components/SyntaxHighlighter'
 import Image from 'next/image'
 import { generateArticleStructuredData, generateBreadcrumbStructuredData, BreadcrumbItem } from '@/lib/structured-data'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 
 // Generate metadata for blog posts
 export async function generateMetadata({
@@ -58,21 +57,21 @@ export async function generateMetadata({
       tags: post.tags || [],
       images: post.coverImage
         ? [
-            {
-              url: `https://danyakmallun.com${post.coverImage}`,
-              width: 1200,
-              height: 630,
-              alt: post.title,
-            },
-          ]
+          {
+            url: `https://danyakmallun.com${post.coverImage}`,
+            width: 1200,
+            height: 630,
+            alt: post.title,
+          },
+        ]
         : [
-            {
-              url: 'https://danyakmallun.com/opengraph.jpg',
-              width: 1366,
-              height: 768,
-              alt: "Dany Akmallun Ni'am - Profile Picture",
-            },
-          ],
+          {
+            url: 'https://danyakmallun.com/opengraph.jpg',
+            width: 1366,
+            height: 768,
+            alt: "Dany Akmallun Ni'am - Profile Picture",
+          },
+        ],
     },
     twitter: {
       card: 'summary_large_image',
@@ -110,7 +109,7 @@ const components = {
       </CodeHighlighter>
     ) : (
       <code
-        className="rounded bg-zinc-200 px-1 py-0.5 font-mono text-sm text-zinc-800 dark:bg-zinc-700 dark:text-zinc-200"
+        className="rounded bg-white/10 px-1 py-0.5 font-mono text-sm text-white"
         {...props}
       >
         {children}
@@ -118,83 +117,90 @@ const components = {
     )
   },
   h1: ({ children }: any) => (
-    <h1 className="mt-8 mb-6 text-3xl font-bold text-zinc-900 dark:text-zinc-100">
+    <h1 className="mt-12 mb-6 text-3xl font-semibold text-white lg:text-4xl">
       {children}
     </h1>
   ),
   h2: ({ children }: any) => (
-    <h2 className="mt-6 mb-4 text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
+    <h2 className="mt-10 mb-4 text-2xl font-medium text-white lg:text-3xl">
       {children}
     </h2>
   ),
   h3: ({ children }: any) => (
-    <h3 className="mt-5 mb-3 text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+    <h3 className="mt-8 mb-3 text-xl font-medium text-white lg:text-2xl">
       {children}
     </h3>
   ),
   p: ({ children }: any) => (
-    <p className="mb-4 leading-relaxed text-zinc-700 dark:text-zinc-300">
+    <p className="mb-6 text-lg leading-relaxed text-[#888888] lg:text-xl lg:leading-loose">
       {children}
     </p>
   ),
   ul: ({ children }: any) => (
-    <ul className="mb-4 list-inside list-disc space-y-1 text-zinc-700 dark:text-zinc-300">
+    <ul className="mb-6 list-inside list-disc space-y-2 text-lg text-[#888888]">
       {children}
     </ul>
   ),
   ol: ({ children }: any) => (
-    <ol className="mb-4 list-inside list-decimal space-y-1 text-zinc-700 dark:text-zinc-300">
+    <ol className="mb-6 list-inside list-decimal space-y-2 text-lg text-[#888888]">
       {children}
     </ol>
   ),
   li: ({ children }: any) => (
-    <li className="text-zinc-700 dark:text-zinc-300">{children}</li>
+    <li className="text-[#888888]">{children}</li>
   ),
   strong: ({ children }: any) => (
-    <strong className="font-semibold text-zinc-900 dark:text-zinc-100">
+    <strong className="font-medium text-white">
       {children}
     </strong>
   ),
   blockquote: ({ children }: any) => (
-    <blockquote className="my-4 border-l-4 border-zinc-300 dark:border-zinc-600 bg-zinc-50 dark:bg-zinc-900/50 py-2 pl-4 text-zinc-700 dark:text-zinc-300 italic">
+    <blockquote className="my-8 border-l-2 border-white/20 pl-6 text-xl italic text-white/80">
       {children}
     </blockquote>
   ),
   table: ({ children }: any) => (
-    <div className="my-6 overflow-x-auto">
-      <table className="min-w-full border border-zinc-300 dark:border-zinc-600">
+    <div className="my-8 overflow-x-auto rounded-lg border border-white/5">
+      <table className="min-w-full text-left text-sm">
         {children}
       </table>
     </div>
   ),
   thead: ({ children }: any) => (
-    <thead className="bg-zinc-100 dark:bg-zinc-800">{children}</thead>
+    <thead className="bg-white/5 text-white">{children}</thead>
   ),
   tbody: ({ children }: any) => (
-    <tbody className="bg-white dark:bg-zinc-900">{children}</tbody>
+    <tbody className="text-[#888888]">{children}</tbody>
   ),
   tr: ({ children }: any) => (
-    <tr className="border-b border-zinc-300 dark:border-zinc-600">
+    <tr className="border-b border-white/5 last:border-0">
       {children}
     </tr>
   ),
   th: ({ children }: any) => (
-    <th className="px-4 py-2 text-left font-semibold text-zinc-900 dark:text-zinc-100">
+    <th className="px-6 py-4 font-medium text-white">
       {children}
     </th>
   ),
   td: ({ children }: any) => (
-    <td className="px-4 py-2 text-zinc-700 dark:text-zinc-300">{children}</td>
+    <td className="px-6 py-4">{children}</td>
   ),
   a: ({ href, children }: any) => (
     <a
       href={href}
-      className="text-blue-600 hover:underline dark:text-blue-400"
+      className="text-white underline decoration-white/30 underline-offset-4 hover:decoration-white transition-all"
       target="_blank"
       rel="noopener noreferrer"
     >
       {children}
     </a>
+  ),
+  img: ({ src, alt }: any) => (
+    <img
+      src={src}
+      alt={alt}
+      className="my-8 h-auto w-full rounded-lg border border-white/5 bg-white/5"
+    />
   ),
 }
 
@@ -220,12 +226,12 @@ export default async function BlogPostPage({
   }
 
   const articleStructuredData = generateArticleStructuredData(post)
-  
+
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: 'Blog', href: '/blog' },
     { label: post.title }
   ]
-  
+
   const breadcrumbStructuredData = generateBreadcrumbStructuredData(breadcrumbItems)
 
   return (
@@ -242,50 +248,58 @@ export default async function BlogPostPage({
           __html: JSON.stringify(breadcrumbStructuredData),
         }}
       />
-      <div className="mb-6">
-        <Breadcrumbs items={breadcrumbItems} />
-      </div>
-      <article className="mx-auto max-w-4xl">
-        <header className="mb-8">
-          {post.coverImage && (
-            <div className="mb-6 w-full overflow-hidden rounded-lg">
-              <Image
-                src={post.coverImage}
-                alt={post.title}
-                width={1200}
-                height={630}
-                className="h-auto max-h-96 w-full object-contain"
-                priority={true}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
-            </div>
-          )}
-          <h1 className="mb-4 text-4xl font-bold">{post.title}</h1>
-          <p className="mb-4 text-xl text-gray-600">{post.description}</p>
-          <time className="text-gray-500" dateTime={post.publishedAt}>
-            {new Date(post.publishedAt).toLocaleDateString('id-ID')}
-          </time>
-          {post.tags && post.tags.length > 0 && (
-            <div className="mt-4 flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900/30 dark:text-green-300"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </header>
 
-        <div className="prose prose-lg max-w-none">
+      <article className="mx-auto max-w-2xl py-12">
+        <div className="mb-10 space-y-6">
+          {/* Back Button */}
+          <a
+            href="/blog"
+            className="group inline-flex items-center gap-2 text-sm text-[#888888] hover:text-white transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:-translate-x-1"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
+            <span>Back to Writing</span>
+          </a>
+
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 text-sm text-[#888888]">
+              <time dateTime={post.publishedAt}>
+                {new Date(post.publishedAt).toLocaleDateString('id-ID', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+              {post.category && (
+                <>
+                  <span>•</span>
+                  <span className="capitalize">{post.category}</span>
+                </>
+              )}
+            </div>
+
+            <h1 className="text-4xl font-semibold leading-tight text-white lg:text-5xl">
+              {post.title}
+            </h1>
+          </div>
+        </div>
+
+        {post.coverImage && (
+          <div className="mb-12 w-full overflow-hidden rounded-xl border border-white/5 bg-white/5">
+            <Image
+              src={post.coverImage}
+              alt={post.title}
+              width={1200}
+              height={630}
+              className="h-auto w-full object-cover"
+              priority={true}
+            />
+          </div>
+        )}
+
+        <div className="prose prose-invert max-w-none">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
-            components={{
-              ...components,
-              h1: () => null, // Hapus h1 dari konten karena sudah ada di header
-            }}
+            components={components}
           >
             {post.content}
           </ReactMarkdown>

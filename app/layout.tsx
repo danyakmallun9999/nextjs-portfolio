@@ -141,9 +141,11 @@ export default function RootLayout({
           defaultTheme="system"
         >
           <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
+            <Header />
             <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 sm:px-8 lg:px-12">
-              <Header />
-              {children}
+              <main className="flex-1">
+                {children}
+              </main>
               <Footer />
               <Analytics />
             </div>
