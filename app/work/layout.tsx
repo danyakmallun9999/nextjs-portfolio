@@ -16,7 +16,7 @@ export default function WorkLayout({
         }}
       />
 
-      <main className="mt-8 pb-20">
+      <main className="mt-2 pb-20">
         {children}
       </main>
     </>

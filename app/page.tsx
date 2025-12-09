@@ -111,7 +111,7 @@ export default function Personal() {
               href="/projects"
               className="group inline-flex items-center gap-2 border border-white/10 bg-white/5 px-8 py-4 text-sm font-medium text-zinc-200 transition-all hover:border-white/20 hover:bg-white/10 lg:px-10 lg:py-5 lg:text-base"
             >
-              Latest Shots
+              Latest Project
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 lg:h-5 lg:w-5" />
             </Link>
           </motion.section>
@@ -120,7 +120,7 @@ export default function Personal() {
 
           <motion.section className="space-y-8 py-10 lg:space-y-12 lg:py-20" variants={item}>
             <div className="flex items-center justify-between border-b border-white/5 pb-4 lg:pb-6">
-              <h3 className="text-xl font-semibold text-white lg:text-3xl">Latest Shots</h3>
+              <h3 className="text-xl font-semibold text-white lg:text-3xl">Latest Project</h3>
               <Link href="/projects" className="inline-flex items-center gap-1 text-sm text-[#888888] hover:text-white transition-colors lg:text-lg">
                 View all <ArrowUpRight className="h-4 w-4 lg:h-5 lg:w-5" />
               </Link>
