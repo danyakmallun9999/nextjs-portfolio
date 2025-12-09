@@ -4,6 +4,7 @@ import { Fira_Code } from 'next/font/google'
 import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
+import { ScrollProgressBar } from '@/components/ui/scroll-progress-bar'
 import { ThemeProvider } from 'next-themes'
 import { Analytics } from '@vercel/analytics/react'
 import { personStructuredData, websiteStructuredData } from '@/lib/structured-data'
@@ -141,6 +142,7 @@ export default function RootLayout({
           defaultTheme="system"
         >
           <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
+            <ScrollProgressBar />
             <Header />
             <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 sm:px-8 lg:px-12">
               <main className="flex-1">

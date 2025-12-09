@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
-import { ArrowUpRight, Calendar } from 'lucide-react'
+import { ArrowUpRight, Calendar, Github, Twitter, Linkedin, Instagram } from 'lucide-react'
 
 import { ScrollProgress } from '@/components/ui/scroll-progress'
 import { BlogPost } from '@/lib/blog'
@@ -268,18 +268,32 @@ export default function Personal() {
             variants={item}
           >
             <h3 className="mb-4 text-3xl font-semibold text-white lg:text-5xl lg:mb-6">
-              Tell me about your next project
+              Contact Me
             </h3>
-            <p className="mb-8 max-w-lg text-sm text-[#888888] lg:text-xl lg:max-w-2xl lg:mb-12">
-              Bangun pengalaman digital yang memukau dengan proses yang terstruktur dan fokus pada hasil.
+            <p className="mb-8 text-sm text-[#888888] lg:text-xl lg:mb-12">
+              Feel free to contact me at <a href={`mailto:${EMAIL}`} className="text-white hover:underline decoration-white/30 underline-offset-4 transition-all">{EMAIL}</a>
             </p>
-            <a
-              href={`mailto:${EMAIL}`}
-              className="inline-flex items-center gap-2 border-b border-white pb-0.5 text-sm font-medium text-white transition-opacity hover:opacity-70 lg:text-xl lg:pb-1"
-            >
-              Get in touch
-              <ArrowUpRight className="h-4 w-4 lg:h-6 lg:w-6" />
-            </a>
+            <div className="flex items-center gap-6 lg:gap-8">
+              {SOCIAL_LINKS.map((link) => {
+                const Icon = link.label === 'Github' ? Github :
+                  link.label === 'Twitter' ? Twitter :
+                    link.label === 'LinkedIn' ? Linkedin :
+                      link.label === 'Instagram' ? Instagram : ArrowUpRight
+
+                return (
+                  <a
+                    key={link.label}
+                    href={link.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#888888] hover:text-white transition-colors"
+                  >
+                    <Icon className="h-6 w-6 lg:h-8 lg:w-8" />
+                    <span className="sr-only">{link.label}</span>
+                  </a>
+                )
+              })}
+            </div>
           </motion.section>
         </motion.main>
       </div>
