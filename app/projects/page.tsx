@@ -1,5 +1,6 @@
 'use client'
 import { motion } from 'motion/react'
+import { useState, useEffect } from 'react'
 import { ArrowUpRight, ArrowLeft } from 'lucide-react'
 import { PROJECTS } from '@/app/data'
 import Link from 'next/link'
@@ -24,7 +25,57 @@ const TRANSITION_SECTION = {
   duration: 0.3,
 }
 
+
+
 export default function ProjectsPage() {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Simulate loading to show skeleton
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="mx-auto max-w-3xl space-y-12 py-12">
+        <div className="space-y-6">
+          <div className="h-4 w-32 bg-[#2d2d2d] rounded animate-pulse" />
+          <div className="space-y-4">
+            <div className="h-10 w-64 bg-[#2d2d2d] rounded animate-pulse" />
+            <div className="h-6 w-96 bg-[#2d2d2d] rounded animate-pulse" />
+          </div>
+        </div>
+
+        <div className="space-y-16">
+          {[...Array(3)].map((_, i) => (
+            <div key={i} className="space-y-6">
+              {/* Image Skeleton */}
+              <div className="aspect-video w-full rounded-xl bg-[#2d2d2d] animate-pulse border border-white/5" />
+
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <div className="h-8 w-48 bg-[#2d2d2d] rounded animate-pulse" />
+                  <div className="h-10 w-10 rounded-full bg-[#2d2d2d] animate-pulse" />
+                </div>
+                <div className="space-y-2">
+                  <div className="h-4 w-full bg-[#2d2d2d] rounded animate-pulse" />
+                  <div className="h-4 w-2/3 bg-[#2d2d2d] rounded animate-pulse" />
+                </div>
+                <div className="flex gap-2">
+                  <div className="h-6 w-20 bg-[#2d2d2d] rounded-full animate-pulse" />
+                  <div className="h-6 w-24 bg-[#2d2d2d] rounded-full animate-pulse" />
+                  <div className="h-6 w-16 bg-[#2d2d2d] rounded-full animate-pulse" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
   return (
     <motion.div
       variants={VARIANTS_CONTAINER}

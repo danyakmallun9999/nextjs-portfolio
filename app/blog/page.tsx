@@ -101,8 +101,36 @@ export default function BlogPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="text-[#888888] animate-pulse">Loading...</div>
+      <div className="mx-auto max-w-2xl space-y-12 py-12">
+        {/* Header Skeleton */}
+        <div className="space-y-6">
+          <div className="h-4 w-32 bg-[#2d2d2d] rounded animate-pulse" />
+          <div className="space-y-4">
+            <div className="h-10 w-48 bg-[#2d2d2d] rounded animate-pulse" />
+            <div className="h-6 w-96 bg-[#2d2d2d] rounded animate-pulse" />
+          </div>
+        </div>
+
+        {/* List Skeleton */}
+        <div className="space-y-8">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="flex flex-col gap-6 sm:flex-row sm:items-start border-b border-white/5 pb-8 last:border-0">
+              {/* Image Skeleton */}
+              <div className="relative aspect-video w-full flex-shrink-0 rounded-lg sm:w-48 bg-[#2d2d2d] animate-pulse" />
+
+              {/* Content Skeleton */}
+              <div className="flex-1 space-y-4">
+                <div className="h-4 w-32 bg-[#2d2d2d] rounded animate-pulse" />
+                <div className="h-7 w-3/4 bg-[#2d2d2d] rounded animate-pulse" />
+                <div className="space-y-2">
+                  <div className="h-4 w-full bg-[#2d2d2d] rounded animate-pulse" />
+                  <div className="h-4 w-2/3 bg-[#2d2d2d] rounded animate-pulse" />
+                </div>
+                <div className="h-4 w-24 bg-[#2d2d2d] rounded animate-pulse" />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     )
   }
