@@ -40,7 +40,7 @@ export default function ProjectsPage() {
 
   if (loading) {
     return (
-      <div className="mx-auto max-w-3xl space-y-12 py-12">
+      <div className="mx-auto max-w-5xl space-y-12 py-12">
         <div className="space-y-6">
           <div className="h-4 w-32 bg-[#2d2d2d] rounded animate-pulse" />
           <div className="space-y-4">
@@ -49,25 +49,24 @@ export default function ProjectsPage() {
           </div>
         </div>
 
-        <div className="space-y-16">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="space-y-6">
+        <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="flex flex-col gap-4">
               {/* Image Skeleton */}
               <div className="aspect-video w-full rounded-xl bg-[#2d2d2d] animate-pulse border border-white/5" />
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <div className="h-8 w-48 bg-[#2d2d2d] rounded animate-pulse" />
-                  <div className="h-10 w-10 rounded-full bg-[#2d2d2d] animate-pulse" />
+                  <div className="h-6 w-32 bg-[#2d2d2d] rounded animate-pulse" />
+                  <div className="h-8 w-8 rounded-full bg-[#2d2d2d] animate-pulse" />
                 </div>
                 <div className="space-y-2">
-                  <div className="h-4 w-full bg-[#2d2d2d] rounded animate-pulse" />
-                  <div className="h-4 w-2/3 bg-[#2d2d2d] rounded animate-pulse" />
+                  <div className="h-3 w-full bg-[#2d2d2d] rounded animate-pulse" />
+                  <div className="h-3 w-2/3 bg-[#2d2d2d] rounded animate-pulse" />
                 </div>
                 <div className="flex gap-2">
-                  <div className="h-6 w-20 bg-[#2d2d2d] rounded-full animate-pulse" />
-                  <div className="h-6 w-24 bg-[#2d2d2d] rounded-full animate-pulse" />
-                  <div className="h-6 w-16 bg-[#2d2d2d] rounded-full animate-pulse" />
+                  <div className="h-5 w-16 bg-[#2d2d2d] rounded-full animate-pulse" />
+                  <div className="h-5 w-20 bg-[#2d2d2d] rounded-full animate-pulse" />
                 </div>
               </div>
             </div>
@@ -81,7 +80,7 @@ export default function ProjectsPage() {
       variants={VARIANTS_CONTAINER}
       initial="hidden"
       animate="visible"
-      className="mx-auto max-w-3xl space-y-12 py-12"
+      className="mx-auto max-w-5xl space-y-12 py-12"
     >
       {/* Header Section */}
       <motion.section
@@ -111,7 +110,7 @@ export default function ProjectsPage() {
       <motion.section
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
-        className="space-y-16"
+        className="grid gap-6 md:grid-cols-2 lg:gap-8"
       >
         {PROJECTS.map((project, index) => (
           <motion.article
@@ -119,7 +118,7 @@ export default function ProjectsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group space-y-6"
+            className="group flex flex-col gap-4"
           >
             {/* Project Image */}
             <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-white/5 border border-white/5">
@@ -132,30 +131,30 @@ export default function ProjectsPage() {
               />
             </div>
 
-            <div className="space-y-4">
+            <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-medium text-white lg:text-3xl">
+                <h2 className="text-xl font-medium text-white lg:text-2xl group-hover:text-blue-400 transition-colors">
                   {project.name}
                 </h2>
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-white/10 bg-white/5 p-3 text-white transition-colors hover:bg-white/10 hover:text-white"
+                  className="rounded-full border border-white/10 bg-white/5 p-2 text-white transition-colors hover:bg-white/10 hover:text-white"
                 >
-                  <ArrowUpRight className="h-5 w-5" />
+                  <ArrowUpRight className="h-4 w-4" />
                 </a>
               </div>
 
-              <p className="text-lg leading-relaxed text-[#888888]">
+              <p className="text-sm leading-relaxed text-[#888888] line-clamp-2">
                 {project.description}
               </p>
 
               <div className="flex flex-wrap gap-2">
-                {project.techStack.map((tech) => (
+                {project.techStack.slice(0, 4).map((tech) => (
                   <span
                     key={tech}
-                    className="rounded-full border border-white/5 bg-white/5 px-3 py-1 text-sm text-[#888888]"
+                    className="rounded-full border border-white/5 bg-white/5 px-2.5 py-0.5 text-xs text-[#888888]"
                   >
                     {tech}
                   </span>
