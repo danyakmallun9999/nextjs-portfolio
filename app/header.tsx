@@ -1,33 +1,38 @@
 'use client'
-import { TextEffect } from '@/components/ui/text-effect'
 import Link from 'next/link'
+import { SOCIAL_LINKS, EMAIL } from './data'
+
+const NAV_ITEMS = [
+  { href: '/projects', label: 'Projects' },
+  { href: '/work', label: 'Experience' },
+  { href: '/blog', label: 'Blog' },
+]
 
 export function Header() {
   return (
-    <header className="mb-8 flex items-center justify-between">
-      <div className="flex flex-col items-start gap-3">
-        <div className="relative">
-          <img
-            src="/profile.jpeg"
-            alt="Foto Profil Dany Akmallun"
-            className="w-20 h-20 rounded-full object-cover border-2 border-zinc-200 dark:border-zinc-700 shadow-lg hover:shadow-xl transition-shadow duration-300"
-          />
-        </div>
-        <Link href="/" className="font-semibold text-xl text-black dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
-          Dany Akmallun Ni'am
-        </Link>
-        <TextEffect
-          as="p"
-          preset="fade"
-          per="char"
-          className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed"
-          delay={0.5}
-        >
-          Crypto enthusiast • Web Developer • Lifelong learner
-        </TextEffect>
-        <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-1">
-          Membangun masa depan terdesentralisasi
-        </p>
+    <header className="mb-16 flex items-center justify-between py-6 text-sm text-[#888888]">
+      <Link
+        href={`mailto:${EMAIL}`}
+        className="font-medium transition hover:text-white"
+      >
+        {EMAIL}
+      </Link>
+
+      <div className="flex items-center gap-6">
+        {NAV_ITEMS.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="transition hover:text-white"
+          >
+            {item.label}
+          </Link>
+        ))}
+        {/* Removed divider and social icons for cleaner look as per minimalist design, 
+            social icons are usually better placed in a specific 'connect' section or footer 
+            in this specific style, but preserving data means we keep them if strictly needed. 
+            However, the design reference often puts nav top right. 
+            I will keep the nav items as requested but remove the heavy dividers. */}
       </div>
     </header>
   )

@@ -132,7 +132,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geist.variable} ${geistMono.variable} ${firaCode.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
+        className={`${geist.variable} ${geistMono.variable} ${firaCode.variable} bg-[#0f0f0f] text-white tracking-tight antialiased`}
       >
         <ThemeProvider
           enableSystem={true}
@@ -141,7 +141,7 @@ export default function RootLayout({
           defaultTheme="system"
         >
           <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
-            <div className="relative mx-auto w-full max-w-screen-sm flex-1 px-4 pt-20">
+            <div className="relative mx-auto w-full max-w-6xl flex-1 px-6 pt-16 sm:px-8 lg:px-12">
               <Header />
               {children}
               <Footer />
