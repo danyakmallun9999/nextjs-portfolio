@@ -1,7 +1,7 @@
 'use client'
 
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 interface SyntaxHighlighterProps {
   language: string
@@ -16,8 +16,8 @@ export default function CodeHighlighter({ language, children, ...props }: Syntax
       style={a11yDark}
       PreTag="div"
       customStyle={{
-        backgroundColor: '#1f2937',
-        border: '1px solid #374151',
+        backgroundColor: '#070707',
+        border: '1px solid #070707',
         borderRadius: '0.5rem',
         padding: '1rem',
         fontSize: '0.875rem',
