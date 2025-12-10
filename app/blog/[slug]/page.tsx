@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Metadata } from 'next'
 import CodeHighlighter from '@/app/components/SyntaxHighlighter'
+import ShareButtons from '@/app/components/ShareButtons'
 import Image from 'next/image'
 import { generateArticleStructuredData, generateBreadcrumbStructuredData, BreadcrumbItem } from '@/lib/structured-data'
 
@@ -234,6 +235,8 @@ export default async function BlogPostPage({
 
   const breadcrumbStructuredData = generateBreadcrumbStructuredData(breadcrumbItems)
 
+  const currentUrl = `https://danyakmallun.com/blog/${post.slug}`
+
   return (
     <>
       <script
@@ -304,7 +307,11 @@ export default async function BlogPostPage({
             {post.content}
           </ReactMarkdown>
         </div>
+
+        <ShareButtons url={currentUrl} title={post.title} />
       </article>
     </>
   )
 }
+
+
