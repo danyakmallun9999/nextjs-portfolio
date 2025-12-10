@@ -252,76 +252,76 @@ export default async function BlogPostPage({
         }}
       />
 
-      <div className="mx-auto max-w-[1600px] py-12 md:py-12">
-        <div className="flex flex-col gap-12 xl:flex-row xl:justify-center xl:items-start">
-          {/* Left Sidebar - Share Buttons (Desktop) */}
-          <aside className="hidden xl:sticky xl:top-24 xl:flex xl:h-[calc(100vh-6rem)] xl:flex-col xl:justify-start xl:items-end">
+      <div className="relative mx-auto max-w-2xl py-12 md:py-12">
+        {/* Left Sidebar - Share Buttons (Desktop) */}
+        <aside className="hidden xl:absolute xl:right-full xl:top-0 xl:mr-12 xl:flex xl:h-full xl:flex-col xl:items-end">
+          <div className="sticky top-[50vh] -translate-y-1/2">
             <ShareButtons url={currentUrl} title={post.title} orientation="vertical" />
-          </aside>
+          </div>
+        </aside>
 
-          {/* Main Content */}
-          <article className="w-full max-w-2xl">
-            <div className="mb-6 space-y-4 md:mb-10 md:space-y-6">
-              {/* Back Button */}
-              <a
-                href="/blog"
-                className="group inline-flex items-center gap-2 text-sm text-[#888888] hover:text-white transition-colors"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:-translate-x-1"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
-                <span>Back to Writing</span>
-              </a>
+        {/* Main Content */}
+        <article className="w-full">
+          <div className="mb-6 space-y-4 md:mb-10 md:space-y-6">
+            {/* Back Button */}
+            <a
+              href="/blog"
+              className="group inline-flex items-center gap-2 text-sm text-[#888888] hover:text-white transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:-translate-x-1"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
+              <span>Back to Writing</span>
+            </a>
 
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 text-sm text-[#888888]">
-                  <time dateTime={post.publishedAt}>
-                    {new Date(post.publishedAt).toLocaleDateString('id-ID', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </time>
-                  {post.category && (
-                    <>
-                      <span>•</span>
-                      <span className="capitalize">{post.category}</span>
-                    </>
-                  )}
-                </div>
-
-                <h1 className="text-4xl font-semibold leading-tight text-white lg:text-5xl">
-                  {post.title}
-                </h1>
+            <div className="space-y-4">
+              <div className="flex items-center gap-3 text-sm text-[#888888]">
+                <time dateTime={post.publishedAt}>
+                  {new Date(post.publishedAt).toLocaleDateString('id-ID', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+                {post.category && (
+                  <>
+                    <span>•</span>
+                    <span className="capitalize">{post.category}</span>
+                  </>
+                )}
               </div>
-            </div>
 
-            {post.coverImage && (
-              <div className="mb-8 w-full overflow-hidden rounded-xl border border-white/5 bg-white/5 md:mb-12">
-                <Image
-                  src={post.coverImage}
-                  alt={post.title}
-                  width={1200}
-                  height={630}
-                  className="h-auto w-full object-cover"
-                  priority={true}
-                />
-              </div>
-            )}
-
-            <div className="prose prose-invert max-w-none">
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                components={components}
-              >
-                {post.content}
-              </ReactMarkdown>
+              <h1 className="text-4xl font-semibold leading-tight text-white lg:text-5xl">
+                {post.title}
+              </h1>
             </div>
+          </div>
 
-            {/* Bottom Share Buttons (Mobile Only) */}
-            <div className="xl:hidden">
-              <ShareButtons url={currentUrl} title={post.title} />
+          {post.coverImage && (
+            <div className="mb-8 w-full overflow-hidden rounded-xl border border-white/5 bg-white/5 md:mb-12">
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                width={1200}
+                height={630}
+                className="h-auto w-full object-cover"
+                priority={true}
+              />
             </div>
-          </article>
-        </div>
+          )}
+
+          <div className="prose prose-invert max-w-none">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={components}
+            >
+              {post.content}
+            </ReactMarkdown>
+          </div>
+
+          {/* Bottom Share Buttons (Mobile Only) */}
+          <div className="xl:hidden">
+            <ShareButtons url={currentUrl} title={post.title} />
+          </div>
+        </article>
       </div>
     </>
   )
