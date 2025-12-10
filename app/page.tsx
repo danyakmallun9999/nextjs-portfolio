@@ -74,7 +74,7 @@ export default function Personal() {
           >
             <div className="relative mb-8 h-32 w-32 overflow-hidden rounded-full ring-4 ring-white/5 lg:mb-10 lg:h-48 lg:w-48">
               <Image
-                src="/profile.jpeg"
+                src="/profile.png"
                 alt="Foto Profil Dany Akmallun"
                 width={192}
                 height={192}
