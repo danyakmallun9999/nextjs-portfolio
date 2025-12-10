@@ -118,12 +118,12 @@ const components = {
     )
   },
   h1: ({ children }: any) => (
-    <h1 className="mt-12 mb-6 text-3xl font-semibold text-white lg:text-4xl">
+    <h1 className="mt-8 mb-4 text-3xl font-semibold text-white md:mt-12 md:mb-6 lg:text-4xl">
       {children}
     </h1>
   ),
   h2: ({ children }: any) => (
-    <h2 className="mt-10 mb-4 text-2xl font-medium text-white lg:text-3xl">
+    <h2 className="mt-8 mb-3 text-2xl font-medium text-white md:mt-10 md:mb-4 lg:text-3xl">
       {children}
     </h2>
   ),
@@ -133,7 +133,7 @@ const components = {
     </h3>
   ),
   p: ({ children }: any) => (
-    <p className="mb-6 text-lg leading-relaxed text-[#888888] lg:text-xl lg:leading-loose">
+    <p className="mb-4 text-lg leading-relaxed text-[#888888] md:mb-6 lg:text-xl lg:leading-loose">
       {children}
     </p>
   ),
@@ -200,7 +200,7 @@ const components = {
     <img
       src={src}
       alt={alt}
-      className="my-8 h-auto w-full rounded-lg border border-white/5 bg-white/5"
+      className="my-6 h-auto w-full rounded-lg border border-white/5 bg-white/5 md:my-8"
     />
   ),
 }
@@ -252,64 +252,77 @@ export default async function BlogPostPage({
         }}
       />
 
-      <article className="mx-auto max-w-2xl py-12">
-        <div className="mb-10 space-y-6">
-          {/* Back Button */}
-          <a
-            href="/blog"
-            className="group inline-flex items-center gap-2 text-sm text-[#888888] hover:text-white transition-colors"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:-translate-x-1"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
-            <span>Back to Writing</span>
-          </a>
+      <div className="mx-auto max-w-[1600px] py-12 md:py-12">
+        <div className="flex flex-col gap-12 xl:flex-row xl:justify-center xl:items-start">
+          {/* Left Sidebar - Share Buttons (Desktop) */}
+          <aside className="hidden xl:sticky xl:top-24 xl:flex xl:h-[calc(100vh-6rem)] xl:flex-col xl:justify-start xl:items-end">
+            <ShareButtons url={currentUrl} title={post.title} orientation="vertical" />
+          </aside>
 
-          <div className="space-y-4">
-            <div className="flex items-center gap-3 text-sm text-[#888888]">
-              <time dateTime={post.publishedAt}>
-                {new Date(post.publishedAt).toLocaleDateString('id-ID', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </time>
-              {post.category && (
-                <>
-                  <span>•</span>
-                  <span className="capitalize">{post.category}</span>
-                </>
-              )}
+          {/* Main Content */}
+          <article className="w-full max-w-2xl">
+            <div className="mb-6 space-y-4 md:mb-10 md:space-y-6">
+              {/* Back Button */}
+              <a
+                href="/blog"
+                className="group inline-flex items-center gap-2 text-sm text-[#888888] hover:text-white transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:-translate-x-1"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
+                <span>Back to Writing</span>
+              </a>
+
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 text-sm text-[#888888]">
+                  <time dateTime={post.publishedAt}>
+                    {new Date(post.publishedAt).toLocaleDateString('id-ID', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                  {post.category && (
+                    <>
+                      <span>•</span>
+                      <span className="capitalize">{post.category}</span>
+                    </>
+                  )}
+                </div>
+
+                <h1 className="text-4xl font-semibold leading-tight text-white lg:text-5xl">
+                  {post.title}
+                </h1>
+              </div>
             </div>
 
-            <h1 className="text-4xl font-semibold leading-tight text-white lg:text-5xl">
-              {post.title}
-            </h1>
-          </div>
+            {post.coverImage && (
+              <div className="mb-8 w-full overflow-hidden rounded-xl border border-white/5 bg-white/5 md:mb-12">
+                <Image
+                  src={post.coverImage}
+                  alt={post.title}
+                  width={1200}
+                  height={630}
+                  className="h-auto w-full object-cover"
+                  priority={true}
+                />
+              </div>
+            )}
+
+            <div className="prose prose-invert max-w-none">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={components}
+              >
+                {post.content}
+              </ReactMarkdown>
+            </div>
+
+            {/* Bottom Share Buttons (Mobile Only) */}
+            <div className="xl:hidden">
+              <ShareButtons url={currentUrl} title={post.title} />
+            </div>
+          </article>
         </div>
-
-        {post.coverImage && (
-          <div className="mb-12 w-full overflow-hidden rounded-xl border border-white/5 bg-white/5">
-            <Image
-              src={post.coverImage}
-              alt={post.title}
-              width={1200}
-              height={630}
-              className="h-auto w-full object-cover"
-              priority={true}
-            />
-          </div>
-        )}
-
-        <div className="prose prose-invert max-w-none">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            components={components}
-          >
-            {post.content}
-          </ReactMarkdown>
-        </div>
-
-        <ShareButtons url={currentUrl} title={post.title} />
-      </article>
+      </div>
     </>
   )
 }

@@ -7,9 +7,10 @@ import { Link, Check } from 'lucide-react'
 interface ShareButtonsProps {
     url: string
     title: string
+    orientation?: 'horizontal' | 'vertical'
 }
 
-export default function ShareButtons({ url, title }: ShareButtonsProps) {
+export default function ShareButtons({ url, title, orientation = 'horizontal' }: ShareButtonsProps) {
     const [copied, setCopied] = useState(false)
 
     const handleCopy = async () => {
@@ -43,14 +44,28 @@ export default function ShareButtons({ url, title }: ShareButtonsProps) {
         },
     ]
 
-    return (
-        <div className="mt-16 border-t border-white/10 pt-8">
-            <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-                <p className="text-sm font-medium text-[#888888]">
-                    Bagikan artikel ini
-                </p>
+    const containerClasses = orientation === 'vertical'
+        ? 'flex flex-col gap-4'
+        : 'mt-16 border-t border-white/10 pt-8'
 
-                <div className="flex items-center gap-4">
+    const contentClasses = orientation === 'vertical'
+        ? 'flex flex-col items-center gap-4'
+        : 'flex flex-col items-center justify-between gap-6 sm:flex-row'
+
+    const buttonsContainerClasses = orientation === 'vertical'
+        ? 'flex flex-col gap-4'
+        : 'flex items-center gap-4'
+
+    return (
+        <div className={containerClasses}>
+            <div className={contentClasses}>
+                {orientation === 'horizontal' && (
+                    <p className="text-sm font-medium text-[#888888]">
+                        Bagikan artikel ini
+                    </p>
+                )}
+
+                <div className={buttonsContainerClasses}>
                     {shareLinks.map((link) => (
                         <a
                             key={link.name}
