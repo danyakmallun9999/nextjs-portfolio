@@ -69,7 +69,7 @@ export default function Personal() {
           animate="visible"
         >
           <motion.section
-            className="flex min-h-[calc(100vh-140px)] flex-col items-center justify-center text-center pt-16 lg:pt-0 lg:min-h-[calc(100vh-160px)]"
+            className="flex min-h-[calc(100vh-140px)] flex-col items-center justify-center text-center pt-4 lg:pt-0 lg:min-h-[calc(100vh-160px)]"
             variants={item}
           >
             <div className="relative mb-8 h-32 w-32 overflow-hidden rounded-full ring-4 ring-white/5 lg:mb-10 lg:h-48 lg:w-48">
