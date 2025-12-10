@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import { ArrowUpRight, Calendar, Github, Twitter, Linkedin, Instagram } from 'lucide-react'
 
-import { ScrollProgress } from '@/components/ui/scroll-progress'
+
 import { BlogPost } from '@/lib/blog'
 import { EMAIL, PROJECTS, SOCIAL_LINKS, WORK_EXPERIENCE } from './data'
 
@@ -55,7 +55,7 @@ export default function Personal() {
 
   return (
     <>
-      <ScrollProgress />
+
       <div className="relative isolate min-h-screen w-full overflow-hidden pb-20">
         {/* Background Gradient/Blobs - Made subtle/removed as per minimalist style */}
         <div className="pointer-events-none absolute inset-0 opacity-20">
