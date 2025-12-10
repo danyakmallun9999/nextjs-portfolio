@@ -1,7 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { useEffect, useState, type ComponentType } from 'react'
+import { motion, AnimatePresence as AnimatePresenceBase } from 'motion/react'
+
+const AnimatePresence = AnimatePresenceBase as unknown as ComponentType<any>
 
 function BackToTop() {
   const [isVisible, setIsVisible] = useState(false)
