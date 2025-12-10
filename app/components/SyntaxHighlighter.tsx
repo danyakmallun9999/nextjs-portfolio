@@ -22,7 +22,7 @@ export default function CodeHighlighter({ language, children, ...props }: Syntax
 
   useEffect(() => {
     setMounted(true)
-    
+
     // Dynamically import themes based on current theme
     const loadTheme = async () => {
       const currentTheme = resolvedTheme || 'light'
@@ -42,7 +42,7 @@ export default function CodeHighlighter({ language, children, ...props }: Syntax
         })
       }
     }
-    
+
     loadTheme()
   }, [resolvedTheme])
 

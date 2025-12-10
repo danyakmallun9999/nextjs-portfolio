@@ -47,17 +47,17 @@ export const PROJECTS: Project[] = [
     category: 'Portfolio',
     featured: true,
   },
-    {
+  {
     name: 'Venture Capital Website',
     description: 'Elegant venture capital website specializing in cryptocurrency and blockchain investments.',
     link: 'https://capital.danyakmallun.com',
     image: '/projek/capital-website.png',
     id: 'project3',
-    techStack: ['NextJS 15', 'React 19', 'NodeJS', 'Tailwind CSS','TypeScript','Framer Motion','Three.js'],
+    techStack: ['NextJS 15', 'React 19', 'NodeJS', 'Tailwind CSS', 'TypeScript', 'Framer Motion', 'Three.js'],
     category: 'Web Application',
     featured: true,
   },
-    {
+  {
     name: 'Manufacturing Management System',
     description: 'A comprehensive manufacturing management system built with Laravel 12, designed to streamline order management, production tracking, inventory control, and financial reporting for manufacturing businesses.',
     link: 'https://manufaktur.idefu.co.id/',
@@ -67,13 +67,13 @@ export const PROJECTS: Project[] = [
     category: 'Web Application',
     featured: true,
   },
-      {
+  {
     name: 'Course Schedule App',
     description: 'Aplikasi web jadwal kuliah dengan desain modern dan minimalis yang terinspirasi dari Apple Reminders.',
     link: 'https://jadwal.danyakmallun.com',
     image: '/projek/jadwal.png',
-    id: 'project3',
-    techStack: ['NextJS 15', 'React 19', 'NodeJS', 'Tailwind CSS','TypeScript'],
+    id: 'project5',
+    techStack: ['NextJS 15', 'React 19', 'NodeJS', 'Tailwind CSS', 'TypeScript'],
     category: 'Web Application',
     featured: true,
   },
@@ -89,7 +89,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     id: 'work1',
     description: 'Mengelola dan memelihara infrastruktur teknologi informasi klinik, termasuk sistem komputer, jaringan, dan perangkat lunak. Memberikan dukungan teknis kepada seluruh staf, melakukan troubleshooting hardware dan software, serta memastikan kelancaran operasional sistem IT untuk mendukung pelayanan kesehatan yang optimal.',
   },
-    {
+  {
     company: 'Pengabdian Dosen Universitas Nahdlatul Ulama Jepara',
     title: 'Anggota Pengabdian Dosen',
     start: '2025',
