@@ -40,7 +40,7 @@ export default function ProjectsPage() {
 
   if (loading) {
     return (
-      <div className="mx-auto max-w-5xl space-y-12 py-12">
+      <div className="mx-auto max-w-5xl space-y-12 py-4">
         <div className="space-y-6">
           <div className="h-4 w-32 bg-[#2d2d2d] rounded animate-pulse" />
           <div className="space-y-4">
@@ -49,24 +49,24 @@ export default function ProjectsPage() {
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:gap-10">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="flex flex-col gap-4">
+            <div key={i} className="flex flex-col gap-6 p-5 rounded-xl border border-white/10 bg-white/[0.02]">
               {/* Image Skeleton */}
-              <div className="aspect-video w-full rounded-xl bg-[#2d2d2d] animate-pulse border border-white/5" />
+              <div className="aspect-video w-full rounded-lg bg-[#2d2d2d] animate-pulse border border-white/5" />
 
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <div className="h-6 w-32 bg-[#2d2d2d] rounded animate-pulse" />
-                  <div className="h-8 w-8 rounded-full bg-[#2d2d2d] animate-pulse" />
+              <div className="space-y-4">
+                <div className="flex justify-between items-start gap-4">
+                  <div className="h-7 w-2/3 bg-[#2d2d2d] rounded animate-pulse" />
+                  <div className="h-8 w-8 rounded-full bg-[#2d2d2d] animate-pulse shrink-0" />
                 </div>
-                <div className="space-y-2">
-                  <div className="h-3 w-full bg-[#2d2d2d] rounded animate-pulse" />
-                  <div className="h-3 w-2/3 bg-[#2d2d2d] rounded animate-pulse" />
+                <div className="space-y-2.5">
+                  <div className="h-4 w-full bg-[#2d2d2d] rounded animate-pulse" />
+                  <div className="h-4 w-4/5 bg-[#2d2d2d] rounded animate-pulse" />
                 </div>
-                <div className="flex gap-2">
-                  <div className="h-5 w-16 bg-[#2d2d2d] rounded-full animate-pulse" />
-                  <div className="h-5 w-20 bg-[#2d2d2d] rounded-full animate-pulse" />
+                <div className="flex gap-2 pt-2">
+                  <div className="h-6 w-20 bg-[#2d2d2d] rounded-full animate-pulse" />
+                  <div className="h-6 w-24 bg-[#2d2d2d] rounded-full animate-pulse" />
                 </div>
               </div>
             </div>
@@ -80,13 +80,13 @@ export default function ProjectsPage() {
       variants={VARIANTS_CONTAINER}
       initial="hidden"
       animate="visible"
-      className="mx-auto max-w-5xl space-y-12 py-12"
+      className="mx-auto max-w-6xl space-y-8 py-4 md:px-4"
     >
       {/* Header Section */}
       <motion.section
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
-        className="space-y-6"
+        className="space-y-4 max-w-2xl"
       >
         <Link
           href="/"
@@ -97,11 +97,12 @@ export default function ProjectsPage() {
         </Link>
 
         <div className="space-y-4">
-          <h1 className="text-4xl font-semibold text-white lg:text-5xl">
+          <h1 className="text-4xl font-semibold text-white lg:text-5xl tracking-tight">
             Selected Work
           </h1>
-          <p className="text-lg leading-relaxed text-[#888888]">
+          <p className="text-lg leading-relaxed text-[#A1A1A1]">
             A collection of projects exploring web development, crypto, and design.
+            Each piece represents a unique challenge and solution.
           </p>
         </div>
       </motion.section>
@@ -110,7 +111,7 @@ export default function ProjectsPage() {
       <motion.section
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
-        className="grid gap-6 md:grid-cols-2 lg:gap-8"
+        className="grid gap-4 md:gap-8 md:grid-cols-2 lg:gap-10"
       >
         {PROJECTS.map((project, index) => (
           <motion.article
@@ -118,43 +119,46 @@ export default function ProjectsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group flex flex-col gap-4"
+            className="group flex flex-col gap-6 p-3 rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300"
           >
             {/* Project Image */}
-            <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-white/5 border border-white/5">
+            <Link href={`/projects/${project.id}`} className="block relative aspect-video w-full overflow-hidden rounded-lg bg-white/5 border border-white/5">
               <ImagePreview
                 src={project.image}
                 alt={project.name}
                 width={1200}
                 height={630}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-            </div>
+            </Link>
 
-            <div className="flex flex-col gap-3">
-              <div className="flex items-center justify-between">
-                <h2 className="text-xl font-medium text-white lg:text-2xl group-hover:text-blue-400 transition-colors">
-                  {project.name}
-                </h2>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-start justify-between gap-4">
+                <Link href={`/projects/${project.id}`} className="block">
+                  <h2 className="text-2xl font-medium text-white group-hover:text-blue-400 transition-colors">
+                    {project.name}
+                  </h2>
+                </Link>
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-white/10 bg-white/5 p-2 text-white transition-colors hover:bg-white/10 hover:text-white"
+                  className="shrink-0 rounded-full border border-white/10 bg-white/5 p-2 text-white transition-colors hover:bg-white/10 hover:text-white hover:scale-110"
+                  aria-label={`Visit ${project.name}`}
                 >
-                  <ArrowUpRight className="h-4 w-4" />
+                  <ArrowUpRight className="h-5 w-5" />
                 </a>
               </div>
 
-              <p className="text-sm leading-relaxed text-[#888888] line-clamp-2">
+              <p className="text-base leading-relaxed text-[#A1A1A1] line-clamp-2">
                 {project.description}
               </p>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 pt-2">
                 {project.techStack.slice(0, 4).map((tech) => (
                   <span
                     key={tech}
-                    className="rounded-full border border-white/5 bg-white/5 px-2.5 py-0.5 text-xs text-[#888888]"
+                    className="rounded-full border border-white/5 bg-white/5 px-3 py-1 text-xs font-medium text-[#A1A1A1] transition-colors group-hover:text-white group-hover:border-white/10"
                   >
                     {tech}
                   </span>

@@ -1,0 +1,108 @@
+---
+title: 'Cara Install & Menggunakan Cloudflare WARP di Linux'
+description: 'Cara memasang serta mengelola WARP di berbagai distro Linux.'
+publishedAt: '2025-12-11'
+coverImage: '/posts/cover-warp-linux.jpeg'
+category: 'Development'
+tags: ['linux', 'warp', 'cloudflare', 'vpn', 'security']
+---
+
+# Cloudflare WARP di Linux
+
+Cloudflare WARP biasanya dikenal sebagai aplikasi mobile yang “sekali klik langsung aman.” Tapi di Linux, ceritanya sedikit berbeda: tidak ada tombol biru besar, tidak ada UI manis… dan jujur saja, itu membuatnya jauh lebih cocok untuk kita para pengguna Linux yang memang hidup di dunia terminal.
+
+Di tulisan ini, saya mau membahas cara instalasi serta ngulik perintah dasar WARP lewat `warp-cli`, supaya kalian bisa langsung pakai tanpa muter-muter.
+
+## Instalasi WARP di Linux
+
+Cloudflare menyediakan paket resmi untuk beberapa distro. Cara install-nya tergantung keluarga OS yang kalian gunakan.
+
+### 1. Apt-based (Ubuntu, Debian, Pop!\_OS, dll.)
+
+```bash
+sudo apt install cloudflare-warp
+```
+
+### 2. Yum-based (CentOS, RHEL, Rocky, Alma, dll.)
+
+```bash
+sudo yum install cloudflare-warp
+```
+
+Atau kalau kalian pakai paket dari repo masing-masing distro, cari saja **Cloudflare WARP client** di repository software yang tersedia.
+
+## Memulai WARP
+
+Di Linux, antarmuka utama WARP adalah **warp-cli**. Semua konfigurasi dikerjakan dari terminal.
+
+### 1. Registrasi pertama kali
+
+Sebelum terhubung, client harus diregister terlebih dahulu.
+
+```bash
+warp-cli registration new
+```
+
+### 2. Menghubungkan WARP
+
+```bash
+warp-cli connect
+```
+
+Jika berhasil, silahkan bisa cek statusnya lewat request ke Cloudflare:
+
+```bash
+curl https://www.cloudflare.com/cdn-cgi/trace/
+```
+
+Pastikan di output muncul:
+
+```
+warp=on
+```
+
+## Mengubah Mode Operasi
+
+WARP punya beberapa mode koneksi. kalian bisa lihat daftar lengkapnya lewat:
+
+```bash
+warp-cli mode --help
+```
+
+Beberapa mode yang umum digunakan:
+
+### 1. DNS-only via DoH
+
+Mode ini hanya menggunakan DNS over HTTPS tanpa tunneling trafik penuh.
+
+```bash
+warp-cli mode doh
+```
+
+### 2. WARP + DoH
+
+Mode standar WARP dengan DNS aman.
+
+```bash
+warp-cli mode warp+doh
+```
+
+## Mengganti Protokol Tunnel
+
+Secara default, WARP di Linux menggunakan **MASQUE**. Namun kalian bisa menggantinya ke **WireGuard** jika ingin kompatibilitas tertentu atau troubleshooting.
+
+### WireGuard
+
+```bash
+warp-cli tunnel protocol set WireGuard
+```
+
+### MASQUE (default)
+
+```bash
+warp-cli tunnel protocol set MASQUE
+```
+
+## Penutup
+
+WARP di Linux tidak memiliki antarmuka grafis atau GUI, tetapi justru disitulah letak asiknya, itu yang membuatnya enak: ringan, cepat, dan mudah diotomatisasi. Setelah memahami beberapa perintah dasar di atas, kalian bisa mengintegrasikan WARP ke berbagai workflow harian kalian tanpa ribet.

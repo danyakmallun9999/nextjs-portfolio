@@ -2,7 +2,7 @@
 title: 'Checklist Wajib Sebelum Deploy Aplikasi Laravel'
 description: 'Panduan lengkap dan mudah dipahami untuk memastikan aplikasi Laravel kamu siap rilis ke server dengan aman, cepat, dan stabil.'
 publishedAt: '2025-09-04'
-coverImage: '/posts/cover-laravel-deploy-checklist.png'
+coverImage: '/posts/cover-laravel-deploy-checklist.jpeg'
 category: 'Development'
 tags: ['laravel', 'deployment', 'checklist', 'keamanan', 'performa']
 ---
@@ -13,8 +13,6 @@ Kalau kamu udah sampai tahap ini, selamat. Artinya proyek Laravel kamu udah jala
 Tapi hati-hati, proses deploy ini nggak bisa asal _upload dan jalan_. Banyak hal kecil yang sering dilupakan dan bisa bikin aplikasi error, lemot, bahkan bocor data pengguna.
 
 Jadi, biar aman dan lancar, di artikel ini kita bahas **checklist wajib sebelum deploy aplikasi Laravel ke server**. Anggap aja ini panduan praktis buat memastikan semuanya udah siap tempur.
-
----
 
 ## 1. Pastikan Keamanan Dulu
 
@@ -55,8 +53,6 @@ composer audit
 
 Kalau ada peringatan, update paketnya.
 
----
-
 ## 2. Bersihkan Kode Sebelum Dikirim
 
 Sebelum naik ke server, bersihkan dulu hal-hal yang nggak penting.
@@ -70,8 +66,6 @@ Sebelum naik ke server, bersihkan dulu hal-hal yang nggak penting.
 ```
 
 Kode rapi = gampang dipelihara dan keliatan profesional.
-
----
 
 ## 3. Optimasi Performa Aplikasi
 
@@ -126,8 +120,6 @@ Post::with('author')->get();
 ```
 
 Daripada ngelakuin 21 query, cukup 2 query aja. Kalau mau deteksi, bisa pakai package **Laravel Debugbar** di lokal.
-
----
 
 ## 4. Konfigurasi Lingkungan Produksi
 
