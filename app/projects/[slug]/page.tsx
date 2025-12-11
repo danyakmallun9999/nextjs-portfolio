@@ -40,7 +40,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
             variants={VARIANTS_CONTAINER}
             initial="hidden"
             animate="visible"
-            className="mx-auto max-w-6xl space-y-6 py-4 md:px-2"
+            className="mx-auto max-w-6xl space-y-6 py-0 md:px-2"
         >
             {/* Header / Nav */}
             <motion.nav

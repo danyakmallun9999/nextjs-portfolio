@@ -252,7 +252,7 @@ export default async function BlogPostPage({
         }}
       />
 
-      <div className="relative mx-auto max-w-2xl py-4 md:py-12">
+      <div className="relative mx-auto max-w-2xl py-2 md:py-12">
         {/* Left Sidebar - Share Buttons (Desktop) */}
         <aside className="hidden xl:absolute xl:right-full xl:top-0 xl:mr-12 xl:flex xl:h-full xl:flex-col xl:items-end">
           <div className="sticky top-[50vh] -translate-y-1/2">
@@ -262,7 +262,7 @@ export default async function BlogPostPage({
 
         {/* Main Content */}
         <article className="w-full">
-          <div className="mb-6 space-y-4 md:mb-10 md:space-y-6">
+          <div className="mb-6 space-y-6 md:mb-10 md:space-y-8">
             {/* Back Button */}
             <a
               href="/blog"

@@ -40,7 +40,7 @@ export default function ProjectsPage() {
 
   if (loading) {
     return (
-      <div className="mx-auto max-w-5xl space-y-12 py-4">
+      <div className="mx-auto max-w-5xl space-y-12 py-2">
         <div className="space-y-6">
           <div className="h-4 w-32 bg-[#2d2d2d] rounded animate-pulse" />
           <div className="space-y-4">
@@ -80,7 +80,7 @@ export default function ProjectsPage() {
       variants={VARIANTS_CONTAINER}
       initial="hidden"
       animate="visible"
-      className="mx-auto max-w-6xl space-y-8 py-4 md:px-4"
+      className="mx-auto max-w-6xl space-y-8 py-0 md:px-4"
     >
       {/* Header Section */}
       <motion.section

@@ -38,7 +38,7 @@ export default function WorkPage() {
 
   if (loading) {
     return (
-      <div className="mx-auto max-w-2xl space-y-12 py-4">
+      <div className="mx-auto max-w-2xl space-y-12 py-2">
         {/* Header Skeleton */}
         <div className="space-y-6">
           <div className="h-4 w-32 bg-[#2d2d2d] rounded animate-pulse" />
@@ -78,7 +78,7 @@ export default function WorkPage() {
       variants={VARIANTS_CONTAINER}
       initial="hidden"
       animate="visible"
-      className="mx-auto max-w-2xl space-y-12 py-4"
+      className="mx-auto max-w-2xl space-y-12 py-0"
     >
       {/* Header Section */}
       <motion.section
