@@ -51,7 +51,7 @@ export default function ProjectsPage() {
 
         <div className="grid gap-8 md:grid-cols-2 lg:gap-10">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="flex flex-col gap-6 p-5 rounded-xl border border-white/10 bg-white/[0.02]">
+            <div key={i} className="flex flex-col gap-6 p-5 rounded-lg border border-white/10 bg-white/[0.02]">
               {/* Image Skeleton */}
               <div className="aspect-video w-full rounded-lg bg-[#2d2d2d] animate-pulse border border-white/5" />
 
@@ -119,7 +119,7 @@ export default function ProjectsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group flex flex-col gap-6 p-3 rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300"
+            className="group flex flex-col gap-6 p-3 rounded-lg border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300"
           >
             {/* Project Image */}
             <Link href={`/projects/${project.id}`} className="block relative aspect-video w-full overflow-hidden rounded-lg bg-white/5 border border-white/5">

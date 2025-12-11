@@ -32,7 +32,7 @@ export function ImagePreview({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 transition-all duration-300",
+        "relative overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-800 transition-all duration-300",
         className
       )}
     >
