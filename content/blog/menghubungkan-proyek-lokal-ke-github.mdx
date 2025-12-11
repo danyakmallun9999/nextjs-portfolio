@@ -1,27 +1,26 @@
 ---
-title: "Menghubungkan Proyek Lokal ke GitHub"
-description: "Langkah-langkah menghubungkan repository lokal dengan remote GitHub"
-publishedAt: "2025-01-14"
-coverImage: "/posts/cover-github-connect.png"
-category: "Development"
-tags: ["git","github","repository","development","tutorial"]
+title: 'Menghubungkan Proyek Lokal ke GitHub'
+description: 'Langkah-langkah menghubungkan repository lokal dengan remote GitHub'
+publishedAt: '2025-01-14'
+coverImage: '/posts/cover-github-connect.png'
+category: 'Development'
+tags: ['git', 'github', 'repository', 'development', 'tutorial']
 ---
 
 # Tutorial: Cara Menghubungkan Proyek ke GitHub
 
 Sebagai seorang developer, GitHub sudah menjadi salah satu alat utama untuk berkolaborasi, menyimpan, dan mengelola kode. Pada artikel ini, kita akan membahas **cara menghubungkan proyek lokal ke GitHub** dengan langkah yang jelas dan mudah diikuti. Artikel ini ditujukan untuk pemula maupun developer yang ingin mempercepat workflow.
 
----
-
 ## 1. Persiapan
+
 Sebelum memulai, pastikan kamu sudah:
+
 - Menginstal **Git** di komputer (cek dengan `git --version`).
 - Memiliki akun GitHub.
 - Menyiapkan sebuah folder proyek di lokal.
 
----
-
 ## 2. Membuat Repository di GitHub
+
 1. Masuk ke [GitHub](https://github.com).
 2. Klik tombol **New Repository**.
 3. Isi:
@@ -31,28 +30,30 @@ Sebelum memulai, pastikan kamu sudah:
 
 Setelah itu, GitHub akan memberikan instruksi untuk menghubungkan repo lokal ke repo GitHub.
 
----
-
 ## 3. Inisialisasi Git di Proyek Lokal
+
 Buka terminal di folder proyek kamu lalu jalankan:
+
 ```bash
 git init
 ```
+
 ```bash
 git add .
 ```
+
 ```bash
 git commit -m "Inisialisasi proyek"
 ```
 
 Langkah ini membuat folder `.git` di dalam proyek sebagai penanda repository lokal.
 
----
-
 ## 4. Menghubungkan ke GitHub
+
 Ada dua cara untuk koneksi ke GitHub: **HTTPS** atau **SSH**.
 
 ### Opsi A: Koneksi via HTTPS
+
 1. Salin URL HTTPS dari repository GitHub, contoh:
    ```
    https://github.com/username/nama-repo.git
@@ -72,16 +73,19 @@ Ada dua cara untuk koneksi ke GitHub: **HTTPS** atau **SSH**.
 👉 Catatan: GitHub tidak lagi menerima password biasa. Kamu perlu menggunakan **Personal Access Token** sebagai pengganti password.
 
 #### Membuat Personal Access Token:
+
 - Masuk ke [Settings → Developer settings → Personal Access Tokens](https://github.com/settings/tokens).
 - Generate token dengan scope `repo`.
 - Gunakan token tersebut sebagai **password** saat Git meminta login.
 
 Supaya tidak perlu ketik ulang token:
+
 ```bash
 git config --global credential.helper store
 ```
 
 ### Opsi B: Koneksi via SSH (lebih praktis)
+
 1. Buat SSH key:
    ```bash
    ssh-keygen -t ed25519 -C "email_github_kamu@example.com"
@@ -111,34 +115,34 @@ git config --global credential.helper store
    git push -u origin main
    ```
 
----
-
 ## 5. Workflow Sehari-hari
+
 Setelah repository terkoneksi, workflow standar biasanya:
+
 ```bash
 git add .
 ```
+
 ```bash
 git push
 ```
+
 ```bash
 git commit -m "Pesan commit kamu"
 ```
+
 ```bash
 git push
 ```
+
 Jika bekerja dengan tim, jangan lupa menarik perubahan terbaru:
+
 ```bash
 git pull
 ```
 
----
-
 ## 6. Kesimpulan
+
 Menghubungkan proyek lokal ke GitHub bisa dilakukan dengan **HTTPS + Personal Access Token** atau **SSH Key**. Untuk penggunaan jangka panjang, SSH lebih praktis karena tidak perlu memasukkan kredensial setiap kali push. Dengan GitHub, manajemen versi kode menjadi lebih mudah dan kolaborasi tim lebih lancar.
 
----
-
 💡 **Tips**: Gunakan branch untuk mengerjakan fitur baru agar kode utama tetap stabil, lalu lakukan pull request sebelum merge.
-
----
