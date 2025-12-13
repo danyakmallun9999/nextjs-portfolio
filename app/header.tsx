@@ -18,7 +18,7 @@ export function Header() {
       <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-6 py-6 sm:px-8 lg:px-12 lg:py-8">
         <Link
           href="/"
-          className="font-medium transition hover:text-foreground lg:text-lg text-foreground"
+          className="font-medium font-semibold transition hover:text-foreground lg:text-xl text-foreground"
         >
           danyakmallun
         </Link>

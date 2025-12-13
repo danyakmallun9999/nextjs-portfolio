@@ -15,8 +15,8 @@
     /* Default Dark Mode (Legacy) */
     --background: 15 15 15;
     /* #0f0f0f */
-    --foreground: 255 255 255;
-    /* #ffffff */
+    --foreground: 230 230 230;
+    /* #e6e6e6 (Softer White) */
     --muted: 136 136 136;
     /* #888888 */
     --card: 9 9 11;

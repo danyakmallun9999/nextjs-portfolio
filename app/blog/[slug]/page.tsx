@@ -6,7 +6,7 @@ import CodeHighlighter from '@/app/components/SyntaxHighlighter'
 import ShareButtons from '@/app/components/ShareButtons'
 import Image from 'next/image'
 import { generateArticleStructuredData, generateBreadcrumbStructuredData, BreadcrumbItem } from '@/lib/structured-data'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 
 // Generate metadata for blog posts
 export async function generateMetadata({
@@ -227,6 +227,18 @@ export default async function BlogPostPage({
     return <div>Post not found</div>
   }
 
+  // Fetch related posts (simple logic: same category, exclude current)
+  const allPosts = await getAllBlogPosts()
+  const relatedPosts = allPosts
+    .filter((p) => p.slug !== post.slug) // Exclude current post
+    .sort((a, b) => {
+      // Prioritize same category
+      if (a.category === post.category && b.category !== post.category) return -1
+      if (a.category !== post.category && b.category === post.category) return 1
+      return 0
+    })
+    .slice(0, 3)
+
   const articleStructuredData = generateArticleStructuredData(post)
 
   const breadcrumbItems: BreadcrumbItem[] = [
@@ -263,7 +275,7 @@ export default async function BlogPostPage({
 
         {/* Main Content */}
         <article className="w-full">
-          <div className="mb-6 space-y-6 md:mb-10 md:space-y-8">
+          <div className="mb-6 space-y-6 md:mb-10 md:space-y-6">
             {/* Back Button */}
             <a
               href="/blog"
@@ -273,8 +285,9 @@ export default async function BlogPostPage({
               <span>Back to Writing</span>
             </a>
 
-            <div className="flex items-center gap-3 text-sm text-muted">
-              <span className="flex items-center gap-1.5 rounded-full bg-border/5 px-3 py-1 text-muted">
+            {/* Meta Info */}
+            <div className="flex items-center gap-3 text-sm text-muted font-medium">
+              <div className="flex items-center gap-2">
                 <time dateTime={post.publishedAt}>
                   {new Date(post.publishedAt).toLocaleDateString('id-ID', {
                     year: 'numeric',
@@ -284,16 +297,32 @@ export default async function BlogPostPage({
                 </time>
                 {post.category && (
                   <>
-                    <span>•</span>
-                    <span className="capitalize">{post.category}</span>
+                    <span className="text-border/40">•</span>
+                    <span className="capitalize text-foreground/80">{post.category}</span>
                   </>
                 )}
-              </span>
+              </div>
             </div>
 
             <h1 className="text-4xl font-semibold leading-tight text-foreground lg:text-5xl font-[family-name:var(--font-lora)]">
               {post.title}
             </h1>
+
+            {/* Author Info */}
+            <div className="flex items-center gap-3 border-b border-border/10 pb-8">
+              <div className="relative h-10 w-10 overflow-hidden rounded-full border border-border/10 bg-muted/10">
+                <Image
+                  src="/profile.png"
+                  alt="Dany Akmallun Ni'am"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="flex flex-col text-sm">
+                <span className="font-medium text-foreground">Dany Akmallun Ni'am</span>
+                <span className="text-muted">Software Engineer</span>
+              </div>
+            </div>
           </div>
 
           {post.coverImage && (
@@ -318,10 +347,65 @@ export default async function BlogPostPage({
             </ReactMarkdown>
           </div>
 
+
           {/* Bottom Share Buttons (Mobile Only) */}
           <div className="xl:hidden">
             <ShareButtons url={currentUrl} title={post.title} />
           </div>
+
+          {/* Related Articles (Desktop Only) */}
+          <section className="hidden mt-20 border-t border-border/10 pt-10 lg:block">
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="text-2xl font-semibold text-foreground font-[family-name:var(--font-lora)]">
+                You Might Also Like
+              </h3>
+              <a href="/blog" className="text-sm text-muted hover:text-foreground transition-colors flex items-center gap-1">
+                View all articles <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+
+            <div className="grid grid-cols-3 gap-8">
+              {relatedPosts.map((relatedPost) => (
+                <a key={relatedPost.slug} href={`/blog/${relatedPost.slug}`} className="group space-y-4">
+                  <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-border/10 bg-muted/5">
+                    {relatedPost.coverImage ? (
+                      <Image
+                        src={relatedPost.coverImage}
+                        alt={relatedPost.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 640px) 33vw, 300px"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-muted/10" />
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-xs text-muted">
+                      <time dateTime={relatedPost.publishedAt}>
+                        {new Date(relatedPost.publishedAt).toLocaleDateString('id-ID', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric'
+                        })}
+                      </time>
+                      {relatedPost.category && (
+                        <>
+                          <span>•</span>
+                          <span className="capitalize">{relatedPost.category}</span>
+                        </>
+                      )}
+                    </div>
+
+                    <h4 className="text-lg font-medium text-foreground group-hover:text-muted transition-colors line-clamp-2 leading-snug font-[family-name:var(--font-lora)]">
+                      {relatedPost.title}
+                    </h4>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
         </article>
       </div>
     </>
