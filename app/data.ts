@@ -87,15 +87,6 @@ export const PROJECTS: Project[] = [
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
-    company: 'Klinik Pratama Amalia',
-    title: 'IT Support',
-    start: '2022',
-    end: '2023',
-    link: 'https://share.google/oQu6fhXU0meamcNkH',
-    id: 'work1',
-    description: 'Mengelola dan memelihara infrastruktur teknologi informasi klinik, termasuk sistem komputer, jaringan, dan perangkat lunak. Memberikan dukungan teknis kepada seluruh staf, melakukan troubleshooting hardware dan software, serta memastikan kelancaran operasional sistem IT untuk mendukung pelayanan kesehatan yang optimal.',
-  },
-  {
     company: 'Pengabdian Dosen Universitas Nahdlatul Ulama Jepara',
     title: 'Anggota Pengabdian Dosen',
     start: '2025',
@@ -103,6 +94,15 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     link: 'https://radarkudus.jawapos.com/jepara/696474276/industri-furnitur-jepara-naik-kelas-lewat-teknologi-steam-berbasis-internet-of-things',
     id: 'work2',
     description: 'Saya berkontribusi dalam program pengabdian dosen di bidang informatika dengan fokus pada pengembangan teknologi berbasis Internet of Things (IoT) untuk industri furnitur di Jepara. Peran saya mencakup pengembangan dan pembuatan sistem manufaktur mebel yang mendukung manajemen pesanan, pelacakan produksi, pengendalian inventori, hingga pelaporan keuangan. Selain itu, saya juga memberikan pelatihan kepada pelaku industri terkait pengelolaan keuangan, penggunaan aplikasi invoice, serta pemanfaatan teknologi untuk meningkatkan efisiensi dan daya saing bisnis.',
+  },
+  {
+    company: 'Klinik Pratama Amalia',
+    title: 'IT Support',
+    start: '2022',
+    end: '2023',
+    link: 'https://share.google/oQu6fhXU0meamcNkH',
+    id: 'work1',
+    description: 'Mengelola dan memelihara infrastruktur teknologi informasi klinik, termasuk sistem komputer, jaringan, dan perangkat lunak. Memberikan dukungan teknis kepada seluruh staf, melakukan troubleshooting hardware dan software, serta memastikan kelancaran operasional sistem IT untuk mendukung pelayanan kesehatan yang optimal.',
   },
 ]
 
@@ -123,7 +123,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     label: 'Instagram',
-    link: 'https://www.instagram.com/danyakmallun_',
+    link: 'https://www.instagram.com/danyakmallun',
   },
 ]
 
