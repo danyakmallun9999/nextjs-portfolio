@@ -7,6 +7,7 @@ type Project = {
   techStack: string[]
   category: string
   featured?: boolean
+  github?: string
 }
 
 type SocialLink = {
@@ -36,6 +37,7 @@ export const PROJECTS: Project[] = [
     techStack: ['Python', 'Laravel 12', 'Tailwind CSS', 'NodeJS', 'NPM', 'Blade'],
     category: 'Web Application',
     featured: true,
+    github: 'https://github.com/danyakmallun9999/AnyConverter',
   },
   {
     name: 'Portfolio dengan sistem blog',
@@ -46,6 +48,7 @@ export const PROJECTS: Project[] = [
     techStack: ['Laravel 12', 'Blade', 'NodeJS', 'Tailwind CSS',],
     category: 'Portfolio',
     featured: true,
+    github: 'https://github.com/danyakmallun9999/portfolio-blog',
   },
   {
     name: 'Venture Capital Website',
@@ -56,6 +59,7 @@ export const PROJECTS: Project[] = [
     techStack: ['NextJS 15', 'React 19', 'NodeJS', 'Tailwind CSS', 'TypeScript', 'Framer Motion', 'Three.js'],
     category: 'Web Application',
     featured: true,
+    github: 'https://github.com/danyakmallun9999', // Placeholder
   },
   {
     name: 'Manufacturing Management System',
@@ -66,6 +70,7 @@ export const PROJECTS: Project[] = [
     techStack: ['Laravel 12', 'Blade', 'NodeJS', 'Tailwind CSS',],
     category: 'Web Application',
     featured: true,
+    github: 'https://github.com/danyakmallun9999', // Placeholder
   },
   {
     name: 'Course Schedule App',
@@ -76,6 +81,7 @@ export const PROJECTS: Project[] = [
     techStack: ['NextJS 15', 'React 19', 'NodeJS', 'Tailwind CSS', 'TypeScript'],
     category: 'Web Application',
     featured: true,
+    github: 'https://github.com/danyakmallun9999', // Placeholder
   },
 ]
 
