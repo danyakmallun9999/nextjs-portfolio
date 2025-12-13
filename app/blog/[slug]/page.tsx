@@ -194,7 +194,7 @@ export default async function BlogPostPage({
 
         {/* Right Sidebar - Table of Contents (Desktop) */}
         <aside className="hidden xl:absolute xl:left-full xl:top-0 xl:ml-12 xl:flex xl:h-full xl:flex-col xl:items-start">
-          <div className="sticky top-[50vh] -translate-y-1/2 w-64">
+          <div className="sticky top-[50vh] -translate-y-1/2 w-64 max-h-[80vh] overflow-y-auto scrollbar-thin scrollbar-thumb-border/20 scrollbar-track-transparent">
             <TableOfContents />
           </div>
         </aside>
