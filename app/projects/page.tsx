@@ -29,6 +29,7 @@ const TRANSITION_SECTION = {
 
 export default function ProjectsPage() {
   const [loading, setLoading] = useState(true)
+  const [visibleCount, setVisibleCount] = useState(4)
 
   useEffect(() => {
     // Simulate loading to show skeleton
@@ -113,7 +114,7 @@ export default function ProjectsPage() {
         transition={TRANSITION_SECTION}
         className="grid gap-4 md:gap-8 md:grid-cols-2 lg:gap-10"
       >
-        {PROJECTS.map((project, index) => (
+        {PROJECTS.slice(0, visibleCount).map((project, index) => (
           <motion.article
             key={project.id}
             initial={{ opacity: 0, y: 20 }}
@@ -190,6 +191,22 @@ export default function ProjectsPage() {
           </motion.article>
         ))}
       </motion.section>
+
+      {/* Load More Button */}
+      {visibleCount < PROJECTS.length && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="flex justify-center pt-8"
+        >
+          <button
+            onClick={() => setVisibleCount(PROJECTS.length)}
+            className="rounded-full border border-border/20 bg-transparent px-8 py-3 text-sm font-medium text-muted transition-colors hover:border-border/40 hover:text-foreground"
+          >
+            Lihat Project Lainnya
+          </button>
+        </motion.div>
+      )}
 
       {/* Empty State */}
       {PROJECTS.length === 0 && (
