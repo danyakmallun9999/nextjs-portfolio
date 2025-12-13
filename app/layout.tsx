@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono, Lora } from 'next/font/google'
 import { Fira_Code } from 'next/font/google'
 import './globals.css'
 import { Header } from './header'
@@ -106,6 +106,12 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
+const lora = Lora({
+  variable: '--font-lora',
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+})
+
 const firaCode = Fira_Code({
   variable: '--font-fira-code',
   subsets: ['latin'],
@@ -133,7 +139,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geist.variable} ${geistMono.variable} ${firaCode.variable} bg-[#0f0f0f] text-white tracking-tight antialiased`}
+        className={`${geist.variable} ${geistMono.variable} ${firaCode.variable} ${lora.variable} bg-[#0f0f0f] text-white tracking-tight antialiased`}
       >
         <ThemeProvider
           enableSystem={true}

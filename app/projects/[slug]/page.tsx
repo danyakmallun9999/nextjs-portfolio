@@ -66,7 +66,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                 <div className="space-y-4">
                     <div className="flex flex-col gap-2">
                         <span className="text-blue-400 font-medium tracking-wide text-sm">{project.category}</span>
-                        <h1 className="text-4xl font-semibold text-white lg:text-5xl tracking-tight">
+                        <h1 className="text-4xl font-semibold text-white lg:text-5xl tracking-tight font-[family-name:var(--font-lora)]">
                             {project.name}
                         </h1>
                     </div>
@@ -92,14 +92,14 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                     className="space-y-10"
                 >
                     <div className="space-y-6">
-                        <h2 className="text-2xl font-medium text-white">Overview</h2>
-                        <div className="prose prose-invert prose-p:text-[#A1A1A1] prose-p:leading-relaxed max-w-none">
+                        <h2 className="text-2xl font-medium text-white font-[family-name:var(--font-lora)]">Overview</h2>
+                        <div className="prose prose-invert prose-p:text-[#A1A1A1] prose-p:leading-loose max-w-none font-[family-name:var(--font-lora)] text-lg">
                             <p>{project.description}</p>
                         </div>
                     </div>
 
                     <div className="space-y-6">
-                        <h2 className="text-2xl font-medium text-white">Technologies</h2>
+                        <h2 className="text-2xl font-medium text-white font-[family-name:var(--font-lora)]">Technologies</h2>
                         <div className="flex flex-wrap gap-2">
                             {project.techStack.map((tech) => (
                                 <span

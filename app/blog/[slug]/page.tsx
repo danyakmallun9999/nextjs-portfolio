@@ -118,37 +118,37 @@ const components = {
     )
   },
   h1: ({ children }: any) => (
-    <h1 className="mt-8 mb-4 text-3xl font-semibold text-white md:mt-12 md:mb-6 lg:text-4xl">
+    <h1 className="mt-8 mb-4 text-3xl font-semibold text-white md:mt-12 md:mb-6 lg:text-4xl font-[family-name:var(--font-lora)]">
       {children}
     </h1>
   ),
   h2: ({ children }: any) => (
-    <h2 className="mt-8 mb-3 text-2xl font-medium text-white md:mt-10 md:mb-4 lg:text-3xl">
+    <h2 className="mt-8 mb-3 text-2xl font-medium text-white md:mt-10 md:mb-4 lg:text-3xl font-[family-name:var(--font-lora)]">
       {children}
     </h2>
   ),
   h3: ({ children }: any) => (
-    <h3 className="mt-8 mb-3 text-xl font-medium text-white lg:text-2xl">
+    <h3 className="mt-8 mb-3 text-xl font-medium text-white lg:text-2xl font-[family-name:var(--font-lora)]">
       {children}
     </h3>
   ),
   p: ({ children }: any) => (
-    <p className="mb-4 text-lg leading-relaxed text-[#888888] md:mb-6 lg:text-xl lg:leading-loose">
+    <p className="mb-4 text-lg leading-loose text-[#888888] md:mb-6 lg:text-xl lg:leading-loose font-[family-name:var(--font-lora)]">
       {children}
     </p>
   ),
   ul: ({ children }: any) => (
-    <ul className="mb-6 list-inside list-disc space-y-2 text-lg text-[#888888]">
+    <ul className="mb-6 list-inside list-disc space-y-2 text-lg text-[#888888] font-[family-name:var(--font-lora)]">
       {children}
     </ul>
   ),
   ol: ({ children }: any) => (
-    <ol className="mb-6 list-inside list-decimal space-y-2 text-lg text-[#888888]">
+    <ol className="mb-6 list-inside list-decimal space-y-2 text-lg text-[#888888] font-[family-name:var(--font-lora)]">
       {children}
     </ol>
   ),
   li: ({ children }: any) => (
-    <li className="text-[#888888]">{children}</li>
+    <li className="text-[#888888] font-[family-name:var(--font-lora)] leading-relaxed">{children}</li>
   ),
   strong: ({ children }: any) => (
     <strong className="font-medium text-white">
@@ -156,7 +156,7 @@ const components = {
     </strong>
   ),
   blockquote: ({ children }: any) => (
-    <blockquote className="my-8 border-l-2 border-white/20 pl-6 text-xl italic text-white/80">
+    <blockquote className="my-8 border-l-2 border-white/20 pl-6 text-xl italic text-white/80 font-[family-name:var(--font-lora)]">
       {children}
     </blockquote>
   ),
@@ -289,7 +289,7 @@ export default async function BlogPostPage({
                 )}
               </div>
 
-              <h1 className="text-4xl font-semibold leading-tight text-white lg:text-5xl">
+              <h1 className="text-4xl font-semibold leading-tight text-white lg:text-5xl font-[family-name:var(--font-lora)]">
                 {post.title}
               </h1>
             </div>
