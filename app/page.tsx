@@ -127,8 +127,9 @@ export default function Personal() {
             </div>
             <div className="grid gap-6 md:grid-cols-2">
               {latestProjects.map((project) => (
-                <div
+                <Link
                   key={project.id}
+                  href={`/projects/${project.id}`}
                   className="group relative flex flex-col justify-between rounded-xl border border-border/10 bg-card dark:bg-white/[0.02] p-4 transition-colors hover:bg-black/5 dark:hover:bg-white/[0.04] lg:p-6"
                 >
                   <div className="space-y-4">
@@ -166,15 +167,13 @@ export default function Personal() {
                   </div>
 
                   <div className="pt-6 lg:pt-8">
-                    <Link
-                      href={project.link}
-                      target="_blank"
+                    <span
                       className="inline-flex items-center gap-2 text-sm font-medium text-foreground transition hover:text-muted lg:text-base"
                     >
                       View project <ArrowUpRight className="h-4 w-4 lg:h-5 lg:w-5" />
-                    </Link>
+                    </span>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </motion.section>
