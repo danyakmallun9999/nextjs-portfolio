@@ -50,7 +50,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
             >
                 <Link
                     href="/projects"
-                    className="group inline-flex items-center gap-2 text-sm text-[#888888] hover:text-white transition-colors"
+                    className="group inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors"
                 >
                     <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
                     <span>Back to Projects</span>
@@ -65,15 +65,15 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
             >
                 <div className="space-y-4">
                     <div className="flex flex-col gap-2">
-                        <span className="text-blue-400 font-medium tracking-wide text-sm">{project.category}</span>
-                        <h1 className="text-4xl font-semibold text-white lg:text-5xl tracking-tight font-[family-name:var(--font-lora)]">
+                        <span className="text-blue-500 dark:text-blue-400 font-medium tracking-wide text-sm">{project.category}</span>
+                        <h1 className="text-4xl font-semibold text-foreground lg:text-5xl tracking-tight font-[family-name:var(--font-lora)]">
                             {project.name}
                         </h1>
                     </div>
                 </div>
 
                 {/* Project Image */}
-                <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-white/5 border border-white/10">
+                <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-muted/10 border border-border/10">
                     <ImagePreview
                         src={project.image}
                         alt={project.name}
@@ -92,19 +92,19 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                     className="space-y-10"
                 >
                     <div className="space-y-6">
-                        <h2 className="text-2xl font-medium text-white font-[family-name:var(--font-lora)]">Overview</h2>
-                        <div className="prose prose-invert prose-p:text-[#A1A1A1] prose-p:leading-loose max-w-none font-[family-name:var(--font-lora)] text-lg">
+                        <h2 className="text-2xl font-medium text-foreground font-[family-name:var(--font-lora)]">Overview</h2>
+                        <div className="prose prose-invert prose-p:text-muted prose-p:leading-loose max-w-none font-[family-name:var(--font-lora)] text-lg">
                             <p>{project.description}</p>
                         </div>
                     </div>
 
                     <div className="space-y-6">
-                        <h2 className="text-2xl font-medium text-white font-[family-name:var(--font-lora)]">Technologies</h2>
+                        <h2 className="text-2xl font-medium text-foreground font-[family-name:var(--font-lora)]">Technologies</h2>
                         <div className="flex flex-wrap gap-2">
                             {project.techStack.map((tech) => (
                                 <span
                                     key={tech}
-                                    className="rounded-sm border border-white/5 bg-white/5 px-4 py-2 text-sm text-[#A1A1A1] transition-colors hover:text-white hover:bg-white/10 hover:border-white/10"
+                                    className="rounded-sm border border-border/5 bg-muted/10 px-4 py-2 text-sm text-muted transition-colors hover:text-foreground hover:bg-muted/20 hover:border-border/10"
                                 >
                                     {tech}
                                 </span>
@@ -119,21 +119,22 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                     transition={TRANSITION_SECTION}
                     className="space-y-8 h-fit md:sticky md:top-24"
                 >
-                    <div className="p-6 rounded-xl border border-white/10 bg-white/[0.02] space-y-6">
+                    <div className="p-6 rounded-xl border border-border/10 bg-card dark:bg-white/[0.02] space-y-6">
+                        <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group flex flex-col gap-2 rounded-xl border border-border/10 bg-card p-4 transition-all hover:bg-muted/5 dark:bg-white/5 dark:hover:bg-white/10"
+                        >
+                            <div className="flex items-center justify-between">
+                                <h3 className="text-sm font-medium text-muted uppercase tracking-wider">Project Link</h3>
+                                <ArrowUpRight className="h-4 w-4 text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                            </div>
+                            <p className="text-sm font-medium text-foreground group-hover:underline decoration-white/30 underline-offset-4">{project.link.replace(/^https?:\/\//, '')}</p>
+                        </a>
                         <div className="space-y-2">
-                            <h3 className="text-sm font-medium text-[#888888] uppercase tracking-wider">Project Link</h3>
-                            <a
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 text-white hover:text-blue-400 transition-colors font-medium"
-                            >
-                                Visit Live Site <ArrowUpRight className="w-4 h-4" />
-                            </a>
-                        </div>
-                        <div className="space-y-2">
-                            <h3 className="text-sm font-medium text-[#888888] uppercase tracking-wider">Category</h3>
-                            <p className="text-white">{project.category}</p>
+                            <h3 className="text-sm font-medium text-muted uppercase tracking-wider">Category</h3>
+                            <p className="text-foreground">{project.category}</p>
                         </div>
                     </div>
                 </motion.aside>

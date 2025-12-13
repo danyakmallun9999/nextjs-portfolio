@@ -104,29 +104,29 @@ export default function BlogPage() {
       <div className="mx-auto max-w-2xl space-y-12 py-2">
         {/* Header Skeleton */}
         <div className="space-y-6">
-          <div className="h-4 w-32 bg-[#2d2d2d] rounded animate-pulse" />
+          <div className="h-4 w-32 bg-muted/20 rounded animate-pulse" />
           <div className="space-y-4">
-            <div className="h-10 w-48 bg-[#2d2d2d] rounded animate-pulse" />
-            <div className="h-6 w-96 bg-[#2d2d2d] rounded animate-pulse" />
+            <div className="h-10 w-48 bg-muted/20 rounded animate-pulse" />
+            <div className="h-6 w-96 bg-muted/20 rounded animate-pulse" />
           </div>
         </div>
 
         {/* List Skeleton */}
         <div className="space-y-8">
           {[...Array(5)].map((_, i) => (
-            <div key={i} className="flex flex-col gap-6 sm:flex-row sm:items-start border-b border-white/5 pb-8 last:border-0">
+            <div key={i} className="flex flex-col gap-6 sm:flex-row sm:items-start border-b border-border/10 pb-8 last:border-0">
               {/* Image Skeleton */}
-              <div className="relative aspect-video w-full flex-shrink-0 rounded-lg sm:w-48 bg-[#2d2d2d] animate-pulse" />
+              <div className="relative aspect-video w-full flex-shrink-0 rounded-lg sm:w-48 bg-muted/20 animate-pulse" />
 
               {/* Content Skeleton */}
               <div className="flex-1 space-y-4">
-                <div className="h-4 w-32 bg-[#2d2d2d] rounded animate-pulse" />
-                <div className="h-7 w-3/4 bg-[#2d2d2d] rounded animate-pulse" />
+                <div className="h-4 w-32 bg-muted/20 rounded animate-pulse" />
+                <div className="h-7 w-3/4 bg-muted/20 rounded animate-pulse" />
                 <div className="space-y-2">
-                  <div className="h-4 w-full bg-[#2d2d2d] rounded animate-pulse" />
-                  <div className="h-4 w-2/3 bg-[#2d2d2d] rounded animate-pulse" />
+                  <div className="h-4 w-full bg-muted/20 rounded animate-pulse" />
+                  <div className="h-4 w-2/3 bg-muted/20 rounded animate-pulse" />
                 </div>
-                <div className="h-4 w-24 bg-[#2d2d2d] rounded animate-pulse" />
+                <div className="h-4 w-24 bg-muted/20 rounded animate-pulse" />
               </div>
             </div>
           ))}
@@ -150,17 +150,17 @@ export default function BlogPage() {
       >
         <Link
           href="/"
-          className="group inline-flex items-center gap-2 text-sm text-[#888888] hover:text-white transition-colors"
+          className="group inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           <span>Back to Home</span>
         </Link>
 
         <div className="space-y-4">
-          <h1 className="text-4xl font-semibold text-white lg:text-5xl">
+          <h1 className="text-4xl font-semibold text-foreground lg:text-5xl">
             Writing
           </h1>
-          <p className="text-lg leading-relaxed text-[#888888]">
+          <p className="text-lg leading-relaxed text-muted">
             Thoughts, insights, and discoveries about technology and beyond.
           </p>
         </div>
@@ -175,7 +175,7 @@ export default function BlogPage() {
         >
           <button
             onClick={() => setSelectedCategory(null)}
-            className={`rounded-full px-3 py-1 text-sm transition-colors ${!selectedCategory ? 'bg-white text-black' : 'bg-white/5 text-[#888888] hover:bg-white/10 hover:text-white'}`}
+            className={`rounded-full px-3 py-1 text-sm transition-colors ${!selectedCategory ? 'bg-foreground text-background' : 'bg-black/5 dark:bg-white/5 text-muted hover:bg-black/10 dark:hover:bg-white/10 hover:text-foreground'}`}
           >
             All
           </button>
@@ -184,13 +184,14 @@ export default function BlogPage() {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`rounded-full px-3 py-1 text-sm transition-colors ${selectedCategory === category ? 'bg-white text-black' : 'bg-white/5 text-[#888888] hover:bg-white/10 hover:text-white'}`}
+              className={`rounded-full px-3 py-1 text-sm transition-colors ${selectedCategory === category ? 'bg-foreground text-background' : 'bg-black/5 dark:bg-white/5 text-muted hover:bg-black/10 dark:hover:bg-white/10 hover:text-foreground'}`}
             >
               {category}
             </button>
           ))}
         </motion.section>
-      )}
+      )
+      }
 
       {/* Blog Posts List */}
       <motion.section
@@ -204,11 +205,11 @@ export default function BlogPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group border-b border-white/5 pb-8 last:border-0"
+            className="group border-b border-border/10 pb-8 last:border-0"
           >
             <Link href={`/blog/${post.slug}`} className="flex flex-col gap-6 sm:flex-row sm:items-start group">
               {post.coverImage && (
-                <div className="relative aspect-video w-full flex-shrink-0 overflow-hidden rounded-lg sm:w-48 bg-white/5 border border-white/5">
+                <div className="relative aspect-video w-full flex-shrink-0 overflow-hidden rounded-lg sm:w-48 bg-black/5 dark:bg-white/5 border border-border/5">
                   <Image
                     src={post.coverImage}
                     alt={post.title}
@@ -220,7 +221,7 @@ export default function BlogPage() {
               )}
 
               <div className="flex-1 space-y-3">
-                <div className="flex items-center justify-between text-sm text-[#888888]">
+                <div className="flex items-center justify-between text-sm text-muted">
                   <span>
                     {new Date(post.publishedAt).toLocaleDateString('id-ID', {
                       year: 'numeric',
@@ -233,15 +234,15 @@ export default function BlogPage() {
                   )}
                 </div>
 
-                <h2 className="text-2xl font-medium text-white group-hover:text-[#888888] transition-colors">
+                <h2 className="text-2xl font-medium text-foreground group-hover:text-muted transition-colors">
                   {post.title}
                 </h2>
 
-                <p className="text-base text-[#888888] leading-relaxed line-clamp-2">
+                <p className="text-base text-muted leading-relaxed line-clamp-2">
                   {post.description}
                 </p>
 
-                <div className="inline-flex items-center gap-1 text-sm text-white group-hover:underline underline-offset-4 decoration-white/30">
+                <div className="inline-flex items-center gap-1 text-sm text-foreground group-hover:underline underline-offset-4 decoration-foreground/30">
                   Read article <ArrowUpRight className="h-4 w-4" />
                 </div>
               </div>
@@ -251,34 +252,38 @@ export default function BlogPage() {
       </motion.section>
 
       {/* Pagination Controls */}
-      {totalPages > 1 && (
-        <div className="flex justify-center gap-2 pt-8">
-          <button
-            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-            disabled={currentPage === 1}
-            className="px-4 py-2 text-sm rounded-lg border border-white/5 bg-white/5 text-white disabled:opacity-50 hover:bg-white/10 transition-colors"
-          >
-            Previous
-          </button>
-          <span className="flex items-center px-4 text-sm text-[#888888]">
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-            disabled={currentPage === totalPages}
-            className="px-4 py-2 text-sm rounded-lg border border-white/5 bg-white/5 text-white disabled:opacity-50 hover:bg-white/10 transition-colors"
-          >
-            Next
-          </button>
-        </div>
-      )}
+      {
+        totalPages > 1 && (
+          <div className="flex justify-center gap-2 pt-8">
+            <button
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="px-4 py-2 text-sm rounded-lg border border-border/10 bg-black/5 dark:bg-white/5 text-foreground disabled:opacity-50 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+            >
+              Previous
+            </button>
+            <span className="flex items-center px-4 text-sm text-muted">
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 text-sm rounded-lg border border-border/10 bg-black/5 dark:bg-white/5 text-foreground disabled:opacity-50 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+            >
+              Next
+            </button>
+          </div>
+        )
+      }
 
       {/* Empty State */}
-      {paginatedPosts.length === 0 && !loading && (
-        <div className="text-center py-12 text-[#888888]">
-          No posts found.
-        </div>
-      )}
-    </motion.div>
+      {
+        paginatedPosts.length === 0 && !loading && (
+          <div className="text-center py-12 text-muted">
+            No posts found.
+          </div>
+        )
+      }
+    </motion.div >
   )
 } 

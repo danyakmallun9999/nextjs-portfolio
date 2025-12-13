@@ -41,10 +41,10 @@ export default function WorkPage() {
       <div className="mx-auto max-w-2xl space-y-12 py-2">
         {/* Header Skeleton */}
         <div className="space-y-6">
-          <div className="h-4 w-32 bg-[#2d2d2d] rounded animate-pulse" />
+          <div className="h-4 w-32 bg-muted/20 rounded animate-pulse" />
           <div className="space-y-4">
-            <div className="h-10 w-48 bg-[#2d2d2d] rounded animate-pulse" />
-            <div className="h-6 w-96 bg-[#2d2d2d] rounded animate-pulse" />
+            <div className="h-10 w-48 bg-muted/20 rounded animate-pulse" />
+            <div className="h-6 w-96 bg-muted/20 rounded animate-pulse" />
           </div>
         </div>
 
@@ -53,19 +53,19 @@ export default function WorkPage() {
           {[...Array(3)].map((_, i) => (
             <div key={i} className="relative space-y-3">
               {/* Dot Skeleton */}
-              <div className="absolute -left-[41px] top-2 h-4 w-4 rounded-full border-2 border-[#2d2d2d] bg-[#2d2d2d] animate-pulse" />
+              <div className="absolute -left-[41px] top-2 h-4 w-4 rounded-full border-2 border-muted bg-muted animate-pulse" />
 
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                <div className="h-7 w-48 bg-[#2d2d2d] rounded animate-pulse" />
-                <div className="h-4 w-24 bg-[#2d2d2d] rounded animate-pulse" />
+                <div className="h-7 w-48 bg-muted/20 rounded animate-pulse" />
+                <div className="h-4 w-24 bg-muted/20 rounded animate-pulse" />
               </div>
 
-              <div className="h-5 w-32 bg-[#2d2d2d] rounded animate-pulse" />
+              <div className="h-5 w-32 bg-muted/20 rounded animate-pulse" />
 
               <div className="space-y-2 pt-1">
-                <div className="h-4 w-full bg-[#2d2d2d] rounded animate-pulse" />
-                <div className="h-4 w-5/6 bg-[#2d2d2d] rounded animate-pulse" />
-                <div className="h-4 w-4/6 bg-[#2d2d2d] rounded animate-pulse" />
+                <div className="h-4 w-full bg-muted/20 rounded animate-pulse" />
+                <div className="h-4 w-5/6 bg-muted/20 rounded animate-pulse" />
+                <div className="h-4 w-4/6 bg-muted/20 rounded animate-pulse" />
               </div>
             </div>
           ))}
@@ -88,17 +88,17 @@ export default function WorkPage() {
       >
         <Link
           href="/"
-          className="group inline-flex items-center gap-2 text-sm text-[#888888] hover:text-white transition-colors"
+          className="group inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           <span>Back to Home</span>
         </Link>
 
         <div className="space-y-4">
-          <h1 className="text-4xl font-semibold text-white lg:text-5xl">
+          <h1 className="text-4xl font-semibold text-foreground lg:text-5xl">
             Experience
           </h1>
-          <p className="text-lg leading-relaxed text-[#888888]">
+          <p className="text-lg leading-relaxed text-muted">
             My professional journey and career progression.
           </p>
         </div>
@@ -110,7 +110,7 @@ export default function WorkPage() {
         transition={TRANSITION_SECTION}
         className="space-y-12"
       >
-        <div className="border-l border-white/5 pl-8 space-y-12">
+        <div className="border-l border-border/10 pl-8 space-y-12">
           {WORK_EXPERIENCE.map((job, index) => (
             <motion.div
               key={job.id}
@@ -120,23 +120,23 @@ export default function WorkPage() {
               className="relative"
             >
               {/* Dot */}
-              <div className="absolute -left-[41px] top-2 h-4 w-4 rounded-full border-2 border-[#888888] bg-[#0f0f0f]" />
+              <div className="absolute -left-[41px] top-2 h-4 w-4 rounded-full border-2 border-muted bg-background" />
 
               <div className="space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                  <h3 className="text-xl font-medium text-white">
+                  <h3 className="text-xl font-medium text-foreground">
                     {job.company}
                   </h3>
-                  <span className="text-sm text-[#888888]">
+                  <span className="text-sm text-muted">
                     {job.start} — {job.end}
                   </span>
                 </div>
 
-                <div className="text-base text-white/80">
+                <div className="text-base text-foreground/80">
                   {job.title}
                 </div>
 
-                <p className="text-base leading-relaxed text-[#888888]">
+                <p className="text-base leading-relaxed text-muted">
                   {job.description}
                 </p>
 
@@ -145,7 +145,7 @@ export default function WorkPage() {
                     href={job.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm text-white hover:underline underline-offset-4 decoration-white/30"
+                    className="inline-flex items-center gap-1 text-sm text-foreground hover:underline underline-offset-4 decoration-foreground/30"
                   >
                     Company Website <ArrowUpRight className="h-4 w-4" />
                   </a>

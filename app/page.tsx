@@ -82,14 +82,14 @@ export default function Personal() {
                 priority
               />
             </div>
-            <p className="mb-6 text-sm font-medium uppercase tracking-[0.2em] text-[#888888] lg:mb-8 lg:text-base lg:tracking-[0.25em]">
+            <p className="mb-6 text-sm font-medium uppercase tracking-[0.2em] text-muted lg:mb-8 lg:text-base lg:tracking-[0.25em]">
               Hi, I&apos;m Dany 👋
             </p>
             <div className="mb-8 max-w-2xl space-y-6 lg:max-w-4xl lg:space-y-8">
-              <h1 className="text-3xl font-semibold text-white sm:text-5xl lg:text-5xl lg:leading-tight">
+              <h1 className="text-3xl font-semibold text-foreground sm:text-5xl lg:text-5xl lg:leading-tight">
                 Crypto enthusiast • Web Developer • Lifelong learner
               </h1>
-              <p className="text-base leading-relaxed text-[#888888] lg:text-lg lg:leading-loose">
+              <p className="text-base leading-relaxed text-muted lg:text-lg lg:leading-loose">
                 Crypto enthusiast & web developer specializing in Laravel, Tailwind, PHP, and modern web stacks. Aktif di testnet project dan gemar eksplorasi ekosistem web3. Also passionate about AI—especially prompt engineering for learning and problem solving. Always curious, always building, always learning.
               </p>
               <div className="flex justify-center gap-4 lg:gap-6">
@@ -99,7 +99,7 @@ export default function Personal() {
                     href={link.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-medium text-white hover:text-[#888888] transition-colors lg:text-base"
+                    className="text-sm font-medium text-foreground hover:text-muted transition-colors lg:text-base"
                   >
                     {link.label}
                   </a>
@@ -109,7 +109,7 @@ export default function Personal() {
 
             <Link
               href="/projects"
-              className="group inline-flex items-center gap-2 border border-white/10 bg-white/5 px-8 py-4 text-sm font-medium text-zinc-200 transition-all hover:border-white/20 hover:bg-white/10 lg:px-10 lg:py-5 lg:text-base"
+              className="group inline-flex items-center gap-2 border border-border/10 bg-black/5 dark:bg-white/5 px-8 py-4 text-sm font-medium text-foreground transition-all hover:border-border/20 hover:bg-black/10 dark:hover:bg-white/10 lg:px-10 lg:py-5 lg:text-base"
             >
               Latest Project
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 lg:h-5 lg:w-5" />
@@ -119,9 +119,9 @@ export default function Personal() {
           {/* Removed Clients, About Me Grid, and Services Grid as per request */}
 
           <motion.section className="space-y-8 py-10 lg:space-y-12 lg:py-20" variants={item}>
-            <div className="flex items-center justify-between border-b border-white/5 pb-4 lg:pb-6">
-              <h3 className="text-xl font-semibold text-white lg:text-3xl">Latest Project</h3>
-              <Link href="/projects" className="inline-flex items-center gap-1 text-sm text-[#888888] hover:text-white transition-colors lg:text-lg">
+            <div className="flex items-center justify-between border-b border-border/10 pb-4 lg:pb-6">
+              <h3 className="text-xl font-semibold text-foreground lg:text-3xl">Latest Project</h3>
+              <Link href="/projects" className="inline-flex items-center gap-1 text-sm text-muted hover:text-foreground transition-colors lg:text-lg">
                 View all <ArrowUpRight className="h-4 w-4 lg:h-5 lg:w-5" />
               </Link>
             </div>
@@ -129,10 +129,10 @@ export default function Personal() {
               {latestProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="group relative flex flex-col justify-between rounded-xl border border-white/5 bg-white/[0.02] p-4 transition-colors hover:bg-white/[0.04] lg:p-6"
+                  className="group relative flex flex-col justify-between rounded-xl border border-border/10 bg-card dark:bg-white/[0.02] p-4 transition-colors hover:bg-black/5 dark:hover:bg-white/[0.04] lg:p-6"
                 >
                   <div className="space-y-4">
-                    <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-white/5">
+                    <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black/5 dark:bg-white/5">
                       <Image
                         src={project.image}
                         alt={project.name}
@@ -143,20 +143,20 @@ export default function Personal() {
 
                     <div className="space-y-2 lg:space-y-3">
                       <div className="flex items-center justify-between">
-                        <div className="text-xs uppercase tracking-widest text-[#888888] lg:text-sm">
+                        <div className="text-xs uppercase tracking-widest text-muted lg:text-sm">
                           {project.category}
                         </div>
                       </div>
 
-                      <h3 className="text-2xl font-medium text-white lg:text-3xl">
+                      <h3 className="text-2xl font-medium text-foreground lg:text-3xl">
                         {project.name}
                       </h3>
-                      <p className="text-sm leading-relaxed text-[#888888] lg:text-lg lg:leading-normal line-clamp-2">{project.description}</p>
+                      <p className="text-sm leading-relaxed text-muted lg:text-lg lg:leading-normal line-clamp-2">{project.description}</p>
                       <div className="flex flex-wrap gap-2 pt-2">
                         {project.techStack.slice(0, 4).map((tech) => (
                           <span
                             key={tech}
-                            className="rounded-md bg-white/5 px-2 py-1 text-[10px] uppercase tracking-wider text-[#888888] lg:text-xs"
+                            className="rounded-md bg-black/5 dark:bg-white/5 px-2 py-1 text-[10px] uppercase tracking-wider text-muted lg:text-xs"
                           >
                             {tech}
                           </span>
@@ -169,7 +169,7 @@ export default function Personal() {
                     <Link
                       href={project.link}
                       target="_blank"
-                      className="inline-flex items-center gap-2 text-sm font-medium text-white transition hover:text-[#888888] lg:text-base"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-foreground transition hover:text-muted lg:text-base"
                     >
                       View project <ArrowUpRight className="h-4 w-4 lg:h-5 lg:w-5" />
                     </Link>
@@ -180,9 +180,9 @@ export default function Personal() {
           </motion.section>
 
           <motion.section className="space-y-8 lg:space-y-12" variants={item}>
-            <div className="flex items-center justify-between border-b border-white/5 pb-4 lg:pb-6">
-              <h3 className="text-xl font-semibold text-white lg:text-3xl">Latest Experience</h3>
-              <Link href="/work" className="inline-flex items-center gap-1 text-sm text-[#888888] hover:text-white transition-colors lg:text-lg">
+            <div className="flex items-center justify-between border-b border-border/10 pb-4 lg:pb-6">
+              <h3 className="text-xl font-semibold text-foreground lg:text-3xl">Latest Experience</h3>
+              <Link href="/work" className="inline-flex items-center gap-1 text-sm text-muted hover:text-foreground transition-colors lg:text-lg">
                 View all <ArrowUpRight className="h-4 w-4 lg:h-5 lg:w-5" />
               </Link>
             </div>
@@ -191,21 +191,21 @@ export default function Personal() {
               {WORK_EXPERIENCE.slice(0, 3).map((job) => (
                 <div
                   key={job.id}
-                  className="group relative flex flex-col gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-6 transition-colors hover:bg-white/[0.04] lg:p-8"
+                  className="group relative flex flex-col gap-3 rounded-xl border border-border/10 bg-card dark:bg-white/[0.02] p-6 transition-colors hover:bg-black/5 dark:hover:bg-white/[0.04] lg:p-8"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                     <div>
-                      <h4 className="text-lg font-medium text-white group-hover:text-blue-400 transition-colors lg:text-2xl">
+                      <h4 className="text-lg font-medium text-foreground group-hover:text-blue-400 transition-colors lg:text-2xl">
                         {job.title}
                       </h4>
-                      <p className="text-sm font-medium text-[#888888] lg:text-lg lg:mt-1">{job.company}</p>
+                      <p className="text-sm font-medium text-muted lg:text-lg lg:mt-1">{job.company}</p>
                     </div>
-                    <span className="inline-flex self-start sm:self-center items-center rounded-md bg-white/5 px-2 py-1 text-xs text-[#888888] lg:text-sm lg:px-3 lg:py-1.5">
+                    <span className="inline-flex self-start sm:self-center items-center rounded-md bg-black/5 dark:bg-white/5 px-2 py-1 text-xs text-muted lg:text-sm lg:px-3 lg:py-1.5">
                       {job.start} - {job.end}
                     </span>
                   </div>
 
-                  <p className="text-sm leading-relaxed text-[#888888] line-clamp-2 lg:text-lg lg:leading-normal">
+                  <p className="text-sm leading-relaxed text-muted line-clamp-2 lg:text-lg lg:leading-normal">
                     {job.description}
                   </p>
                 </div>
@@ -214,28 +214,28 @@ export default function Personal() {
           </motion.section>
 
           <motion.section className="space-y-8 lg:space-y-12" variants={item}>
-            <div className="flex items-center justify-between border-b border-white/5 pb-4 lg:pb-6">
-              <h3 className="text-xl font-semibold text-white lg:text-3xl">Latest Blog</h3>
-              <Link href="/blog" className="inline-flex items-center gap-1 text-sm text-[#888888] hover:text-white transition-colors lg:text-lg">
+            <div className="flex items-center justify-between border-b border-border/10 pb-4 lg:pb-6">
+              <h3 className="text-xl font-semibold text-foreground lg:text-3xl">Latest Blog</h3>
+              <Link href="/blog" className="inline-flex items-center gap-1 text-sm text-muted hover:text-foreground transition-colors lg:text-lg">
                 View all <ArrowUpRight className="h-4 w-4 lg:h-5 lg:w-5" />
               </Link>
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:gap-8">
               {loading ? (
-                <div className="py-8 text-center text-[#888888] lg:text-lg">
+                <div className="py-8 text-center text-muted lg:text-lg">
                   Loading...
                 </div>
               ) : latestPosts.length === 0 ? (
-                <div className="py-6 text-center text-sm text-[#888888] lg:text-lg">No blog posts available</div>
+                <div className="py-6 text-center text-sm text-muted lg:text-lg">No blog posts available</div>
               ) : (
                 latestPosts.map((post) => (
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
-                    className="group flex flex-col gap-4 rounded-xl border border-white/5 bg-white/[0.02] p-4 transition-colors hover:bg-white/[0.04] lg:gap-6 lg:p-6"
+                    className="group flex flex-col gap-4 rounded-xl border border-border/10 bg-card dark:bg-white/[0.02] p-4 transition-colors hover:bg-black/5 dark:hover:bg-white/[0.04] lg:gap-6 lg:p-6"
                   >
-                    <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-white/5">
+                    <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black/5 dark:bg-white/5">
                       <Image
                         src={post.coverImage || '/opengraph.jpg'}
                         alt={post.title}
@@ -244,7 +244,7 @@ export default function Personal() {
                       />
                     </div>
                     <div className="flex flex-col gap-2 lg:gap-3">
-                      <div className="flex items-center gap-2 text-xs text-[#888888] lg:text-sm">
+                      <div className="flex items-center gap-2 text-xs text-muted lg:text-sm">
                         <Calendar className="h-3 w-3 lg:h-4 lg:w-4" />
                         <span>
                           {new Date(post.publishedAt).toLocaleDateString('id-ID', {
@@ -254,8 +254,8 @@ export default function Personal() {
                           })}
                         </span>
                       </div>
-                      <h4 className="text-lg font-medium text-white group-hover:text-blue-400 transition-colors lg:text-2xl">{post.title}</h4>
-                      <p className="text-sm text-[#888888] line-clamp-2 lg:text-lg lg:leading-normal">{post.description}</p>
+                      <h4 className="text-lg font-medium text-foreground group-hover:text-blue-400 transition-colors lg:text-2xl">{post.title}</h4>
+                      <p className="text-sm text-muted line-clamp-2 lg:text-lg lg:leading-normal">{post.description}</p>
                     </div>
                   </Link>
                 ))
@@ -267,11 +267,11 @@ export default function Personal() {
             className="my-20 flex flex-col items-center text-center lg:my-32"
             variants={item}
           >
-            <h3 className="mb-4 text-3xl font-semibold text-white lg:text-5xl lg:mb-6">
+            <h3 className="mb-4 text-3xl font-semibold text-foreground lg:text-5xl lg:mb-6">
               Contact Me
             </h3>
-            <p className="mb-8 text-sm text-[#888888] lg:text-xl lg:mb-12">
-              Feel free to contact me at <a href={`mailto:${EMAIL}`} className="text-white hover:underline decoration-white/30 underline-offset-4 transition-all">{EMAIL}</a>
+            <p className="mb-8 text-sm text-muted lg:text-xl lg:mb-12">
+              Feel free to contact me at <a href={`mailto:${EMAIL}`} className="text-foreground hover:underline decoration-foreground/30 underline-offset-4 transition-all">{EMAIL}</a>
             </p>
             <div className="flex items-center gap-6 lg:gap-8">
               {SOCIAL_LINKS.map((link) => {
@@ -286,7 +286,7 @@ export default function Personal() {
                     href={link.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#888888] hover:text-white transition-colors"
+                    className="text-muted hover:text-foreground transition-colors"
                   >
                     <Icon className="h-6 w-6 lg:h-8 lg:w-8" />
                     <span className="sr-only">{link.label}</span>

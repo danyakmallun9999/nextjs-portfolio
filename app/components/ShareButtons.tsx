@@ -28,25 +28,25 @@ export default function ShareButtons({ url, title, orientation = 'horizontal' }:
             name: 'Twitter',
             icon: FaXTwitter,
             href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
-            color: 'hover:border-white hover:text-white', // Minimalist white hover
+            color: 'hover:border-foreground hover:text-foreground', // Minimalist white hover
         },
         {
             name: 'LinkedIn',
             icon: FaLinkedin,
             href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-            color: 'hover:border-white hover:text-white',
+            color: 'hover:border-foreground hover:text-foreground',
         },
         {
             name: 'WhatsApp',
             icon: FaWhatsapp,
             href: `https://wa.me/?text=${encodeURIComponent(title)}%20${encodeURIComponent(url)}`,
-            color: 'hover:border-white hover:text-white',
+            color: 'hover:border-foreground hover:text-foreground',
         },
     ]
 
     const containerClasses = orientation === 'vertical'
         ? 'flex flex-col gap-4'
-        : 'mt-16 border-t border-white/10 pt-8'
+        : 'mt-16 border-t border-border/10 pt-8'
 
     const contentClasses = orientation === 'vertical'
         ? 'flex flex-col items-center gap-4'
@@ -60,7 +60,7 @@ export default function ShareButtons({ url, title, orientation = 'horizontal' }:
         <div className={containerClasses}>
             <div className={contentClasses}>
                 {orientation === 'horizontal' && (
-                    <p className="text-sm font-medium text-[#888888]">
+                    <p className="text-sm font-medium text-muted">
                         Bagikan artikel ini
                     </p>
                 )}
@@ -73,7 +73,7 @@ export default function ShareButtons({ url, title, orientation = 'horizontal' }:
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={`Share on ${link.name}`}
-                            className={`group relative flex h-10 w-10 items-center justify-center rounded-full border border-[#333] bg-transparent text-[#888888] transition-all duration-300 hover:scale-110 ${link.color}`}
+                            className={`group relative flex h-10 w-10 items-center justify-center rounded-full border border-border/20 bg-transparent text-muted transition-all duration-300 hover:scale-110 ${link.color}`}
                         >
                             <link.icon className="h-4 w-4 transition-transform duration-300" />
                         </a>
@@ -82,7 +82,7 @@ export default function ShareButtons({ url, title, orientation = 'horizontal' }:
                     <button
                         onClick={handleCopy}
                         aria-label="Copy Link"
-                        className="group relative flex h-10 w-10 items-center justify-center rounded-full border border-[#333] bg-transparent text-[#888888] transition-all duration-300 hover:scale-110 hover:border-white hover:text-white"
+                        className="group relative flex h-10 w-10 items-center justify-center rounded-full border border-border/20 bg-transparent text-muted transition-all duration-300 hover:scale-110 hover:border-foreground hover:text-foreground"
                     >
                         {copied ? (
                             <Check className="h-4 w-4 text-emerald-500" />

@@ -139,7 +139,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geist.variable} ${geistMono.variable} ${firaCode.variable} ${lora.variable} bg-[#0f0f0f] text-white tracking-tight antialiased`}
+        className={`${geist.variable} ${geistMono.variable} ${firaCode.variable} ${lora.variable} bg-background text-foreground tracking-tight antialiased transition-colors duration-300`}
       >
         <ThemeProvider
           enableSystem={true}

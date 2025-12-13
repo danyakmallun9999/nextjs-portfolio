@@ -6,6 +6,7 @@ import CodeHighlighter from '@/app/components/SyntaxHighlighter'
 import ShareButtons from '@/app/components/ShareButtons'
 import Image from 'next/image'
 import { generateArticleStructuredData, generateBreadcrumbStructuredData, BreadcrumbItem } from '@/lib/structured-data'
+import { ArrowLeft } from 'lucide-react'
 
 // Generate metadata for blog posts
 export async function generateMetadata({
@@ -110,7 +111,7 @@ const components = {
       </CodeHighlighter>
     ) : (
       <code
-        className="rounded bg-white/10 px-1 py-0.5 font-mono text-sm text-white"
+        className="rounded bg-muted/20 px-1 py-0.5 font-mono text-sm text-foreground"
         {...props}
       >
         {children}
@@ -118,68 +119,68 @@ const components = {
     )
   },
   h1: ({ children }: any) => (
-    <h1 className="mt-8 mb-4 text-3xl font-semibold text-white md:mt-12 md:mb-6 lg:text-4xl font-[family-name:var(--font-lora)]">
+    <h1 className="mt-8 mb-4 text-3xl font-semibold text-foreground md:mt-12 md:mb-6 lg:text-4xl font-[family-name:var(--font-lora)]">
       {children}
     </h1>
   ),
   h2: ({ children }: any) => (
-    <h2 className="mt-8 mb-3 text-2xl font-medium text-white md:mt-10 md:mb-4 lg:text-3xl font-[family-name:var(--font-lora)]">
+    <h2 className="mt-8 mb-3 text-2xl font-medium text-foreground md:mt-10 md:mb-4 lg:text-3xl font-[family-name:var(--font-lora)]">
       {children}
     </h2>
   ),
   h3: ({ children }: any) => (
-    <h3 className="mt-8 mb-3 text-xl font-medium text-white lg:text-2xl font-[family-name:var(--font-lora)]">
+    <h3 className="mt-8 mb-3 text-xl font-medium text-foreground lg:text-2xl font-[family-name:var(--font-lora)]">
       {children}
     </h3>
   ),
   p: ({ children }: any) => (
-    <p className="mb-4 text-lg leading-loose text-[#888888] md:mb-6 lg:text-xl lg:leading-loose font-[family-name:var(--font-lora)]">
+    <p className="mb-4 text-lg leading-loose text-muted md:mb-6 lg:text-xl lg:leading-loose font-[family-name:var(--font-lora)]">
       {children}
     </p>
   ),
   ul: ({ children }: any) => (
-    <ul className="mb-6 list-inside list-disc space-y-2 text-lg text-[#888888] font-[family-name:var(--font-lora)]">
+    <ul className="mb-6 list-inside list-disc space-y-2 text-lg text-muted font-[family-name:var(--font-lora)]">
       {children}
     </ul>
   ),
   ol: ({ children }: any) => (
-    <ol className="mb-6 list-inside list-decimal space-y-2 text-lg text-[#888888] font-[family-name:var(--font-lora)]">
+    <ol className="mb-6 list-inside list-decimal space-y-2 text-lg text-muted font-[family-name:var(--font-lora)]">
       {children}
     </ol>
   ),
   li: ({ children }: any) => (
-    <li className="text-[#888888] font-[family-name:var(--font-lora)] leading-relaxed">{children}</li>
+    <li className="text-muted font-[family-name:var(--font-lora)] leading-relaxed">{children}</li>
   ),
   strong: ({ children }: any) => (
-    <strong className="font-medium text-white">
+    <strong className="font-medium text-foreground">
       {children}
     </strong>
   ),
   blockquote: ({ children }: any) => (
-    <blockquote className="my-8 border-l-2 border-white/20 pl-6 text-xl italic text-white/80 font-[family-name:var(--font-lora)]">
+    <blockquote className="my-8 border-l-2 border-border/20 pl-6 text-xl italic text-muted font-[family-name:var(--font-lora)]">
       {children}
     </blockquote>
   ),
   table: ({ children }: any) => (
-    <div className="my-8 overflow-x-auto rounded-lg border border-white/5">
+    <div className="my-8 overflow-x-auto rounded-lg border border-border/10">
       <table className="min-w-full text-left text-sm">
         {children}
       </table>
     </div>
   ),
   thead: ({ children }: any) => (
-    <thead className="bg-white/5 text-white">{children}</thead>
+    <thead className="bg-muted/10 text-foreground">{children}</thead>
   ),
   tbody: ({ children }: any) => (
-    <tbody className="text-[#888888]">{children}</tbody>
+    <tbody className="text-muted">{children}</tbody>
   ),
   tr: ({ children }: any) => (
-    <tr className="border-b border-white/5 last:border-0">
+    <tr className="border-b border-border/5 last:border-0">
       {children}
     </tr>
   ),
   th: ({ children }: any) => (
-    <th className="px-6 py-4 font-medium text-white">
+    <th className="px-6 py-4 font-medium text-foreground">
       {children}
     </th>
   ),
@@ -189,7 +190,7 @@ const components = {
   a: ({ href, children }: any) => (
     <a
       href={href}
-      className="text-white underline decoration-white/30 underline-offset-4 hover:decoration-white transition-all"
+      className="text-foreground underline decoration-foreground/30 underline-offset-4 hover:decoration-foreground transition-all"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -200,7 +201,7 @@ const components = {
     <img
       src={src}
       alt={alt}
-      className="my-6 h-auto w-full rounded-lg border border-white/5 bg-white/5 md:my-8"
+      className="my-6 h-auto w-full rounded-lg border border-border/10 bg-muted/5 md:my-8"
     />
   ),
 }
@@ -266,14 +267,14 @@ export default async function BlogPostPage({
             {/* Back Button */}
             <a
               href="/blog"
-              className="group inline-flex items-center gap-2 text-sm text-[#888888] hover:text-white transition-colors"
+              className="group inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:-translate-x-1"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
               <span>Back to Writing</span>
             </a>
 
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 text-sm text-[#888888]">
+            <div className="flex items-center gap-3 text-sm text-muted">
+              <span className="flex items-center gap-1.5 rounded-full bg-border/5 px-3 py-1 text-muted">
                 <time dateTime={post.publishedAt}>
                   {new Date(post.publishedAt).toLocaleDateString('id-ID', {
                     year: 'numeric',
@@ -287,12 +288,12 @@ export default async function BlogPostPage({
                     <span className="capitalize">{post.category}</span>
                   </>
                 )}
-              </div>
-
-              <h1 className="text-4xl font-semibold leading-tight text-white lg:text-5xl font-[family-name:var(--font-lora)]">
-                {post.title}
-              </h1>
+              </span>
             </div>
+
+            <h1 className="text-4xl font-semibold leading-tight text-foreground lg:text-5xl font-[family-name:var(--font-lora)]">
+              {post.title}
+            </h1>
           </div>
 
           {post.coverImage && (
@@ -326,5 +327,3 @@ export default async function BlogPostPage({
     </>
   )
 }
-
-
