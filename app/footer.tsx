@@ -10,7 +10,7 @@ export function Footer() {
         <div className="flex flex-col space-y-2">
           <a href="https://github.com/danyakmallun9999" target="_blank" className="group transition-colors duration-200">
             <TextLoop className="text-sm text-muted group-hover:text-foreground lg:text-base">
-              <span>© 2025 Dany Akmallun.</span>
+              <span>© 2025 Dany Akmallun Ni'am.</span>
               <span>All rights reserved.</span>
             </TextLoop>
           </a>
