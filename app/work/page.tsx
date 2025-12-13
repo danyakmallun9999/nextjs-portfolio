@@ -136,7 +136,7 @@ export default function WorkPage() {
                   {job.title}
                 </div>
 
-                <p className="text-base leading-relaxed text-muted">
+                <p className="text-lg leading-loose text-muted font-[family-name:var(--font-lora)]">
                   {job.description}
                 </p>
 
