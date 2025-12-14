@@ -77,9 +77,10 @@ export async function generateMetadata({
       title: post.title,
       description: post.description,
       images: post.coverImage
-        ? `https://danyakmallun.com${post.coverImage}`
-        : 'https://danyakmallun.com/opengraph.jpg',
+        ? [`https://danyakmallun.com${post.coverImage}`]
+        : ['https://danyakmallun.com/opengraph.jpg'],
       creator: '@danyakmallun',
+      site: '@danyakmallun',
     },
     robots: {
       index: true,
