@@ -11,7 +11,89 @@ import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { ScrollProgressBar } from '@/components/ui/scroll-progress-bar'
 import { TableOfContents } from '@/components/table-of-contents'
 
-// ... (Metadata generation skipped for brevity)
+// Generate metadata for blog posts
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const resolvedParams = await params
+  const { getBlogPostBySlug } = await import('@/lib/blog')
+  const post = await getBlogPostBySlug(resolvedParams.slug)
+
+  if (!post) {
+    return {
+      title: 'Blog Post Not Found',
+      description: 'The requested blog post could not be found.',
+    }
+  }
+
+  return {
+    title: `${post.title} - Dany Akmallun Ni'am`,
+    description: post.description,
+    keywords: post.tags?.join(', ') || '',
+    authors: [{ name: "Dany Akmallun Ni'am" }],
+    creator: "Dany Akmallun Ni'am",
+    publisher: "Dany Akmallun Ni'am",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    metadataBase: new URL('https://danyakmallun.com'),
+    alternates: {
+      canonical: `https://danyakmallun.com/blog/${post.slug}`,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url: `https://danyakmallun.com/blog/${post.slug}`,
+      siteName: "Dany Akmallun Ni'am",
+      locale: 'id_ID',
+      type: 'article',
+      publishedTime: post.publishedAt,
+      authors: ["Dany Akmallun Ni'am"],
+      tags: post.tags || [],
+      images: post.coverImage
+        ? [
+          {
+            url: `https://danyakmallun.com${post.coverImage}`,
+            width: 1200,
+            height: 630,
+            alt: post.title,
+          },
+        ]
+        : [
+          {
+            url: 'https://danyakmallun.com/opengraph.jpg',
+            width: 1366,
+            height: 768,
+            alt: "Dany Akmallun Ni'am - Profile Picture",
+          },
+        ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: post.coverImage
+        ? `https://danyakmallun.com${post.coverImage}`
+        : 'https://danyakmallun.com/opengraph.jpg',
+      creator: '@danyakmallun',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+  }
+}
 
 // Custom components for ReactMarkdown
 const components = {
