@@ -130,7 +130,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                                 <h3 className="text-sm font-medium text-muted uppercase tracking-wider">Project Link</h3>
                                 <ArrowUpRight className="h-4 w-4 text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                             </div>
-                            <p className="text-sm font-medium text-foreground group-hover:underline decoration-white/30 underline-offset-4">{project.link.replace(/^https?:\/\//, '')}</p>
+                            <p className="text-sm font-medium text-foreground group-hover:underline decoration-white/30 underline-offset-4 break-all">{project.link.replace(/^https?:\/\//, '')}</p>
                         </a>
                         <div className="space-y-2">
                             <h3 className="text-sm font-medium text-muted uppercase tracking-wider">Category</h3>
