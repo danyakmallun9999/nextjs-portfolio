@@ -1,7 +1,7 @@
 ---
-title: 'Cara Santuy Deploy Laravel di Vercel + Supabase (Gratis, Bos!)'
+title: 'Cara Deploy Laravel 12 di Vercel + Supabase (Gratis)'
 description: 'Cara deploy Laravel 12 ke Vercel pakai database Supabase GRATISSS.'
-publishedAt: '2025-01-15'
+publishedAt: '2025-12-20'
 coverImage: '/posts/deploy-laravel.png'
 category: 'Development'
 tags: ['laravel', 'vercel', 'supabase', 'deploy']
@@ -9,45 +9,43 @@ tags: ['laravel', 'vercel', 'supabase', 'deploy']
 
 # Cara Deploy Laravel di Vercel + Supabase (GRATIS)
 
-Halo, guys!
+Halo, _Devs_!
 
-Pernah nggak sih kalian pusing mikirin hosting Laravel yang gratis tapi performanya oke? Hosting shared lemot, VPS ribet setup-nya. Nah, kali ini saya mau share rahasia dapur deployment yang sering saya pakai: **Laravel di Vercel** pakai database **Supabase**. Kombinasi maut ini bukan cuma gratis, tapi juga ngebut karena serverless!
+Pernah merasa pusing memikirkan biaya hosting Laravel untuk proyek hobi atau portofolio? _Shared hosting_ sering kali lambat, sementara VPS memerlukan konfigurasi yang cukup rumit.
 
-Tapi, namanya juga gratisan, pasti ada trik-trik khususnya biar jalan mulus. Yuk, simak tutorial lengkapnya!
+Kali ini saya akan berbagi "resep dapur" deployment yang sering saya gunakan: **Laravel di Vercel** dengan database **Supabase**. Kombinasi ini bukan hanya gratis, tetapi juga sangat kencang karena berbasis _serverless architecture_.
 
-## Persiapan Tempur
+Namun, karena sifatnya yang _stateless_, ada beberapa trik khusus agar Laravel berjalan mulus di Vercel. Mari kita bedah!
 
-Sebelum mulai perang, pastikan amunisi lengkap dulu yaa:
+## Persiapan Amunisi
 
-1.  **Akun GitHub**: Buat nyimpen kodingan (wajib).
-2.  **Akun Vercel**: Login pakai GitHub aja biar gampang.
-3.  **Akun Supabase**: Database gratisan rasa enterprise (PostgreSQL).
-4.  **Kopi**: Opsional, tapi sangat disarankan. ☕
+Sebelum mulai, pastikan Anda sudah memiliki hal-hal berikut:
 
----
+1. **Akun GitHub**: Untuk menyimpan repositori (wajib).
+2. **Akun Vercel**: Disarankan login menggunakan GitHub.
+3. **Akun Supabase**: Sebagai database PostgreSQL gratis dengan fitur melimpah.
+4. **Kopi ☕**: Opsional.
 
 ## Langkah 1: Setup Database Supabase
 
-Ini bagian paling krusial. Vercel itu _serverless_, jadi IP-nya gonta-ganti. Kalau konek langsung ke database biasa, sering error. Makanya di Supabase kita harus pakai **Connection Pooler**.
+Karena Vercel berjalan di lingkungan _serverless_, alamat IP server akan berubah-ubah. Untuk menghindari masalah koneksi, kita wajib menggunakan **Connection Pooler**.
 
-1.  Bikin project baru di [Supabase](https://supabase.com).
-2.  Masuk ke **Settings > Database**.
-3.  Cari bagian `Connection parameters`.
-4.  Aktifkan toggle **"Use connection pooler"** (Wajib, ya!).
-5.  Pastikan **Mode** diset ke `Session`.
-6.  Catat kredensialnya (Host, Port 6543, User, Pass).
+1. Buat proyek baru di [Supabase](https://supabase.com).
+2. Navigasi ke menu **Settings > Database**.
+3. Cari bagian **Connection Pooler**.
+4. Aktifkan toggle **"Use connection pooler"** (Wajib!).
+5. Pastikan **Pool Mode** disetel ke `Session`.
+6. Catat kredensialnya (Gunakan **Port 6543**).
 
-> **Pentungan:** Jangan pakai Direct Connection (Port 5432) kalau nggak mau pusing sama error "Network Unreachable" gara-gara IPv6. Pakai yang Port **6543**.
+> **Catatan Penting:** Jangan gunakan _Direct Connection_ (Port 5432). Banyak platform _serverless_ mengalami masalah resolusi IPv6. Gunakan selalu **Port 6543**.
 
----
+## Langkah 2: Konfigurasi Laravel untuk Vercel
 
-## Langkah 2: Oprek Config Laravel
+Agar Laravel dapat berjalan di infrastruktur Vercel, kita perlu menambahkan beberapa file konfigurasi khusus.
 
-Laravel nggak bisa langsung "plug and play" masuk Vercel. Kita harus kasih peta jalan dulu biar dia nggak nyasar.
+### 1. Membuat `vercel.json`
 
-### 1. Bikin `vercel.json`
-
-Buat file ini di root project kalian. Ini jimat utamanya biar Laravel bisa jalan.
+Buat file ini di _root directory_ proyek Anda. File ini bertindak sebagai instruksi bagi Vercel untuk menjalankan PHP.
 
 ```json
 {
@@ -60,7 +58,7 @@ Buat file ini di root project kalian. Ini jimat utamanya biar Laravel bisa jalan
   "routes": [
     { "src": "/build/(.*)", "dest": "/public/build/$1" },
     { "src": "/(images|assets|css|js)/(.*)", "dest": "/public/$1/$2" },
-    { "src": "/(.*)", "dest": "/api/index.php" }
+    { "src": "/(.*)", "primary": true, "dest": "/api/index.php" }
   ],
   "env": {
     "APP_ENV": "production",
@@ -72,18 +70,20 @@ Buat file ini di root project kalian. Ini jimat utamanya biar Laravel bisa jalan
 }
 ```
 
-### 2. Bikin Jembatan `api/index.php`
+### 2. Membuat Entry Point `api/index.php`
 
-Karena Vercel serverless, kita butuh _entry point_ khusus. Buat folder `api`, terus isi file `index.php` di dalamnya:
+Vercel membutuhkan _file handler_ di dalam folder `api`. Buat folder tersebut dan isi dengan file `index.php`:
 
 ```php
 <?php
+// Meneruskan request ke file index utama Laravel
 require __DIR__ . '/../public/index.php';
+
 ```
 
-### 3. File `.vercelignore`
+### 3. Konfigurasi `.vercelignore`
 
-Biar deploy kita nggak berat, kita filter file yang nggak perlu upload. Buat `.vercelignore` di root:
+Agar proses deploy lebih cepat, abaikan file yang tidak diperlukan:
 
 ```text
 .env
@@ -91,134 +91,105 @@ Biar deploy kita nggak berat, kita filter file yang nggak perlu upload. Buat `.v
 /tests
 /storage/logs
 README.md
+
 ```
 
-### 4. Cek `.gitignore`
+### 4. Penyesuaian `.gitignore`
 
-Biasanya folder `public/build` di-ignore sama Laravel. Nah, di Vercel kita **WAJIB** upload ini kalau kita build aset di lokal. Jadi, komen baris ini di `.gitignore`:
+Secara bawaan, Laravel mengabaikan folder `public/build`. Namun, jika Anda melakukan kompilasi aset (Vite) di lokal, folder ini **harus** ikut diunggah. Hapus atau beri komentar pada baris berikut di `.gitignore`:
 
 ```gitignore
-# /public/build  <-- Kasih pager biar nggak di-ignore
+# /public/build  <-- Matikan ignore agar aset ikut ter-upload
+
 ```
 
-### 5. Masalah HTTPS
+### 5. Memaksa Protokol HTTPS
 
-Kadang Vercel loadingnya HTTPS tapi aplikasinya merasa HTTP, alhasil CSS hilang semua. Solusinya simpel, paksa HTTPS di `AppServiceProvider.php`:
+Terkadang terjadi _mixed content error_ di mana Vercel menggunakan HTTPS tetapi Laravel menganggapnya HTTP. Tambahkan kode berikut di `app/Providers/AppServiceProvider.php`:
 
 ```php
 public function boot(): void
 {
-    if($this->app->environment('production')) {
+    if ($this->app->environment('production')) {
         \Illuminate\Support\Facades\URL::forceScheme('https');
     }
 }
-```
 
----
+```
 
 ## Langkah 3: Build & Deploy
 
-Sekarang saatnya momen kebenaran.
+Sekarang saatnya meluncurkan aplikasi Anda ke internet.
 
-1.  **Build Aset di Lokal**: Jalankan `npm run build` dulu.
-2.  **Push ke GitHub**: Commit semua file konfigurasi tadi.
-3.  **Import di Vercel**: Pilih repo GitHub kamu.
-4.  **Environment Variables**: Masukkan rahasia negara di sini.
+1. **Build Aset**: Jalankan `npm run build` di terminal lokal Anda.
+2. **Push ke GitHub**: Lakukan _commit_ dan _push_ seluruh perubahan.
+3. **Import di Vercel**: Buka _dashboard_ Vercel, pilih **New Project**, dan arahkan ke repositori Anda.
+4. **Environment Variables**: Masukkan variabel berikut di bagian **Environment Variables** sebelum klik _Deploy_:
 
-| Key             | Keterangan                                      |
-| :-------------- | :---------------------------------------------- |
-| `APP_KEY`       | Copy dari .env lokal kamu (yang `base64:...`)   |
-| `DB_CONNECTION` | `pgsql`                                         |
-| `DB_HOST`       | Host dari Supabase (yang `pooler.supabase.com`) |
-| `DB_PORT`       | `6543` (Jangan 5432!)                           |
-| `DB_DATABASE`   | `postgres`                                      |
-| `DB_USERNAME`   | User database kamu                              |
-| `DB_PASSWORD`   | Password database kamu                          |
+| Key             | Keterangan                                         |
+| --------------- | -------------------------------------------------- |
+| `APP_KEY`       | Salin dari `.env` lokal Anda (format `base64:...`) |
+| `DB_CONNECTION` | `pgsql`                                            |
+| `DB_HOST`       | Host dari Supabase (_Connection Pooler_)           |
+| `DB_PORT`       | `6543`                                             |
+| `DB_DATABASE`   | `postgres`                                         |
+| `DB_USERNAME`   | Username database Anda                             |
+| `DB_PASSWORD`   | Password database Anda                             |
 
-> **Pro Tip:** Kalau pas deploy ada error `prepared statement does not exist`, itu karena konflik driver Pooler. Fix-nya gampang, tambahkan ini di `config/database.php` bagian `pgsql`, di dalam key `options` (bukan attributes!):
+> **Pro Tip:** Jika muncul error `prepared statement does not exist`, tambahkan konfigurasi ini di `config/database.php` pada bagian `pgsql`:
 >
 > ```php
 > 'options' => [
 >     PDO::ATTR_EMULATE_PREPARES => true,
 > ],
+>
 > ```
 
----
+## Langkah 4: Migrasi Database (Cara Praktis)
 
-## Langkah 4: Migrasi Database (Cara Ninja)
+Karena Vercel tidak menyediakan akses terminal SSH untuk menjalankan `php artisan migrate`, cara termudah adalah melakukannya dari komputer lokal Anda:
 
-Vercel itu nggak kasih akses SSH buat jalanin `php artisan migrate`. Jadi gimana dong? Kita jalanin dari lokal aja!
+1. Buka file `.env` di lokal secara sementara.
+2. Ganti kredensial database lokal dengan kredensial Supabase.
+3. Jalankan perintah `php artisan migrate` dari terminal laptop Anda.
+4. Setelah selesai, kembalikan isi `.env` lokal ke pengaturan semula.
 
-1. Edit file `.env` di laptop kamu.
-2. Ganti koneksi databasenya ke kredensial Supabase (Pooler) sementara.
-3. Jalanin `php artisan migrate`.
-4. Balikin lagi `.env` ke database lokal kalau sudah.
+## Langkah 5: Penanganan File Upload (Supabase Storage)
 
-_Simpel kan? Nggak perlu ribet bikin route khusus migrasi._
-
----
-
-## Langkah 5: Masalah Upload Gambar (Supabase Storage)
-
-Ini jebakan batman lainnya. Vercel itu filenya _ephemeral_, artinya kalau kamu upload file ke server, filenya bakal hilang pas servernya "tidur". Solusinya? Kita "lempar" filenya ke **Supabase Storage**.
+Penyimpanan di Vercel bersifat **ephemeral** (sementara). File yang diunggah ke folder `storage` akan hilang secara otomatis. Solusinya, kita gunakan **Supabase Storage** sebagai penggantinya.
 
 ### 1. Setup di Supabase
 
-- Masuk menu **Storage**, bikin bucket baru namanya `uploads`.
-- Set sebagai **Public Bucket**.
+- Buka menu **Storage**, buat _bucket_ baru (misalnya: `uploads`).
+- Pastikan statusnya adalah **Public**.
 
-### 2. Install Tools
+### 2. Install Driver S3
 
-Di terminal, install driver S3:
+Laravel dapat berkomunikasi dengan Supabase Storage menggunakan protokol S3. Jalankan:
 
 ```bash
 composer require league/flysystem-aws-s3-v3 "^3.0"
+
 ```
 
-### 3. Config `config/filesystems.php`
+### 3. Konfigurasi Env untuk Storage
 
-Tambahkan disk `supabase` di array `disks`. Ini konfigurasinya:
+Tambahkan variabel berikut di Vercel Dashboard agar Laravel tahu di mana harus menyimpan file:
 
-```php
-'supabase' => [
-    'driver' => 's3',
-    'key' => env('SUPABASE_ACCESS_KEY_ID'),
-    'secret' => env('SUPABASE_SECRET_ACCESS_KEY'),
-    'region' => env('SUPABASE_REGION'),
-    'bucket' => env('SUPABASE_BUCKET'),
-    'url' => env('SUPABASE_URL'),
-    'endpoint' => env('SUPABASE_ENDPOINT'),
-    'use_path_style_endpoint' => true,
-    'throw' => false,
-    'report' => false,
-],
-```
+- `FILESYSTEM_DISK` = `s3`
+- `AWS_ACCESS_KEY_ID` = (Cek di Project Settings > API)
+- `AWS_SECRET_ACCESS_KEY` = (Cek di Project Settings > API)
+- `AWS_DEFAULT_REGION` = `ap-southeast-1` (atau region Supabase Anda)
+- `AWS_BUCKET` = `uploads`
+- `AWS_URL` = (URL publik bucket Anda)
+- `AWS_ENDPOINT` = (Endpoint S3 dari Supabase)
 
-### 4. Tambah Env Var di Vercel
+## Troubleshooting & Tips
 
-Tambahkan variable ini di **Vercel Dashboard** biar Laravel tau mau nyimpen kemana:
-
-- `FILESYSTEM_DISK` = `supabase`
-- `SUPABASE_BUCKET` = `uploads`
-- `SUPABASE_REGION` = `ap-southeast-1` (atau sesuai region kamu)
-- `SUPABASE_ENDPOINT` = (Cek di Settings > Storage)
-- `SUPABASE_URL` = URL publik bucket kamu.
-- `SUPABASE_ACCESS_KEY_ID` & `SECRET` = (Cek di Project Settings -> Storage)
-
----
-
-## Troubleshooting
-
-Kalau masih ada yang error, coba cek ini:
-
-1.  **Gambar nggak kesimpan?** Cek variable `FILESYSTEM_DISK`, pastikan isinya `supabase`, bukan `public`.
-2.  **Error Transaction Aborted?** Pastikan di Vercel Env Var ada `CACHE_STORE=array` dan `SESSION_DRIVER=cookie`. Database driver suka ngambek kalau di Vercel.
-3.  **CSS/JS Hilang (404)?** Pastikan kamu sudah `npm run build` dan folder `public/build` ter-upload (cek langkah .gitignore).
-
----
+- **CSS/JS Tidak Muncul?** Pastikan Anda sudah menjalankan `npm run build` dan folder `public/build` tidak ter-ignore oleh Git.
+- **Error 500?** Periksa **Function Logs** di dashboard Vercel untuk melihat pesan error PHP yang lebih detail.
+- **Session Bermasalah?** Pastikan `SESSION_DRIVER` diatur ke `cookie` karena serverless tidak mendukung session berbasis file secara stabil.
 
 ## Penutup
 
-Gimana? Lumayan seru kan "ngakalin" hostingan gratisan biar rasa premium. Kalau ada error, jangan panik, cek log-nya, biasanya sih cuma masalah config environment...
-
-Selamat mencoba dan semoga sukses project-nya! Jangan lupa traktir kopi kalau berhasil! 😄✌️
+Sekarang aplikasi Laravel 12 Anda sudah mengudara secara gratis dengan performa yang mumpuni. Memanfaatkan infrastruktur _serverless_ memang butuh sedikit penyesuaian, tapi hasilnya sangat sepadan.

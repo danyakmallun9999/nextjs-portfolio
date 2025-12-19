@@ -161,20 +161,20 @@ const components = {
     </blockquote>
   ),
   table: ({ children }: any) => (
-    <div className="my-8 overflow-x-auto rounded-lg border border-border/10">
+    <div className="my-8 overflow-x-auto rounded-lg ">
       <table className="min-w-full text-left text-sm">
         {children}
       </table>
     </div>
   ),
   thead: ({ children }: any) => (
-    <thead className="bg-muted/10 text-foreground">{children}</thead>
+    <thead className="bg-muted/10 text-foreground border border-border/5">{children}</thead>
   ),
   tbody: ({ children }: any) => (
-    <tbody className="text-muted">{children}</tbody>
+    <tbody className="text-muted border border-border/5">{children}</tbody>
   ),
   tr: ({ children }: any) => (
-    <tr className="border-b border-border/5 last:border-0">
+    <tr className="border-b border-border/5 ">
       {children}
     </tr>
   ),

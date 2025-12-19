@@ -20,10 +20,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       return (
         <figure className="group relative mb-8 mt-0 overflow-hidden rounded-2xl">
           <div className="relative aspect-video">
-            <img 
-              src={src} 
-              alt={alt} 
-              className="w-full h-full object-cover" 
+            <img
+              src={src}
+              alt={alt}
+              className="w-full h-full object-cover"
             />
           </div>
           <figcaption className="mt-4 text-center text-sm font-medium text-zinc-600 dark:text-zinc-400">
@@ -45,7 +45,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           </code>
         )
       }
-      
+
       // Block code with syntax highlighting
       const codeHTML = highlight(children as string)
       return (
@@ -145,7 +145,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       // Extract language from className if available
       const className = (children as any)?.props?.className || ''
       const language = className.replace('language-', '') || 'text'
-      
+
       return (
         <CodeBlock language={language}>
           {children}
@@ -161,9 +161,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     // Custom components for enhanced code display
     Terminal: ({ commands, autoType, typingSpeed, ...props }: any) => (
-      <Terminal 
-        commands={commands} 
-        autoType={autoType} 
+      <Terminal
+        commands={commands}
+        autoType={autoType}
         typingSpeed={typingSpeed}
         {...props}
       />
