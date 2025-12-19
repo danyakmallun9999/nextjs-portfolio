@@ -8,7 +8,6 @@ import ShareButtons from '@/app/components/ShareButtons'
 import Image from 'next/image'
 import { generateArticleStructuredData, generateBreadcrumbStructuredData, BreadcrumbItem } from '@/lib/structured-data'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
-import { ScrollProgressBar } from '@/components/ui/scroll-progress-bar'
 import { TableOfContents } from '@/components/table-of-contents'
 
 // Generate metadata for blog posts
@@ -265,7 +264,6 @@ export default async function BlogPostPage({
         }}
       />
 
-      <ScrollProgressBar />
 
       <div className="relative mx-auto max-w-2xl py-2 md:py-2">
         {/* Left Sidebar - Share Buttons (Desktop) */}
