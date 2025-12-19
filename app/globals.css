@@ -21,7 +21,9 @@
     /* #888888 */
     --card: 9 9 11;
     /* #09090b */
-    --border: 255 255 255;
+    /* #09090b */
+    --border: 39 39 42;
+    /* #27272a (Zinc 800) */
   }
 
   /* Warm Editorial Light Mode */
@@ -34,7 +36,8 @@
     /* #666666 */
     --card: 240 239 234;
     /* #F0EFEA (Darker Beige) */
-    --border: 51 51 51;
+    --border: 220 218 210;
+    /* #DCDAD2 (Warm Gray) */
   }
 }
 
@@ -99,6 +102,16 @@
 
 /* Clean Code Block Styling */
 @layer components {
+
+  /* Remove default backticks from tailwind typography */
+  .prose :where(code):not(:where([class~="not-prose"] *))::before {
+    content: none !important;
+  }
+
+  .prose :where(code):not(:where([class~="not-prose"] *))::after {
+    content: none !important;
+  }
+
   .code-block-wrapper {
     position: relative;
   }
@@ -174,14 +187,16 @@
   }
 
   /* Inline code with simple solid colors and no effects */
-  code:not(pre code) {
-    background: #f3f4f6 !important;
-    color: #1f2937 !important;
+  code:not(pre code):not(.code-block code) {
+    background-color: rgba(var(--muted), 0.2) !important;
+    color: rgb(var(--foreground)) !important;
+    border-radius: 0.25rem;
+    padding: 0.125rem 0.25rem;
   }
 
-  .dark code:not(pre code) {
-    background: #374151 !important;
-    color: #e5e7eb !important;
+  .dark code:not(pre code):not(.code-block code) {
+    background-color: rgba(var(--muted), 0.3) !important;
+    color: rgb(var(--foreground)) !important;
   }
 
   /* File Tree Styling */
@@ -308,26 +323,4 @@
 
 .react-syntax-highlighter code {
   background: transparent !important;
-}
-
-/* Force dark backgrounds for code blocks in dark mode */
-.dark .react-syntax-highlighter {
-  background-color: #1f2937 !important;
-}
-
-.dark .react-syntax-highlighter pre {
-  background-color: #1f2937 !important;
-}
-
-.dark .react-syntax-highlighter code {
-  background-color: #1f2937 !important;
-}
-
-/* Override any inline styles that might set white backgrounds */
-.dark pre[style*="background"] {
-  background-color: #1f2937 !important;
-}
-
-.dark code[style*="background"] {
-  background-color: #1f2937 !important;
 }

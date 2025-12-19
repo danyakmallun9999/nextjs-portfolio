@@ -97,6 +97,7 @@ export async function generateMetadata({
 
 // Custom components for ReactMarkdown
 const components = {
+  pre: ({ children }: any) => <>{children}</>,
   // ... (code block component skipped)
   code({ node, inline, className, children, ...props }: any) {
     const match = /language-(\w+)/.exec(className || '')
@@ -168,23 +169,23 @@ const components = {
     </div>
   ),
   thead: ({ children }: any) => (
-    <thead className="bg-muted/10 text-foreground border border-border/5">{children}</thead>
+    <thead className="bg-muted/10 text-foreground border border-border/40">{children}</thead>
   ),
   tbody: ({ children }: any) => (
-    <tbody className="text-muted border border-border/5">{children}</tbody>
+    <tbody className="text-muted border border-border/40">{children}</tbody>
   ),
   tr: ({ children }: any) => (
-    <tr className="border-b border-border/5 ">
+    <tr className="border-b border-border/40 hover:bg-muted/5 transition-colors">
       {children}
     </tr>
   ),
   th: ({ children }: any) => (
-    <th className="px-6 py-4 font-medium text-foreground">
+    <th className="px-6 py-4 font-medium text-foreground border-r border-border/40 last:border-r-0">
       {children}
     </th>
   ),
   td: ({ children }: any) => (
-    <td className="px-6 py-4">{children}</td>
+    <td className="px-6 py-4 border-r border-border/40 last:border-r-0">{children}</td>
   ),
   a: ({ href, children }: any) => (
     <a
@@ -346,7 +347,7 @@ export default async function BlogPostPage({
             </div>
           )}
 
-          <div className="prose prose-invert max-w-none">
+          <div className="prose dark:prose-invert max-w-none">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeSlug]}

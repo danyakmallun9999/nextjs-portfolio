@@ -38,7 +38,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         // Inline code with solid colors and no shadow
         return (
           <code
-            className="bg-zinc-100 px-2 py-1 rounded-lg text-sm font-mono text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200"
+            className="bg-muted/20 px-2 py-1 rounded-lg text-sm font-mono text-foreground dark:bg-muted/30 dark:text-foreground"
             {...props}
           >
             {children}
