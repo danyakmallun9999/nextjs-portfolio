@@ -329,7 +329,7 @@ export default async function BlogPostPage({
               </div>
               <div className="flex flex-col text-sm">
                 <span className="font-medium text-foreground">Dany Akmallun Ni'am</span>
-                <span className="text-muted">Mas mas jawa</span>
+                <span className="text-muted">mas mas jawa</span>
               </div>
             </div>
           </div>

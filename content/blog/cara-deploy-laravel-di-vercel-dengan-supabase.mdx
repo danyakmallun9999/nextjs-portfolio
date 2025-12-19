@@ -1,5 +1,5 @@
 ---
-title: 'Cara Deploy Laravel 12 di Vercel + Supabase (Gratis)'
+title: 'Cara Deploy Laravel 12 di Vercel with Supabase'
 description: 'Cara deploy Laravel 12 ke Vercel pakai database Supabase GRATISSS.'
 publishedAt: '2025-12-20'
 coverImage: '/posts/deploy-laravel.png'
@@ -7,15 +7,13 @@ category: 'Development'
 tags: ['laravel', 'vercel', 'supabase', 'deploy']
 ---
 
-# Cara Deploy Laravel di Vercel + Supabase (GRATIS)
+# Cara Deploy Laravel di Vercel with Supabase
 
-Halo, _Devs_!
+GM!
 
-Pernah merasa pusing memikirkan biaya hosting Laravel untuk proyek hobi atau portofolio? _Shared hosting_ sering kali lambat, sementara VPS memerlukan konfigurasi yang cukup rumit.
+Berbeda dengan ekosistem **Next.js**, men-deploy **Laravel** ke Vercel memerlukan konfigurasi yang sedikit lebih kompleks. Ditambah lagi, sangat jarang ada penyedia hosting Laravel yang menawarkan paket gratis secara cuma-cuma. Akibatnya, banyak proyek akhirnya hanya tertahan di localhost. Namun, jangan khawatir... ada trik khusus agar Laravel bisa berjalan mulus di Vercel. Kali ini, saya akan membagikan pengalaman saya ketika melakukan deployment Laravel di Vercel menggunakan database Supabase.
 
-Kali ini saya akan berbagi "resep dapur" deployment yang sering saya gunakan: **Laravel di Vercel** dengan database **Supabase**. Kombinasi ini bukan hanya gratis, tetapi juga sangat kencang karena berbasis _serverless architecture_.
-
-Namun, karena sifatnya yang _stateless_, ada beberapa trik khusus agar Laravel berjalan mulus di Vercel. Mari kita bedah!
+Namun, karena Laravel memiliki sifat **_stateless_** dan Vercel berbasis **_serverless_**, ada beberapa trik khusus agar Laravel berjalan mulus di Vercel. Mari kita bedah...
 
 ## Persiapan Amunisi
 
@@ -23,7 +21,7 @@ Sebelum mulai, pastikan Anda sudah memiliki hal-hal berikut:
 
 1. **Akun GitHub**: Untuk menyimpan repositori (wajib).
 2. **Akun Vercel**: Disarankan login menggunakan GitHub.
-3. **Akun Supabase**: Sebagai database PostgreSQL gratis dengan fitur melimpah.
+3. **Akun Supabase**: Sebagai database PostgreSQL.
 4. **Kopi ☕**: Opsional.
 
 ## Langkah 1: Setup Database Supabase
@@ -145,7 +143,7 @@ Sekarang saatnya meluncurkan aplikasi Anda ke internet.
 >
 > ```
 
-## Langkah 4: Migrasi Database (Cara Praktis)
+## Langkah 4: Migrasi Database
 
 Karena Vercel tidak menyediakan akses terminal SSH untuk menjalankan `php artisan migrate`, cara termudah adalah melakukannya dari komputer lokal Anda:
 
@@ -154,7 +152,7 @@ Karena Vercel tidak menyediakan akses terminal SSH untuk menjalankan `php artisa
 3. Jalankan perintah `php artisan migrate` dari terminal laptop Anda.
 4. Setelah selesai, kembalikan isi `.env` lokal ke pengaturan semula.
 
-## Langkah 5: Penanganan File Upload (Supabase Storage)
+## Langkah 5: Penanganan File Upload
 
 Penyimpanan di Vercel bersifat **ephemeral** (sementara). File yang diunggah ke folder `storage` akan hilang secara otomatis. Solusinya, kita gunakan **Supabase Storage** sebagai penggantinya.
 
