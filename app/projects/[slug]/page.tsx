@@ -119,18 +119,18 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                     transition={TRANSITION_SECTION}
                     className="space-y-8 h-fit md:sticky md:top-24"
                 >
-                    <div className="p-6 rounded-xl border border-border/10 bg-card dark:bg-white/[0.02] space-y-6">
+                    <div className="p-6 rounded-xl border border-border/10 bg-card dark:bg-white/[0.02]  space-y-6">
                         <a
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group flex flex-col gap-2 rounded-xl border border-border/10 bg-card p-4 transition-all hover:bg-muted/5 dark:bg-white/5 dark:hover:bg-white/10"
+                            className="group flex flex-col gap-2 rounded-xl border border-border/10 bg-white p-4 transition-all hover:bg-muted/5 dark:bg-white/5 dark:hover:bg-white/10"
                         >
                             <div className="flex items-center justify-between">
                                 <h3 className="text-sm font-medium text-muted uppercase tracking-wider">Project Link</h3>
                                 <ArrowUpRight className="h-4 w-4 text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                             </div>
-                            <p className="text-sm font-medium text-foreground group-hover:underline decoration-white/30 underline-offset-4 break-all">{project.link.replace(/^https?:\/\//, '')}</p>
+                            <p className="text-sm font-medium text-foreground group-hover:underline decoration-border underline-offset-4 break-all">{project.link.replace(/^https?:\/\//, '')}</p>
                         </a>
                         <div className="space-y-2">
                             <h3 className="text-sm font-medium text-muted uppercase tracking-wider">Category</h3>

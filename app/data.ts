@@ -83,6 +83,28 @@ export const PROJECTS: Project[] = [
     featured: true,
     github: 'https://github.com/danyakmallun9999', // Placeholder
   },
+  {
+    name: 'Sistem Informasi Geografis Desa Mayong Lor',
+    description: 'Mayong Lor GIS adalah aplikasi web berbasis Geographic Information System (GIS) modern yang dikembangkan untuk mendigitalisasi aset dan potensi wilayah Desa Mayong Lor. Aplikasi ini berfungsi sebagai pusat data spasial yang dapat diakses oleh masyarakat umum maupun perangkat desa. Dengan antarmuka yang user-friendly dan fitur interaktif, pengguna dapat dengan mudah menjelajahi peta desa, mengakses informasi tentang infrastruktur, fasilitas umum, dan potensi ekonomi lokal. Aplikasi ini bertujuan untuk meningkatkan transparansi, partisipasi masyarakat, dan efisiensi pengelolaan sumber daya desa melalui teknologi GIS.',
+    link: 'https://github.com/danyakmallun9999/landing-page-mayonglor-gis',
+    image: '/projek/landing-page-desa.png',
+    id: 'project6',
+    techStack: ['MySql', 'Alpine JS', 'NodeJS', 'Tailwind CSS', 'Leaflet JS', 'Laravel 12', 'Map Library'],
+    category: 'Web Application',
+    featured: true,
+    github: 'https://github.com/danyakmallun9999/landing-page-mayonglor-gis', // Placeholder
+  },
+  {
+    name: 'SRME - Sistem Rekam Medis Elektronik',
+    description: 'SRME adalah aplikasi berbasis web yang dirancang untuk mendigitalkan proses operasional klinik, mulai dari pendaftaran pasien, rekam medis, antrean, hingga farmasi dan penagihan. Aplikasi ini bertujuan untuk meningkatkan efisiensi, akurasi, dan kualitas layanan kesehatan di klinik dengan menyediakan sistem yang terintegrasi dan mudah digunakan oleh staf medis dan administrasi.',
+    link: 'https://github.com/danyakmallun9999/laravel-sistem-rekam-medis-klinik',
+    image: '/projek/srme.png',
+    id: 'project8',
+    techStack: ['MySql', 'Alpine JS', 'NodeJS', 'Tailwind CSS', 'Laravel Breeze', 'Laravel 12', 'Blade', 'Spatie Permission'],
+    category: 'Web Application',
+    featured: true,
+    github: 'https://github.com/danyakmallun9999/laravel-sistem-rekam-medis-klinik', // Placeholder
+  },
 ]
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
