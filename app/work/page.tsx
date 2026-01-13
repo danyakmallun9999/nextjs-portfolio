@@ -49,7 +49,7 @@ export default function WorkPage() {
         </div>
 
         {/* Timeline Skeleton */}
-        <div className="border-l border-white/5 pl-8 space-y-12">
+        <div className="border-l border-border/50 pl-8 space-y-12">
           {[...Array(3)].map((_, i) => (
             <div key={i} className="relative space-y-3">
               {/* Dot Skeleton */}
@@ -110,7 +110,7 @@ export default function WorkPage() {
         transition={TRANSITION_SECTION}
         className="space-y-12"
       >
-        <div className="border-l border-border/10 pl-8 space-y-12">
+        <div className="border-l border-border/50 pl-8 space-y-12">
           {WORK_EXPERIENCE.map((job, index) => (
             <motion.div
               key={job.id}
