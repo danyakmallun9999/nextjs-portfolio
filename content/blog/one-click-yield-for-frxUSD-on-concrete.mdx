@@ -1,0 +1,74 @@
+---
+title: 'Introducing frxUSD+ Vault: One-Click Yield for frxUSD on Concrete'
+description: 'Concrete launches the frxUSD+ Earn Vault, enabling automated, risk-adjusted yield on frxUSD through curated DeFi strategies. Deposit frxUSD to receive ctfrxUSD+ shares for one-click deployment, dynamic rebalancing, transparent on-chain accounting, and composable yield-bearing tokens.'
+publishedAt: '2026-01-24'
+coverImage: '/posts/concrete/5.png'
+category: 'Cryptocurrency'
+tags:
+  [
+    'frxUSD',
+    'defi',
+    'vault',
+    'institutional defi',
+    'managed defi',
+    'risk-adjusted yield',
+  ]
+---
+
+# Introducing the frxUSD+ Vault: One-Click Yield for frxUSD on Concrete
+
+We’re excited to introduce the frxUSD+ Vault, a seamless solution for generating yield on frxUSD through Concrete's advanced DeFi infrastructure. This vault offers one-click access to automated, risk-managed strategies, eliminating the need for manual position management and enabling users to maximize returns on their stablecoin holdings.
+
+## What is frxUSD+?
+
+The frxUSD+ Vault is a specialized Concrete Earn Vault engineered to deploy frxUSD across a curated set of DeFi strategies. Built on Ethereum, it leverages the ERC-4626 standard for tokenized vaults, ensuring standardized interfaces for deposits, withdrawals, and share management. Upon deposit, the vault automatically allocates capital to yield-generating opportunities, such as lending protocols, liquidity provision, or restaking mechanisms, while maintaining liquidity-aware execution to minimize slippage and risks.
+
+Technically, frxUSD itself is a stablecoin from Frax Finance, designed as a fully collateralized USD-pegged asset. It operates through a hybrid model combining exogenous collateral (like USDC or other stables) with algorithmic stability via the FRAX token and FXS governance. This setup allows frxUSD to maintain its peg through arbitrage incentives and redemption mechanics, with on-chain oracles ensuring price stability. The frxUSD+ Vault enhances this by transforming idle frxUSD into a productive asset without compromising its stability.
+
+## Vault Details
+
+- **Asset**: frxUSD (Frax USD stablecoin)
+- **Product**: Concrete Earn Vault
+- **Contract Address**: 0xcf9ceacf5c7d6d2fe6e8650d81fbe4240c72443f (deployed on Ethereum mainnet)
+- **Deposit Link**: [https://app.concrete.xyz/vault/frax/frxusd/0xcf9ceacf5c7d6d2fe6e8650d81fbe4240c72443f](https://app.concrete.xyz/vault/frax/frxusd/0xcf9ceacf5c7d6d2fe6e8650d81fbe4240c72443f)
+- **Current TVL**: Approximately 3,899,014.626 frxUSD (as of recent data)
+- **Share Price**: 1 frxUSD (maintaining parity with the underlying asset through accrual mechanics)
+
+The vault's smart contract inherits from ERC-4626, implementing key functions like `deposit(uint256 assets, address receiver)` for minting shares, `previewDeposit(uint256 assets)` for simulating outcomes, and `totalAssets()` for real-time NAV calculations. This ensures transparent accounting, with shares (ctfrxUSD+) appreciating as yields compound automatically. Strategies are dynamically allocated, potentially including integrations with protocols like Morpho for lending, EigenLayer for restaking, or Curve for liquidity, based on Concrete's risk models.
+
+## Why frxUSD+?
+
+Pairing frxUSD with Concrete’s vault architecture provides depositors with a host of technical advantages:
+
+- **Automated Deployment**: The vault uses programmable allocators to distribute frxUSD across multi-strategy positions. This includes on-chain logic for strategy selection, where algorithms evaluate factors like APY, liquidity depth, and volatility to optimize allocations.
+- **Dynamic Risk Allocation and Rebalancing**: Risk parameters are enforced via smart contract guards, such as TVL caps per strategy or oracle-based price checks. Rebalancing occurs periodically or on triggers (e.g., when a strategy's risk score exceeds thresholds), using liquidity-aware routers to minimize gas and slippage.
+- **On-Chain Accounting and Transparent Share Pricing**: Leveraging ERC-4626's `convertToAssets(uint256 shares)` and `convertToShares(uint256 assets)` functions, the vault provides precise, real-time conversions. Daily NAV updates ensure shares reflect accrued yields without rebasing, supported by institutional tools like HyperNative for monitoring.
+- **Single-Asset, One-Click Experience**: Users interact via a simple `deposit` call, bypassing manual bridging, swapping, or position setup. This abstracts complexity, turning frxUSD into a yield-bearing instrument compatible with broader DeFi.
+- **No Strategy Hopping or Fragmented Liquidity**: The vault consolidates liquidity into a single pool, reducing fragmentation and enabling scalable deployments. This design prevents the need for users to chase yields across protocols, instead relying on Concrete's automated rotations.
+
+These features make frxUSD+ ideal for both retail and institutional users seeking efficient, low-maintenance yield generation.
+
+## Risk-Adjusted by Design
+
+Concrete Vaults are architected for risk-adjusted returns, incorporating several technical safeguards:
+
+- **Liquidity-Aware Execution**: Deposits and withdrawals use routers that assess market depth, preventing large trades from causing excessive slippage. For example, withdrawals via `redeem(uint256 shares, address receiver, address owner)` factor in current liquidity pools.
+- **Institutional-Grade Controls**: Integration with monitoring services like HyperNative scans for anomalies in real-time, such as unusual share price deviations or strategy underperformance. Audits and modular contract design minimize smart contract risks.
+- **Continuous Monitoring**: On-chain oracles and off-chain keepers handle rebalancing, with parameters like min/max allocation percentages hardcoded or governed via multisig. Risks include impermanent loss in liquidity strategies, oracle failures, or protocol exploits, but these are mitigated through diversification and insurance-like mechanisms.
+- **Pre-Deposit Campaigns**: As seen in partnerships with Stable, pre-deposits (e.g., ctStablefrxUSD) allow early access, with claims on mainnet enabling seamless transitions.
+
+Overall, the vault prioritizes capital preservation alongside yield, with historical data showing competitive APYs in similar Concrete products.
+
+## Explaining ctfrxUSD+ as Vault Shares
+
+Depositors receive ctfrxUSD+ vault shares, which are ERC-4626-compliant ERC-20 tokens representing proportional ownership in the vault. These shares accrue value as the vault earns yield, computed via `convertToAssets(balanceOf(user))`. For instance, if the vault generates 5% APY through compounded returns, ctfrxUSD+ appreciates accordingly without requiring user intervention.
+
+ctfrxUSD+ enables composability: users can lock shares for boosted APYs and Concrete points, or use them as collateral in other protocols (e.g., Pendle for PT/YT splits or Morpho for borrowing). This "earn and use" model turns static stables into dynamic assets, with cross-chain potential via integrations like EigenLayer or Berachain.
+
+## Why This Matters for Users and Institutions
+
+The frxUSD+ Vault exemplifies Concrete's vision of managed DeFi: transforming manual farming into infrastructure-level yield. For users, it simplifies access to sophisticated strategies; for institutions, it offers fund-like structures with clear reporting and low operational risk. Participation also unlocks points programs, hinting at future airdrops or rewards.
+
+More integrations and utility are on the horizon, including expanded strategies and ecosystem partnerships. See the original post [here](https://x.com/ConcreteXYZ/status/2014369012277223480).
+
+Ready to deploy your frxUSD? Visit [https://concrete.xyz/](https://concrete.xyz/) to get started.
