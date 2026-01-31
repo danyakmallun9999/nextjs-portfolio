@@ -8,6 +8,7 @@ type Project = {
   category: string
   featured?: boolean
   github?: string
+  date: string
 }
 
 type SocialLink = {
@@ -38,6 +39,7 @@ export const PROJECTS: Project[] = [
     category: 'Web Application',
     featured: true,
     github: 'https://github.com/danyakmallun9999/AnyConverter',
+    date: '2023-01-15',
   },
   {
     name: 'Portfolio dengan sistem blog',
@@ -49,6 +51,7 @@ export const PROJECTS: Project[] = [
     category: 'Portfolio',
     featured: true,
     github: 'https://github.com/danyakmallun9999/portfolio-blog',
+    date: '2023-06-20',
   },
   {
     name: 'Venture Capital Website',
@@ -60,6 +63,7 @@ export const PROJECTS: Project[] = [
     category: 'Web Application',
     featured: true,
     github: 'https://github.com/danyakmallun9999', // Placeholder
+    date: '2024-01-10',
   },
   {
     name: 'Manufacturing Management System',
@@ -71,6 +75,7 @@ export const PROJECTS: Project[] = [
     category: 'Web Application',
     featured: true,
     github: 'https://github.com/danyakmallun9999', // Placeholder
+    date: '2024-05-15',
   },
   {
     name: 'Course Schedule App',
@@ -82,6 +87,7 @@ export const PROJECTS: Project[] = [
     category: 'Web Application',
     featured: true,
     github: 'https://github.com/danyakmallun9999', // Placeholder
+    date: '2024-09-01',
   },
   {
     name: 'Sistem Informasi Geografis Desa Mayong Lor',
@@ -93,6 +99,7 @@ export const PROJECTS: Project[] = [
     category: 'Web Application',
     featured: true,
     github: 'https://github.com/danyakmallun9999/landing-page-mayonglor-gis', // Placeholder
+    date: '2025-02-15',
   },
   {
     name: 'SRME - Sistem Rekam Medis Elektronik',
@@ -104,10 +111,21 @@ export const PROJECTS: Project[] = [
     category: 'Web Application',
     featured: true,
     github: 'https://github.com/danyakmallun9999/laravel-sistem-rekam-medis-klinik', // Placeholder
+    date: '2025-08-20',
   },
 ]
 
+
 export const WORK_EXPERIENCE: WorkExperience[] = [
+  {
+    company: '( Magang ) Dinas Pariwisata dan Kebudayaan Jepara',
+    title: 'Web Developer',
+    start: '2026',
+    end: '2026',
+    link: 'https://github.com/danyakmallun9999/laravel-dinas-pariwisata.git',
+    id: 'work3',
+    description: 'Selama menjalani program magang di Dinas Pariwisata dan Kebudayaan Kabupaten Jepara, saya terlibat dalam pengembangan website promosi pariwisata sebagai bagian dari tim yang terdiri dari empat mahasiswa. Website ini ditujukan sebagai media informasi dan promosi resmi untuk memperkenalkan destinasi wisata dan kebudayaan daerah Jepara. Saya berkontribusi dalam proses pengembangan teknis website, mulai dari implementasi antarmuka pengguna, pengelolaan struktur halaman, hingga penyesuaian fungsionalitas sesuai kebutuhan instansi. Selain itu, saya turut berkoordinasi dengan tim dan pihak dinas untuk memastikan website mudah digunakan, informatif, dan sesuai dengan standar instansi pemerintahan. Pengalaman ini membantu saya memahami alur kerja proyek nyata, kerja tim lintas peran, serta penerapan ilmu teknik informatika dalam lingkungan profesional dan institusional.',
+  },
   {
     company: 'Pengabdian Dosen Universitas Nahdlatul Ulama Jepara',
     title: 'Anggota Pengabdian Dosen',

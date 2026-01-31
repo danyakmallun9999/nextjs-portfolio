@@ -114,82 +114,84 @@ export default function ProjectsPage() {
         transition={TRANSITION_SECTION}
         className="grid gap-4 md:gap-8 md:grid-cols-2 lg:gap-10"
       >
-        {PROJECTS.slice(0, visibleCount).map((project, index) => (
-          <motion.article
-            key={project.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group relative flex flex-col gap-6 p-3 rounded-lg border border-border/10 bg-card dark:bg-white/[0.02] hover:bg-black/5 dark:hover:bg-white/[0.04] hover:border-border/20 transition-all duration-300"
-          >
-            {/* Project Image */}
-            <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black/5 dark:bg-white/5 border border-border/5">
-              <ImagePreview
-                src={project.image}
-                alt={project.name}
-                width={1200}
-                height={630}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
+        {[...PROJECTS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          .slice(0, visibleCount)
+          .map((project, index) => (
+            <motion.article
+              key={project.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group relative flex flex-col gap-6 p-3 rounded-lg border border-border/10 bg-card dark:bg-white/[0.02] hover:bg-black/5 dark:hover:bg-white/[0.04] hover:border-border/20 transition-all duration-300"
+            >
+              {/* Project Image */}
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black/5 dark:bg-white/5 border border-border/5">
+                <ImagePreview
+                  src={project.image}
+                  alt={project.name}
+                  width={1200}
+                  height={630}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
 
-            <div className="flex flex-col flex-1 gap-4">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="text-xs uppercase tracking-widest text-muted">
-                    {project.category}
+              <div className="flex flex-col flex-1 gap-4">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="text-xs uppercase tracking-widest text-muted">
+                      {project.category}
+                    </div>
+                  </div>
+
+                  <h2 className="text-2xl font-medium text-foreground group-hover:text-blue-400 transition-colors">
+                    {project.name}
+                  </h2>
+
+                  <p className="text-base leading-relaxed text-muted line-clamp-2">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {project.techStack.slice(0, 4).map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-full border border-border/5 bg-black/5 dark:bg-white/5 px-3 py-1 text-xs font-medium text-muted transition-colors group-hover:text-foreground group-hover:border-border/10"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
-                <h2 className="text-2xl font-medium text-foreground group-hover:text-blue-400 transition-colors">
-                  {project.name}
-                </h2>
+                <div className="mt-auto pt-4 flex items-center justify-between border-t border-border/5">
+                  <div className="inline-flex items-center gap-2 text-sm font-medium text-foreground transition hover:text-muted">
+                    View details <ArrowUpRight className="h-4 w-4" />
+                  </div>
 
-                <p className="text-base leading-relaxed text-muted line-clamp-2">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {project.techStack.slice(0, 4).map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full border border-border/5 bg-black/5 dark:bg-white/5 px-3 py-1 text-xs font-medium text-muted transition-colors group-hover:text-foreground group-hover:border-border/10"
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative z-10 shrink-0 rounded-full border border-border/10 bg-black/5 dark:bg-white/5 p-2 text-foreground transition-colors hover:bg-black/10 dark:hover:bg-white/10 hover:text-foreground hover:scale-110"
+                      aria-label={`View ${project.name} source code on GitHub`}
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      {tech}
-                    </span>
-                  ))}
+                      <Github className="h-5 w-5" />
+                    </a>
+                  )}
                 </div>
               </div>
 
-              <div className="mt-auto pt-4 flex items-center justify-between border-t border-border/5">
-                <div className="inline-flex items-center gap-2 text-sm font-medium text-foreground transition hover:text-muted">
-                  View details <ArrowUpRight className="h-4 w-4" />
-                </div>
-
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative z-10 shrink-0 rounded-full border border-border/10 bg-black/5 dark:bg-white/5 p-2 text-foreground transition-colors hover:bg-black/10 dark:hover:bg-white/10 hover:text-foreground hover:scale-110"
-                    aria-label={`View ${project.name} source code on GitHub`}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <Github className="h-5 w-5" />
-                  </a>
-                )}
-              </div>
-            </div>
-
-            {/* Overlay Link for entire card */}
-            <Link
-              href={`/projects/${project.id}`}
-              className="absolute inset-0 z-0 rounded-lg focus:outline-none"
-            >
-              <span className="sr-only">View {project.name} details</span>
-            </Link>
-          </motion.article>
-        ))}
+              {/* Overlay Link for entire card */}
+              <Link
+                href={`/projects/${project.id}`}
+                className="absolute inset-0 z-0 rounded-lg focus:outline-none"
+              >
+                <span className="sr-only">View {project.name} details</span>
+              </Link>
+            </motion.article>
+          ))}
       </motion.section>
 
       {/* Load More Button */}
