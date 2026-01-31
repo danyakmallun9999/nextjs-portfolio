@@ -7,6 +7,7 @@ import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
 import { Analytics } from '@vercel/analytics/react'
 import { personStructuredData, websiteStructuredData } from '@/lib/structured-data'
+import { MeteorCursor } from '@/components/ui/meteor-cursor'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -146,6 +147,7 @@ export default function RootLayout({
           storageKey="theme"
           defaultTheme="dark"
         >
+          <MeteorCursor />
           <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
             <Header />
             <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 sm:px-8 lg:px-12">
