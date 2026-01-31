@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import { ArrowUpRight, Calendar, Github, Twitter, Linkedin, Instagram } from 'lucide-react'
 import { TechStack } from '@/components/tech-stack'
+import { AboutTerminal } from '@/components/about-terminal'
 
 import { BlogPost } from '@/lib/blog'
 import { EMAIL, PROJECTS, SOCIAL_LINKS, WORK_EXPERIENCE } from './data'
@@ -118,6 +119,11 @@ export default function Personal() {
           {/* Tech Stack Marquee */}
           <motion.section variants={item}>
             <TechStack />
+          </motion.section>
+
+          {/* About Terminal */}
+          <motion.section variants={item}>
+            <AboutTerminal />
           </motion.section>
 
           <motion.section className="space-y-8 py-10 lg:space-y-12 lg:py-20" variants={item}>
