@@ -44,7 +44,7 @@ export function TechStack() {
                 <h3 className="text-xl font-semibold text-foreground lg:text-3xl">Tech Stack</h3>
             </div>
             <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background py-4 ">
-                <Marquee speed={40} className="[--gap:3rem]">
+                <Marquee speed={40} className="[--gap:0.5rem]">
                     {TECH_STACK.map((tech) => (
                         <div
                             key={tech.name}
