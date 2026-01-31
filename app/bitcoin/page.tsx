@@ -123,27 +123,46 @@ function Heartbeat() {
 
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 
-const PRICE_HISTORY = [
-    { year: '2015', price: 430 },
-    { year: '2016', price: 960 },
-    { year: '2017', price: 13800 },
-    { year: '2018', price: 3700 },
-    { year: '2019', price: 7200 },
-    { year: '2020', price: 29000 },
-    { year: '2021', price: 47000 },
-    { year: '2022', price: 16500 },
-    { year: '2023', price: 42000 },
-    { year: '2024', price: 98000 }, // Projected / Current
-]
-
 function PriceChart() {
+    const [chartData, setChartData] = useState<any[]>([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        async function fetchHistory() {
+            try {
+                // Fetch monthly data for the last ~8-10 years (limit 100-120)
+                const res = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1M&limit=120')
+                const data = await res.json()
+
+                const formattedData = data.map((item: any) => {
+                    const date = new Date(item[0])
+                    return {
+                        year: date.getFullYear().toString(),
+                        price: parseFloat(item[4]), // Close price
+                        fullDate: date.toLocaleDateString()
+                    }
+                })
+
+                setChartData(formattedData)
+                setLoading(false)
+            } catch (error) {
+                console.error("Failed to fetch price history", error)
+                setLoading(false)
+            }
+        }
+
+        fetchHistory()
+    }, [])
+
+    if (loading) return null
+
     return (
         <section className="py-24 px-4 border-t border-border/10">
             <div className="max-w-4xl mx-auto">
-                <h2 className="text-3xl font-semibold mb-8 text-center text-foreground">Annual Growth</h2>
+                <h2 className="text-3xl font-semibold mb-8 text-center text-foreground">Market Trend (Monthly)</h2>
                 <div className="h-[400px] w-full">
                     <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={PRICE_HISTORY}>
+                        <AreaChart data={chartData}>
                             <defs>
                                 <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
                                     <stop offset="5%" stopColor="#F7931A" stopOpacity={0.3} />
@@ -156,17 +175,25 @@ function PriceChart() {
                                 fontSize={12}
                                 tickLine={false}
                                 axisLine={false}
+                                minTickGap={30}
                             />
                             <YAxis
                                 stroke="#888888"
                                 fontSize={12}
                                 tickLine={false}
                                 axisLine={false}
-                                tickFormatter={(value) => `$${value}`}
+                                tickFormatter={(value) => `$${value / 1000}k`}
                             />
                             <Tooltip
                                 contentStyle={{ backgroundColor: 'var(--background)', borderRadius: '8px', border: '1px solid var(--border)' }}
                                 itemStyle={{ color: '#F7931A' }}
+                                labelStyle={{ color: 'var(--foreground)' }}
+                                labelFormatter={(label, payload) => {
+                                    if (payload && payload.length > 0 && payload[0].payload) {
+                                        return payload[0].payload.fullDate;
+                                    }
+                                    return label;
+                                }}
                                 formatter={(value: any) => [`$${Number(value).toLocaleString()}`, 'Price']}
                             />
                             <Area
@@ -181,7 +208,7 @@ function PriceChart() {
                     </ResponsiveContainer>
                 </div>
                 <p className="text-center text-muted text-sm mt-8">
-                    Historical yearly close / average prices showing the long-term upward trend.
+                    Data fetched continuously from Binance API (Monthly Intervals).
                 </p>
             </div>
         </section>
@@ -199,28 +226,47 @@ function HistoryTimeline() {
     ]
 
     return (
-        <section className="py-24 px-4 bg-muted/5">
-            <div className="max-w-3xl mx-auto">
-                <h2 className="text-3xl font-semibold mb-16 text-center text-foreground">Path to Freedom</h2>
-                <div className="relative border-l-2 border-foreground/10 dark:border-white/10 ml-4 md:ml-12 space-y-12">
+        <section className="py-24 px-4">
+            <div className="max-w-5xl mx-auto">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="mb-16 text-center"
+                >
+                    <h2 className="text-xs font-mono text-muted uppercase tracking-[0.3em] mb-3">Timeline</h2>
+                    <div className="text-4xl md:text-5xl font-bold tracking-tighter text-foreground">Path to Freedom</div>
+                </motion.div>
+
+                <div className="space-y-0 border-t border-border/10">
                     {events.map((event, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.5, delay: i * 0.1 }}
-                            className="relative pl-8 md:pl-12 group"
-                        >
-                            <div className="absolute left-[-7px] top-2 w-3 h-3 rounded-full bg-foreground/60 group-hover:bg-[#F7931A] transition-colors duration-300 ring-4 ring-background" />
-                            <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6">
-                                <span className="font-mono text-[#F7931A] text-xl font-bold">{event.year}</span>
-                                <div>
-                                    <h3 className="text-xl font-medium text-foreground mb-2 group-hover:text-[#F7931A] transition-colors">{event.title}</h3>
-                                    <p className="text-muted leading-relaxed text-sm md:text-base">{event.desc}</p>
+                        <div key={i} className="group grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 border-b border-border/10">
+                            {/* Sticky Year Column - Compacted */}
+                            <div className="md:col-span-3 relative">
+                                <div className="sticky top-1/2 -translate-y-1/2 py-8 md:py-12 transition-all duration-500 group-hover:pl-2">
+                                    <span className="font-mono text-4xl md:text-5xl font-bold text-[#F7931A] block leading-none">
+                                        {event.year}
+                                    </span>
                                 </div>
                             </div>
-                        </motion.div>
+
+                            {/* Content Column - Expanded */}
+                            <div className="md:col-span-9 py-8 md:py-12 flex flex-col justify-center">
+                                <motion.div
+                                    initial={{ opacity: 0, x: 10 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ margin: "-10%" }}
+                                    transition={{ duration: 0.4 }}
+                                >
+                                    <h3 className="text-xl md:text-2xl font-semibold mb-3 text-foreground group-hover:text-[#F7931A] transition-colors duration-300">
+                                        {event.title}
+                                    </h3>
+                                    <p className="text-muted text-base leading-relaxed max-w-2xl group-hover:text-foreground/80 transition-colors duration-300">
+                                        {event.desc}
+                                    </p>
+                                </motion.div>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>
