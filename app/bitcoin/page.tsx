@@ -7,12 +7,23 @@ import { ArrowUpRight, Bitcoin } from 'lucide-react'
 // --- Components ---
 
 function GenesisBlock() {
+    const [binaryLines, setBinaryLines] = useState<string[]>([])
+
+    useEffect(() => {
+        const lines = Array.from({ length: 40 }).map(() => {
+            return (Math.random() > 0.5 ? '1' : '0') + (Math.random() > 0.5 ? '1' : '0') + '010101000110100001100101001000000101010001101001011011010110010101110011001000000011000000110011001011110100101001100001011011100010111100110010001100000011000000111001'
+        })
+        setBinaryLines(lines)
+    }, [])
+
     return (
         <section className="pt-10 pb-20 md:pt-16 md:pb-32 flex flex-col items-center text-center px-4 relative overflow-hidden">
+
+
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, ease: "easeOut" }}
+                transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
                 className="z-10"
             >
                 <div className="text-xl md:text-2xl font-mono text-[#F7931A] mb-4 tracking-widest uppercase">
@@ -29,9 +40,9 @@ function GenesisBlock() {
 
             {/* Subtle Binary Rain Effect Background - ensure text color adapts */}
             <div className="absolute inset-0 opacity-5 pointer-events-none font-mono text-[10px] break-all overflow-hidden flex flex-col justify-center text-foreground">
-                {Array.from({ length: 40 }).map((_, i) => (
+                {binaryLines.map((line, i) => (
                     <div key={i} className="whitespace-nowrap">
-                        {Math.random() > 0.5 ? '1' : '0'}{Math.random() > 0.5 ? '1' : '0'}010101000110100001100101001000000101010001101001011011010110010101110011001000000011000000110011001011110100101001100001011011100010111100110010001100000011000000111001
+                        {line}
                     </div>
                 ))}
             </div>
