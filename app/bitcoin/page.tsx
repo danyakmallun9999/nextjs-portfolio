@@ -20,6 +20,7 @@ function GenesisBlock() {
         <section className="pt-10 pb-20 md:pt-16 md:pb-32 flex flex-col items-center text-center px-4 relative overflow-hidden">
 
 
+
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -85,11 +86,13 @@ function Heartbeat() {
                     <motion.div
                         animate={{ rotate: 360 }}
                         transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-                        className="absolute opacity-[0.03] dark:opacity-[0.05] pointer-events-none select-none grayscale"
+                        className="absolute opacity-5 dark:opacity-10 pointer-events-none select-none grayscale"
                     >
-                        <svg width="600" height="600" viewBox="0 0 24 24" fill="currentColor" className="text-foreground w-64 h-64 md:w-[500px] md:h-[500px]">
-                            <path d="M16.657 8.239C16.481 7.546 15.659 7.018 14.594 6.643V4.545H13.563V6.591C13.337 6.545 13.109 6.5 12.879 6.455V4.545H11.848V6.432C10.74 6.227 9.871 6.136 9.871 6.136L9.648 7.023C9.648 7.023 10.273 7.159 10.239 7.182C10.591 7.273 10.659 7.727 10.636 8.045V14.136C10.614 14.205 10.557 14.523 10.239 14.614C10.273 14.636 9.648 14.5 9.648 14.5L9.193 15.545C9.193 15.545 10.034 15.773 11.239 16.023V18H12.27V16.068C12.511 16.114 12.75 16.159 12.989 16.205V18H14.02V16.159C15.795 16.477 17.068 15.864 17.489 14.659C17.829 13.682 17.477 12.659 16.591 12.114C17.227 11.955 17.705 11.409 17.795 10.614C17.795 10.614 17.818 10.523 17.807 10.455C17.659 9.545 17.023 8.841 16.657 8.239ZM15.114 13.795C14.773 15.159 12.5 14.523 11.841 14.341V11.886C12.5 12.068 15.443 12.455 15.114 13.795ZM14.795 9.773C14.488 10.955 12.591 10.386 11.841 10.205V8.182C12.591 8.364 15.091 8.591 14.795 9.773Z" />
-                        </svg>
+                        <img
+                            src="/bitcoin.png"
+                            alt="Bitcoin Logo"
+                            className="w-64 h-64 md:w-[500px] md:h-[500px] object-contain"
+                        />
                     </motion.div>
 
                     {/* Pulse Animation - Made much more subtle */}
@@ -118,6 +121,73 @@ function Heartbeat() {
     )
 }
 
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
+
+const PRICE_HISTORY = [
+    { year: '2015', price: 430 },
+    { year: '2016', price: 960 },
+    { year: '2017', price: 13800 },
+    { year: '2018', price: 3700 },
+    { year: '2019', price: 7200 },
+    { year: '2020', price: 29000 },
+    { year: '2021', price: 47000 },
+    { year: '2022', price: 16500 },
+    { year: '2023', price: 42000 },
+    { year: '2024', price: 98000 }, // Projected / Current
+]
+
+function PriceChart() {
+    return (
+        <section className="py-24 px-4 border-t border-border/10">
+            <div className="max-w-4xl mx-auto">
+                <h2 className="text-3xl font-semibold mb-8 text-center text-foreground">Annual Growth</h2>
+                <div className="h-[400px] w-full">
+                    <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={PRICE_HISTORY}>
+                            <defs>
+                                <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#F7931A" stopOpacity={0.3} />
+                                    <stop offset="95%" stopColor="#F7931A" stopOpacity={0} />
+                                </linearGradient>
+                            </defs>
+                            <XAxis
+                                dataKey="year"
+                                stroke="#888888"
+                                fontSize={12}
+                                tickLine={false}
+                                axisLine={false}
+                            />
+                            <YAxis
+                                stroke="#888888"
+                                fontSize={12}
+                                tickLine={false}
+                                axisLine={false}
+                                tickFormatter={(value) => `$${value}`}
+                            />
+                            <Tooltip
+                                contentStyle={{ backgroundColor: 'var(--background)', borderRadius: '8px', border: '1px solid var(--border)' }}
+                                itemStyle={{ color: '#F7931A' }}
+                                formatter={(value: any) => [`$${Number(value).toLocaleString()}`, 'Price']}
+                            />
+                            <Area
+                                type="monotone"
+                                dataKey="price"
+                                stroke="#F7931A"
+                                strokeWidth={2}
+                                fillOpacity={1}
+                                fill="url(#colorPrice)"
+                            />
+                        </AreaChart>
+                    </ResponsiveContainer>
+                </div>
+                <p className="text-center text-muted text-sm mt-8">
+                    Historical yearly close / average prices showing the long-term upward trend.
+                </p>
+            </div>
+        </section>
+    )
+}
+
 function HistoryTimeline() {
     const events = [
         { year: '2008', title: 'The Shadow', desc: 'Domain bitcoin.org registered. Whitepaper published by Satoshi Nakamoto.' },
@@ -132,10 +202,17 @@ function HistoryTimeline() {
         <section className="py-24 px-4 bg-muted/5">
             <div className="max-w-3xl mx-auto">
                 <h2 className="text-3xl font-semibold mb-16 text-center text-foreground">Path to Freedom</h2>
-                <div className="relative border-l border-border/20 ml-4 md:ml-12 space-y-12">
+                <div className="relative border-l-2 border-foreground/10 dark:border-white/10 ml-4 md:ml-12 space-y-12">
                     {events.map((event, i) => (
-                        <div key={i} className="relative pl-8 md:pl-12 group">
-                            <div className="absolute left-[-5px] top-2 w-2.5 h-2.5 rounded-full bg-muted group-hover:bg-[#F7931A] transition-colors duration-300 ring-4 ring-background" />
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, delay: i * 0.1 }}
+                            className="relative pl-8 md:pl-12 group"
+                        >
+                            <div className="absolute left-[-7px] top-2 w-3 h-3 rounded-full bg-foreground/60 group-hover:bg-[#F7931A] transition-colors duration-300 ring-4 ring-background" />
                             <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6">
                                 <span className="font-mono text-[#F7931A] text-xl font-bold">{event.year}</span>
                                 <div>
@@ -143,7 +220,7 @@ function HistoryTimeline() {
                                     <p className="text-muted leading-relaxed text-sm md:text-base">{event.desc}</p>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
@@ -192,6 +269,7 @@ export default function BitcoinPage() {
         <main className="min-h-screen pt-20 pb-20 bg-background text-foreground transition-colors duration-300">
             <GenesisBlock />
             <Heartbeat />
+            <PriceChart />
             <HistoryTimeline />
             <Scarcity />
 
