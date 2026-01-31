@@ -5,13 +5,13 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import { ArrowUpRight, Calendar, Github, Twitter, Linkedin, Instagram } from 'lucide-react'
-
+import { TechStack } from '@/components/tech-stack'
 
 import { BlogPost } from '@/lib/blog'
 import { EMAIL, PROJECTS, SOCIAL_LINKS, WORK_EXPERIENCE } from './data'
 
-const CLIENTS: string[] = [] // Removed as per request
-const SERVICES: any[] = [] // Removed as per request
+const CLIENTS: string[] = []
+const SERVICES: any[] = []
 
 const container = {
   hidden: { opacity: 0, y: 8 },
@@ -55,9 +55,7 @@ export default function Personal() {
 
   return (
     <>
-
       <div className="relative isolate min-h-screen w-full overflow-hidden pb-20">
-        {/* Background Gradient/Blobs - Made subtle/removed as per minimalist style */}
         <div className="pointer-events-none absolute inset-0 opacity-20">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 h-96 w-[500px] rounded-full bg-white/5 blur-[100px]" />
         </div>
@@ -68,6 +66,7 @@ export default function Personal() {
           initial="hidden"
           animate="visible"
         >
+          {/* Hero Section */}
           <motion.section
             className="flex min-h-[calc(100vh-140px)] flex-col items-center justify-center text-center pt-4 lg:pt-0 lg:min-h-[calc(100vh-160px)]"
             variants={item}
@@ -90,7 +89,7 @@ export default function Personal() {
                 Crypto Enthusiast • Web Developer • Lifelong Learner
               </h1>
               <p className="text-base leading-relaxed text-muted lg:text-lg lg:leading-loose">
-                Crypto enthusiast & web developer specializing in Laravel, Tailwind, PHP, and modern web stacks. Aktif di testnet project dan gemar eksplorasi ekosistem web3. Also passionate about AI especially prompt engineering for learning and problem solving. Always curious, always building, always learning.
+                Crypto enthusiast & web developer specializing in Laravel, Tailwind, PHP, and modern web stacks. Aktif di testnet project dan gemar eksplorasi ekosistem web3. Also passionate about AI—especially prompt engineering for learning and problem solving. Always curious, always building, always learning.
               </p>
               <div className="flex justify-center gap-4 lg:gap-6">
                 {SOCIAL_LINKS.map((link) => (
@@ -116,7 +115,10 @@ export default function Personal() {
             </Link>
           </motion.section>
 
-          {/* Removed Clients, About Me Grid, and Services Grid as per request */}
+          {/* Tech Stack Marquee */}
+          <motion.section variants={item}>
+            <TechStack />
+          </motion.section>
 
           <motion.section className="space-y-8 py-10 lg:space-y-12 lg:py-20" variants={item}>
             <div className="flex items-center justify-between border-b border-border/10 pb-4 lg:pb-6">
@@ -299,4 +301,3 @@ export default function Personal() {
     </>
   )
 }
-
