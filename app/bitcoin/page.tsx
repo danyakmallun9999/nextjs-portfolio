@@ -1,8 +1,9 @@
 'use client'
 
 import React, { useEffect, useState, useRef } from 'react'
-import { motion, useScroll, useTransform } from 'motion/react'
-import { ArrowUpRight, Bitcoin } from 'lucide-react'
+import { motion } from 'motion/react'
+import { ArrowUpRight, Bitcoin, ArrowLeft, ArrowRight } from 'lucide-react'
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 
 // --- Components ---
 
@@ -19,14 +20,13 @@ function GenesisBlock() {
     return (
         <section className="pt-10 pb-20 md:pt-16 md:pb-32 flex flex-col items-center text-center px-4 relative overflow-hidden">
 
-
-
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
                 className="z-10"
             >
+
                 <div className="text-xl md:text-2xl font-mono text-[#F7931A] mb-4 tracking-widest uppercase">
                     The Genesis Block
                 </div>
@@ -121,8 +121,6 @@ function Heartbeat() {
     )
 }
 
-import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
-
 function PriceChart() {
     const [chartData, setChartData] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
@@ -216,6 +214,18 @@ function PriceChart() {
 }
 
 function HistoryTimeline() {
+    const scrollRef = useRef<HTMLDivElement>(null)
+
+    const scroll = (direction: 'left' | 'right') => {
+        if (scrollRef.current) {
+            const scrollAmount = 420 // Card width + gap
+            scrollRef.current.scrollBy({
+                left: direction === 'left' ? -scrollAmount : scrollAmount,
+                behavior: 'smooth'
+            })
+        }
+    }
+
     const events = [
         { year: '2008', title: 'The Shadow', desc: 'Domain bitcoin.org registered. Whitepaper published by Satoshi Nakamoto.' },
         { year: '2009', title: 'The Genesis', desc: 'Block #0 mined. The network goes live.' },
@@ -226,47 +236,62 @@ function HistoryTimeline() {
     ]
 
     return (
-        <section className="py-24 px-4">
-            <div className="max-w-5xl mx-auto">
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    className="mb-16 text-center"
-                >
-                    <h2 className="text-xs font-mono text-muted uppercase tracking-[0.3em] mb-3">Timeline</h2>
-                    <div className="text-4xl md:text-5xl font-bold tracking-tighter text-foreground">Path to Freedom</div>
-                </motion.div>
+        <section className="py-24 px-4 overflow-hidden">
+            <div className="max-w-6xl mx-auto">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                    <div>
+                        <h2 className="text-xs font-mono text-muted uppercase tracking-[0.3em] mb-2">Timeline</h2>
+                        <div className="text-3xl md:text-5xl font-bold tracking-tighter text-foreground">Path to Freedom</div>
+                    </div>
 
-                <div className="space-y-0 border-t border-border/10">
-                    {events.map((event, i) => (
-                        <div key={i} className="group grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 border-b border-border/10">
-                            {/* Sticky Year Column - Compacted */}
-                            <div className="md:col-span-3 relative">
-                                <div className="sticky top-1/2 -translate-y-1/2 py-8 md:py-12 transition-all duration-500 group-hover:pl-2">
-                                    <span className="font-mono text-4xl md:text-5xl font-bold text-[#F7931A] block leading-none">
-                                        {event.year}
-                                    </span>
-                                </div>
-                            </div>
-
-                            {/* Content Column - Expanded */}
-                            <div className="md:col-span-9 py-8 md:py-12 flex flex-col justify-center">
-                                <motion.div
-                                    initial={{ opacity: 0, x: 10 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ margin: "-10%" }}
-                                    transition={{ duration: 0.4 }}
-                                >
-                                    <h3 className="text-xl md:text-2xl font-semibold mb-3 text-foreground group-hover:text-[#F7931A] transition-colors duration-300">
-                                        {event.title}
-                                    </h3>
-                                    <p className="text-muted text-base leading-relaxed max-w-2xl group-hover:text-foreground/80 transition-colors duration-300">
-                                        {event.desc}
-                                    </p>
-                                </motion.div>
-                            </div>
+                    {/* Navigation Buttons */}
+                    <div className="flex items-center gap-4">
+                        <div className="text-muted text-sm hidden md:block mr-4">Scroll to explore</div>
+                        <div className="flex gap-2">
+                            <button
+                                onClick={() => scroll('left')}
+                                className="p-3 rounded-full border border-border/10 bg-muted/5 hover:bg-muted/10 hover:border-[#F7931A]/50 transition-all active:scale-95"
+                                aria-label="Scroll left"
+                            >
+                                <ArrowLeft className="w-5 h-5 text-foreground" />
+                            </button>
+                            <button
+                                onClick={() => scroll('right')}
+                                className="p-3 rounded-full border border-border/10 bg-muted/5 hover:bg-muted/10 hover:border-[#F7931A]/50 transition-all active:scale-95"
+                                aria-label="Scroll right"
+                            >
+                                <ArrowRight className="w-5 h-5 text-foreground" />
+                            </button>
                         </div>
+                    </div>
+                </div>
+
+                <div
+                    ref={scrollRef}
+                    className="flex gap-6 overflow-x-auto pb-8 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory scrollbar-hide"
+                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                >
+                    {events.map((event, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-10%" }}
+                            transition={{ duration: 0.5, delay: i * 0.1 }}
+                            className="snap-center shrink-0 w-[85vw] md:w-[400px] bg-muted/5 border border-border/10 p-8 rounded-2xl hover:border-[#F7931A]/30 transition-colors duration-300 group flex flex-col"
+                        >
+                            <span className="font-mono text-4xl md:text-5xl font-bold text-[#F7931A] mb-auto block">
+                                {event.year}
+                            </span>
+                            <div className="mt-8 md:mt-16">
+                                <h3 className="text-xl md:text-2xl font-semibold mb-3 text-foreground group-hover:text-[#F7931A] transition-colors duration-300">
+                                    {event.title}
+                                </h3>
+                                <p className="text-muted text-sm md:text-base leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
+                                    {event.desc}
+                                </p>
+                            </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
@@ -310,6 +335,72 @@ function Scarcity() {
     )
 }
 
+function HalvingCountdown() {
+    const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+
+    useEffect(() => {
+        // Target: Approx April 14, 2028 (Estimated)
+        const targetDate = new Date('2028-04-14T00:00:00').getTime()
+
+        const updateCountdown = () => {
+            const now = new Date().getTime()
+            const distance = targetDate - now
+
+            if (distance < 0) {
+                setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+                return
+            }
+
+            setTimeLeft({
+                days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+                hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+                seconds: Math.floor((distance % (1000 * 60)) / 1000)
+            })
+        }
+
+        updateCountdown()
+        const interval = setInterval(updateCountdown, 1000)
+
+        return () => clearInterval(interval)
+    }, [])
+
+    const TimeUnit = ({ value, label }: { value: number, label: string }) => (
+        <div className="flex flex-col items-center bg-muted/5 border border-border/10 p-6 rounded-2xl min-w-[100px] md:min-w-[140px]">
+            <span className="text-4xl md:text-6xl font-mono font-bold text-[#F7931A] mb-2">
+                {String(value).padStart(2, '0')}
+            </span>
+            <span className="text-xs text-muted uppercase tracking-widest">{label}</span>
+        </div>
+    )
+
+    return (
+        <section className="py-24 px-4 bg-muted/5">
+            <div className="max-w-4xl mx-auto text-center">
+                <h2 className="text-3xl font-semibold mb-12 text-foreground">Next Halving</h2>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-12">
+                    <TimeUnit value={timeLeft.days} label="Days" />
+                    <TimeUnit value={timeLeft.hours} label="Hours" />
+                    <TimeUnit value={timeLeft.minutes} label="Mins" />
+                    <TimeUnit value={timeLeft.seconds} label="Secs" />
+                </div>
+
+                <p className="text-muted max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+                    Every 210,000 blocks (approx. 4 years), the Bitcoin issuance rate is cut in half.
+                    <br className="hidden md:block" />
+                    In 2028, the block reward will drop from <span className="text-foreground font-semibold">3.125 BTC</span> to <span className="text-foreground font-semibold">1.5625 BTC</span>.
+                </p>
+                <div className="mt-8">
+                    <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F7931A]/10 text-[#F7931A] text-xs font-mono font-bold border border-[#F7931A]/20">
+                        ESTIMATED DATE: APR 2028
+                    </span>
+                </div>
+            </div>
+        </section>
+    )
+}
+
 export default function BitcoinPage() {
     return (
         <main className="min-h-screen pt-20 pb-20 bg-background text-foreground transition-colors duration-300">
@@ -318,6 +409,7 @@ export default function BitcoinPage() {
             <PriceChart />
             <HistoryTimeline />
             <Scarcity />
+            <HalvingCountdown />
 
             <section className="text-center py-24">
                 <a
