@@ -158,9 +158,9 @@ function PriceChart() {
         <section className="py-24 px-4 border-t border-border/10">
             <div className="max-w-4xl mx-auto">
                 <h2 className="text-3xl font-semibold mb-8 text-center text-foreground">Market Trend (Monthly)</h2>
-                <div className="h-[400px] w-full">
+                <div className="h-[300px] md:h-[500px] w-full">
                     <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={chartData}>
+                        <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                             <defs>
                                 <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
                                     <stop offset="5%" stopColor="#F7931A" stopOpacity={0.3} />

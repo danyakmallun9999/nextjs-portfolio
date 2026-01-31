@@ -4,6 +4,7 @@ import { ThemeToggle } from '@/components/theme-toggle'
 import { TextLoop } from '@/components/ui/text-loop'
 import { SOCIAL_LINKS } from './data'
 import { BitcoinTicker } from '@/components/bitcoin-ticker'
+import Link from 'next/link'
 
 export function Footer() {
   return (
@@ -23,7 +24,9 @@ export function Footer() {
 
         <div className="flex w-full flex-col gap-4 md:w-auto md:flex-row md:items-center md:gap-6">
           <div className="flex w-full items-center justify-between md:w-auto md:justify-start md:gap-6">
-            <BitcoinTicker />
+            <Link href="/bitcoin" className="hover:opacity-80 transition-opacity">
+              <BitcoinTicker />
+            </Link>
             <div className="md:hidden">
               <ThemeToggle />
             </div>
