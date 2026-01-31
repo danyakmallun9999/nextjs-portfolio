@@ -90,7 +90,7 @@ export default function Personal() {
                 Crypto Enthusiast • Web Developer • Lifelong Learner
               </h1>
               <p className="text-base leading-relaxed text-muted lg:text-lg lg:leading-loose">
-                Crypto enthusiast & web developer specializing in Laravel, Tailwind, PHP, and modern web stacks. Aktif di testnet project dan gemar eksplorasi ekosistem web3. Also passionate about AI—especially prompt engineering for learning and problem solving. Always curious, always building, always learning.
+                Crypto enthusiast and web developer with a focus on Laravel, Tailwind CSS, PHP, and modern web stacks. Actively involved in testnet projects and exploring the Web3 ecosystem. Also passionate about AI, particularly prompt engineering for learning and problem solving. Always curious, always building, always learning.
               </p>
               <div className="flex justify-center gap-4 lg:gap-6">
                 {SOCIAL_LINKS.map((link) => (
