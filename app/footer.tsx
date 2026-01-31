@@ -1,7 +1,9 @@
 'use client'
+
 import { ThemeToggle } from '@/components/theme-toggle'
 import { TextLoop } from '@/components/ui/text-loop'
 import { SOCIAL_LINKS } from './data'
+import { BitcoinTicker } from '@/components/bitcoin-ticker'
 
 export function Footer() {
   return (
@@ -20,6 +22,7 @@ export function Footer() {
         </div>
 
         <div className="flex items-center gap-6">
+          <BitcoinTicker />
           <div className="flex gap-6">
             {SOCIAL_LINKS.map((link) => (
               <a
