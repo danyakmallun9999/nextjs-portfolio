@@ -44,15 +44,15 @@ export function TechStack() {
                 <h3 className="text-xl font-semibold text-foreground lg:text-3xl">Tech Stack</h3>
             </div>
             <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background py-4 ">
-                <Marquee speed={40} className="[--gap:0.5rem]">
+                <Marquee speed={40} className="[--gap:1px] md:[--gap:2rem]">
                     {TECH_STACK.map((tech) => (
                         <div
                             key={tech.name}
-                            className="group flex flex-col items-center gap-2 justify-center px-4"
+                            className="group flex flex-col items-center gap-2 justify-center px-2 md:px-4"
                         >
-                            <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-border/10 bg-black/5 dark:bg-white/5 transition-all duration-300 group-hover:border-border/20 group-hover:bg-black/10 dark:group-hover:bg-white/10 group-hover:scale-110">
+                            <div className="relative flex h-12 w-12 md:h-16 md:w-16 items-center justify-center rounded-2xl border border-border/10 bg-black/5 dark:bg-white/5 transition-all duration-300 group-hover:border-border/20 group-hover:bg-black/10 dark:group-hover:bg-white/10 group-hover:scale-110">
                                 <tech.icon
-                                    className="h-8 w-8 transition-colors duration-300 grayscale group-hover:grayscale-0"
+                                    className="h-6 w-6 md:h-8 md:w-8 transition-colors duration-300 grayscale group-hover:grayscale-0"
                                     style={{ color: tech.color }}
                                 // Note: In dark mode, some blacks might be invisible. 
                                 // However, grayscale handles it by making it gray usually. 

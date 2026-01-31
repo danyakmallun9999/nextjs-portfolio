@@ -23,6 +23,9 @@ export const MeteorCursor = () => {
     const [isHovering, setIsHovering] = useState(false)
 
     useEffect(() => {
+        // Prevent running on touch devices (pointer: coarse)
+        if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) return
+
         const canvas = canvasRef.current
         const cursorEl = cursorRef.current
         if (!canvas || !cursorEl) return
@@ -164,14 +167,14 @@ export const MeteorCursor = () => {
             {/* Trail Canvas */}
             <canvas
                 ref={canvasRef}
-                className="fixed inset-0 pointer-events-none z-50"
+                className="fixed inset-0 pointer-events-none z-50 hidden md:block"
                 style={{ mixBlendMode: 'screen' }}
             />
 
             {/* Custom Cursor Icon */}
             <div
                 ref={cursorRef}
-                className="fixed top-0 left-0 pointer-events-none z-[9999]"
+                className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block"
                 style={{
                     // Initial off-screen position to prevent flash
                     transform: 'translate3d(-100px, -100px, 0)',
