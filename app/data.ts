@@ -124,7 +124,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     end: '2026',
     link: 'https://github.com/danyakmallun9999/laravel-dinas-pariwisata.git',
     id: 'work3',
-    description: 'Selama menjalani program magang di Dinas Pariwisata dan Kebudayaan Kabupaten Jepara, saya terlibat dalam pengembangan website promosi pariwisata sebagai bagian dari tim yang terdiri dari empat mahasiswa. Website ini ditujukan sebagai media informasi dan promosi resmi untuk memperkenalkan destinasi wisata dan kebudayaan daerah Jepara. Saya berkontribusi dalam proses pengembangan teknis website, mulai dari implementasi antarmuka pengguna, pengelolaan struktur halaman, hingga penyesuaian fungsionalitas sesuai kebutuhan instansi. Selain itu, saya turut berkoordinasi dengan tim dan pihak dinas untuk memastikan website mudah digunakan, informatif, dan sesuai dengan standar instansi pemerintahan. Pengalaman ini membantu saya memahami alur kerja proyek nyata, kerja tim lintas peran, serta penerapan ilmu teknik informatika dalam lingkungan profesional dan institusional.',
+    description: 'Selama magang di Dinas Pariwisata dan Kebudayaan Kabupaten Jepara, saya terlibat dalam pengembangan website promosi pariwisata sebagai bagian dari tim beranggotakan empat mahasiswa. Saya berkontribusi pada aspek teknis pengembangan website, termasuk pembuatan dan pengelolaan antarmuka, penyesuaian struktur konten, serta kolaborasi dengan tim dan pihak dinas untuk memastikan website informatif, mudah digunakan, dan sesuai kebutuhan instansi pemerintahan.',
   },
   {
     company: 'Pengabdian Dosen Universitas Nahdlatul Ulama Jepara',
