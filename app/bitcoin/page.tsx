@@ -8,7 +8,7 @@ import { ArrowUpRight, Bitcoin } from 'lucide-react'
 
 function GenesisBlock() {
     return (
-        <section className="min-h-[80vh] flex flex-col justify-center items-center text-center px-4 relative overflow-hidden">
+        <section className="pt-10 pb-20 md:pt-16 md:pb-32 flex flex-col items-center text-center px-4 relative overflow-hidden">
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
