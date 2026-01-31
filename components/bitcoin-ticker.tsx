@@ -35,15 +35,15 @@ export function BitcoinTicker() {
     }, [])
 
     return (
-        <div className="flex items-center gap-2 text-sm font-medium bg-black/5 dark:bg-white/5 px-3 py-1.5 rounded-full border border-border/10">
+        <div className="flex items-center gap-2 text-sm font-medium border-b border-muted/30 pb-0.5 hover:border-foreground/50 transition-all">
             <Bitcoin className="w-4 h-4 text-[#F7931A]" />
             <span className="text-muted/80">BTC</span>
 
             {loading || price === null ? (
-                <span className="animate-pulse text-muted">Loading...</span>
+                <span className="animate-pulse text-muted mt-[1px]">Loading...</span>
             ) : (
-                <div className="flex items-center gap-1 font-mono min-w-[80px] justify-end">
-                    <span className="text-foreground transition-colors duration-300">
+                <div className="flex items-center gap-1 font-mono mt-[2px]">
+                    <span className="text-foreground transition-colors duration-300 leading-none">
                         ${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </span>
                 </div>

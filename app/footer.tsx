@@ -21,9 +21,15 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="flex items-center gap-6">
-          <BitcoinTicker />
-          <div className="flex gap-6">
+        <div className="flex w-full flex-col gap-4 md:w-auto md:flex-row md:items-center md:gap-6">
+          <div className="flex w-full items-center justify-between md:w-auto md:justify-start md:gap-6">
+            <BitcoinTicker />
+            <div className="md:hidden">
+              <ThemeToggle />
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-4 md:gap-6">
             {SOCIAL_LINKS.map((link) => (
               <a
                 key={link.label}
@@ -36,7 +42,10 @@ export function Footer() {
               </a>
             ))}
           </div>
-          <ThemeToggle />
+
+          <div className="hidden md:block">
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </footer>
