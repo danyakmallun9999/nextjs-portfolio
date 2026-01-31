@@ -128,8 +128,9 @@ function PriceChart() {
     useEffect(() => {
         async function fetchHistory() {
             try {
-                // Fetch monthly data for the last ~8-10 years (limit 100-120)
-                const res = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1M&limit=120')
+                // Fetch max monthly data (limit 1000 covers ~80 years, effectively all available history)
+                // Binance started ~2017, but sometimes provides earlier data if backfilled, usually just 2017+
+                const res = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1M&limit=1000')
                 const data = await res.json()
 
                 const formattedData = data.map((item: any) => {
@@ -157,8 +158,8 @@ function PriceChart() {
     return (
         <section className="py-24 px-4 border-t border-border/10">
             <div className="max-w-4xl mx-auto">
-                <h2 className="text-3xl font-semibold mb-8 text-center text-foreground">Market Trend (Monthly)</h2>
-                <div className="h-[300px] md:h-[500px] w-full">
+                <h2 className="text-3xl font-semibold mb-8 text-center text-foreground">Bitcoin Price History</h2>
+                <div className="h-[300px] md:h-[500px] w-full pointer-events-none select-none">
                     <ResponsiveContainer width="100%" height="100%">
                         <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                             <defs>
@@ -173,7 +174,7 @@ function PriceChart() {
                                 fontSize={12}
                                 tickLine={false}
                                 axisLine={false}
-                                minTickGap={30}
+                                minTickGap={50}
                             />
                             <YAxis
                                 stroke="#888888"
@@ -182,18 +183,7 @@ function PriceChart() {
                                 axisLine={false}
                                 tickFormatter={(value) => `$${value / 1000}k`}
                             />
-                            <Tooltip
-                                contentStyle={{ backgroundColor: 'var(--background)', borderRadius: '8px', border: '1px solid var(--border)' }}
-                                itemStyle={{ color: '#F7931A' }}
-                                labelStyle={{ color: 'var(--foreground)' }}
-                                labelFormatter={(label, payload) => {
-                                    if (payload && payload.length > 0 && payload[0].payload) {
-                                        return payload[0].payload.fullDate;
-                                    }
-                                    return label;
-                                }}
-                                formatter={(value: any) => [`$${Number(value).toLocaleString()}`, 'Price']}
-                            />
+                            {/* Tooltip removed to disable hover interaction */}
                             <Area
                                 type="monotone"
                                 dataKey="price"
@@ -201,12 +191,14 @@ function PriceChart() {
                                 strokeWidth={2}
                                 fillOpacity={1}
                                 fill="url(#colorPrice)"
+                                activeDot={false}
+                                isAnimationActive={true}
                             />
                         </AreaChart>
                     </ResponsiveContainer>
                 </div>
                 <p className="text-center text-muted text-sm mt-8">
-                    Data fetched continuously from Binance API (Monthly Intervals).
+                    Data fetched continuously from Binance API (All Time Monthly).
                 </p>
             </div>
         </section>
