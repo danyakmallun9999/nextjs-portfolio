@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Bitcoin } from 'lucide-react'
 
 // --- Components ---
 
@@ -68,27 +68,39 @@ function Heartbeat() {
     return (
         <section className="py-24 px-4 border-t border-border/10">
             <div className="max-w-4xl mx-auto text-center">
-                <h2 className="text-3xl font-semibold mb-12 text-foreground">The Heartbeat</h2>
-                <div className="relative flex items-center justify-center h-40">
-                    {/* Pulse Animation */}
+                <h2 className="text-sm font-mono text-muted mb-8 uppercase tracking-widest relative z-10">The Heartbeat</h2>
+                <div className="relative flex items-center justify-center h-64 md:h-80">
+                    {/* Background Bitcoin Watermark Logo */}
                     <motion.div
-                        key={price} // Re-animate on price change
-                        initial={{ scale: 1, opacity: 0.5 }}
-                        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-                        transition={{ duration: 0.2 }}
-                        className={`absolute w-64 h-64 rounded-full blur-[80px] ${isUp ? 'bg-green-500/20' : isDown ? 'bg-red-500/20' : 'bg-orange-500/10'}`}
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+                        className="absolute opacity-[0.03] dark:opacity-[0.05] pointer-events-none select-none grayscale"
+                    >
+                        <svg width="600" height="600" viewBox="0 0 24 24" fill="currentColor" className="text-foreground w-64 h-64 md:w-[500px] md:h-[500px]">
+                            <path d="M16.657 8.239C16.481 7.546 15.659 7.018 14.594 6.643V4.545H13.563V6.591C13.337 6.545 13.109 6.5 12.879 6.455V4.545H11.848V6.432C10.74 6.227 9.871 6.136 9.871 6.136L9.648 7.023C9.648 7.023 10.273 7.159 10.239 7.182C10.591 7.273 10.659 7.727 10.636 8.045V14.136C10.614 14.205 10.557 14.523 10.239 14.614C10.273 14.636 9.648 14.5 9.648 14.5L9.193 15.545C9.193 15.545 10.034 15.773 11.239 16.023V18H12.27V16.068C12.511 16.114 12.75 16.159 12.989 16.205V18H14.02V16.159C15.795 16.477 17.068 15.864 17.489 14.659C17.829 13.682 17.477 12.659 16.591 12.114C17.227 11.955 17.705 11.409 17.795 10.614C17.795 10.614 17.818 10.523 17.807 10.455C17.659 9.545 17.023 8.841 16.657 8.239ZM15.114 13.795C14.773 15.159 12.5 14.523 11.841 14.341V11.886C12.5 12.068 15.443 12.455 15.114 13.795ZM14.795 9.773C14.488 10.955 12.591 10.386 11.841 10.205V8.182C12.591 8.364 15.091 8.591 14.795 9.773Z" />
+                        </svg>
+                    </motion.div>
+
+                    {/* Pulse Animation - Made much more subtle */}
+                    <motion.div
+                        key={price}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: [0, 0.3, 0] }}
+                        transition={{ duration: 0.8 }}
+                        className={`absolute w-96 h-96 rounded-full blur-[100px] z-0 ${isUp ? 'bg-green-500/20' : isDown ? 'bg-red-500/20' : 'bg-transparent'}`}
                     />
 
-                    {/* Updated background to 'bg-card/80' and colors for better visibility in light mode */}
-                    <div className="z-10 bg-card/80 backdrop-blur-md border border-border/10 rounded-2xl px-8 py-6 shadow-2xl">
-                        <div className="text-sm text-muted mb-2 font-mono">LIVE / BTCUSD</div>
-                        <div className={`text-5xl md:text-7xl font-mono font-bold tracking-tighter transition-colors duration-300 ${isUp ? 'text-green-500' : isDown ? 'text-red-500' : 'text-foreground'}`}>
+                    <div className="z-10 bg-transparent flex flex-col items-center">
+                        <div className={`text-6xl md:text-8xl font-mono font-bold tracking-tighter transition-colors duration-500 relative z-10 ${isUp ? 'text-green-500' : isDown ? 'text-red-500' : 'text-foreground'}`}>
                             ${price?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '---,---.--'}
+                        </div>
+                        <div className="mt-4 text-xs text-muted/50 font-mono flex items-center justify-center gap-2 relative z-10">
+                            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> LIVE PRICE CONNECTION
                         </div>
                     </div>
                 </div>
-                <p className="mt-8 text-muted max-w-lg mx-auto">
-                    Bitcoin never sleeps. Every second, blocks are propagated, nodes reconcile truth, and value is transferred without permission.
+                <p className="mt-8 text-muted/60 max-w-lg mx-auto text-sm leading-relaxed relative z-10">
+                    Bitcoin never sleeps. It breathes, block by block.
                 </p>
             </div>
         </section>
