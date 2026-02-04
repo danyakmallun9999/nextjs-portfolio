@@ -118,7 +118,7 @@ export const PROJECTS: Project[] = [
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
-    company: '( Magang ) Dinas Pariwisata dan Kebudayaan Jepara',
+    company: '( Internship ) Dinas Pariwisata dan Kebudayaan Jepara',
     title: 'Web Developer',
     start: '2026',
     end: '2026',
